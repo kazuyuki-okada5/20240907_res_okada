@@ -1,0 +1,106 @@
+ /* ここにCSSを記述 */
+ .header__logo-container {
+     display: flex;
+     align-items: center;
+     /* アイテムを垂直方向に中央揃え */
+ }
+
+ .header__logo {
+     margin-left: 30px;
+     /* アイコンとテキストの間隔を調整 */
+     font-size: 50px;
+     /* ロゴのフォントサイズを調整 */
+     font-weight: bold;
+     /* フォントを太字にする */
+ }
+
+ /* ハンバーガーアイコンのスタイル */
+ .header__hamburger {
+     cursor: pointer;
+     font-size: 80px;
+     /* ハンバーガーアイコンのフォントサイズを調整 */
+ }
+
+ /* ハンバーガーメニューを開いたときのリンクのスタイル */
+ .header-nav__link {
+     font-size: 18px;
+     /* リンクのテキストサイズを変更 */
+     padding: 4px 4px;
+     /* リンクのパディングを調整 */
+     margin: 5px 0;
+     /* リンク間のマージンを調整 */
+ }
+
+ /* ハンバーガーメニューを開いたときのリンクアイテムのスタイル */
+ .header__menu {
+     display: none;
+     position: absolute;
+     /* 絶対位置に配置 */
+     top: 12%;
+     /* ハンバーガーアイコンの下に配置 */
+     left: -40;
+     background-color: #fff;
+     /* メニューの背景色 */
+     border: 1px solid #ccc;
+     /* メニューの境界線 */
+     padding: 10px;
+     /* メニューの余白 */
+    font-size: 60px;
+        /* ×アイコンのフォントサイズを調整 */
+    z-index: 1;
+        /* 他の要素よりも前面に表示 */
+ }
+
+ /* ×アイコンのスタイル */
+ .header__close {
+     display: none;
+     /* 初期状態では非表示 */
+     font-size: 60px;
+     /* ×アイコンのフォントサイズを調整 */
+ }
+
+ /* メニューが表示されている場合のスタイル */
+ .header__menu {
+     display: none;
+     /* 初期状態では非表示 */
+ }
+
+ .header-nav {
+    width: 150px;
+        /* 幅を200pxに設定 */
+        height: 250px;
+        /* 高さを300pxに設定 */
+     margin: 0;
+     /* マージンを0に設定 */
+     padding: 0;
+     /* パディングも0に設定 */
+ }
+ /* リンクの共通スタイル */
+ .header-nav__link {
+     font-size: 20px;
+     /* テキストサイズ */
+     color: #1d6ac1;
+     /* テキストの色 */
+     text-decoration: none;
+     /* 下線なし */
+     padding: 10px 20px;
+     /* パディング */
+     display: block;
+     /* リンクをブロック要素に変更 */
+ }
+
+ .header__menu.show {
+     display: block;
+     /* 表示される際に表示 */
+ }
+
+ /* メニューアイテムのスタイル */
+ .header-nav__item {
+     margin-bottom: 50px;
+     /* メニューアイテム間の間隔を調整 */
+ }
+
+
+
+
+ <link rel="stylesheet" href="/css/common.css">
