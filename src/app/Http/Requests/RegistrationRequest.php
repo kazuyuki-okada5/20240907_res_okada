@@ -29,4 +29,5 @@ class RegistrationRequest extends FormRequest
             'password' => 'required|string|min:8|max191|confirmed',
         ];
     }
+    
 }

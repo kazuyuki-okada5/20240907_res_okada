@@ -36,7 +36,10 @@
                                 <a class="header-nav__link" href="/mypage">マイページ</a>
                             </li>
                             <li class="header-nav__item" id="logoutItem" style="display: none;">
-                                <a class="header-nav__link" href="/logout">ログアウト</a>
+                              <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+<a href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">ログアウト</a>
                             </li>
                            <li class="header-nav__item" id="registrationItem">
                                 <a class="header-nav__link" href="/registration">Registration</a>
@@ -50,28 +53,7 @@
                     <a class="header__logo" href="/">
                         Rese
                     </a>
-                    <div class="search-container">
-                        <div class="search-group">
-                            <div class="search-area">
-                                <select class="search-area-select" onchange="selectRegistrationArea()">
-                                    <option value="area1">エリア1</option>
-                                    <option value="area2">エリア2</option>
-                                    <option value="area3">エリア3</option>
-                                </select>
-                            </div>
-                            <div class="search-genre">
-                                <select class="search-genre-select" onchange="selectRegistrationGenre()">
-                                    <option value="genre1">ジャンル1</option>
-                                    <option value="genre2">ジャンル2</option>
-                                    <option value="genre3">ジャンル3</option>
-                                <!-- 必要に応じて他のジャンルを追加 -->
-                                </select>
-                            </div>
-                            <div class="search-words">
-                                <input type="text" id="keyword" placeholder="キーワードを入力" onkeydown="handleKeyDown(event)">
-                                    <button onclick="search()">検索</button>
-                            </div>
-                        </div>
+                    
                     </div>
                 </div>
             </div>
@@ -83,12 +65,18 @@
   </main>
 
   <script>
-    var isLoggedIn = false; // ログイン状態を示す変数
-
     // ページが読み込まれたときに実行される関数
     window.onload = function () {
-      // ログイン状態に応じてメニュー項目を表示または非表示にする
-      if (isLoggedIn) {
+        // ログイン状態に応じてメニュー項目を表示または非表示にする
+        updateMenu();
+    };
+
+    // ログイン状態が変更された場合に呼び出される関数
+    function updateMenu() {
+        var isLoggedIn = {{ Auth::check() ? 'true' : 'false' }}; // ログイン状態を示す変数
+
+        // ログイン状態に応じてメニュー項目を表示または非表示にする
+        if (isLoggedIn) {
         document.getElementById('homeItem').style.display = 'block';
         document.getElementById('mypageItem').style.display = 'block';
         document.getElementById('logoutItem').style.display = 'block';

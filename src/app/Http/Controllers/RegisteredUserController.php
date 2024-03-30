@@ -30,5 +30,8 @@ class RegisteredUserController extends Controller
         ]);
         // 登録完了ページを表示
         return view('auth.registration_end');
+        
     }
+
+    
 }

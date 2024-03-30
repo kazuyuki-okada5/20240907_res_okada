@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,4 @@ return view('auth.register');
 });
 
 Route::post('/register', [RegisteredUserController::class, 'store']);
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
