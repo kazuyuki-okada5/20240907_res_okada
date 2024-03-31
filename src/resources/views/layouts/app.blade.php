@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Restaurant reservation service</title>
   <!-- CSSファイルを読み込む -->
-   <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/common.css">
 </head>
 
 <body>
@@ -32,16 +32,13 @@
                             <li class="header-nav__item" id="homeItem">
                                 <a class="header-nav__link" href="/">Home</a>
                             </li>
-                            <li class="header-nav__item" id="mypageItem" style="display: none;">
-                                <a class="header-nav__link" href="/mypage">マイページ</a>
+                            <li class="header-nav__item" id="mypageItem">
+                                <a class="header-nav__link" href="{{ route('favorite.index')}}">マイページ</a>
                             </li>
                             <li class="header-nav__item" id="logoutItem" style="display: none;">
-                              <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>
-<a href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">ログアウト</a>
+                                <a class="header-nav__link" href="/logout">ログアウト</a>
                             </li>
-                           <li class="header-nav__item" id="registrationItem">
+                            <li class="header-nav__item" id="registrationItem">
                                 <a class="header-nav__link" href="/registration">Registration</a>
                             </li>
                             <li class="header-nav__item" id="loginItem">
