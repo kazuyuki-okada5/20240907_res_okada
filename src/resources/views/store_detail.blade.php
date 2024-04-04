@@ -11,7 +11,11 @@
         <div class="store-container">
             <div class="store-group">
                 <div class="store-info">
-                    <button class="return-button">戻る</button><h3>店舗名</h3>
+                    <form action="{{ url('/') }}" method="get">
+    @csrf
+    <button type="submit" class="return-button">戻る</button>
+</form>
+                    <h3>店舗名</h3>
                     <img src="store_image.jpg" alt="店画像">
                     <p>地域名</p><p>ジャンル名</p>
                     <p>詳細</p>
@@ -40,6 +44,8 @@
                             <label for="num_people">人数:</label>
                             
                         </div>
+                        <form action="{{ route('booking_is_done') }}" method="post">
+                        @csrf
                         <button type="submit">予約する</button>
                     </form>
                 </div>

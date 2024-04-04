@@ -12,5 +12,13 @@ class ShopController extends Controller
         return view('store_detail');
     }
 
-    
+    public function store(Request $request)
+    {
+        // ストアを追加するロジックをここに記述
+    }
+
+    public function destroy(Store $store)
+    {
+        // ストアを削除するロジックをここに追加
+    }
 }
