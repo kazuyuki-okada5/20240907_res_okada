@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AreasTableSeeder extends Seeder
 {
@@ -14,27 +15,29 @@ class AreasTableSeeder extends Seeder
      */
     public function run()
     {
+        $currentTimestamp = Carbon::now();
+
         DB::table('areas')->insert([
-            ['area' => '東京都'],
-            ['area' => '大阪府'],
-            ['area' => '福岡県'],
-            ['area' => '東京都'],
-            ['area' => '福岡県'],
-            ['area' => '東京都'],
-            ['area' => '大阪府'],
-            ['area' => '東京都'],
-            ['area' => '大阪府'],
-            ['area' => '東京都'],
-            ['area' => '大阪府'],
-            ['area' => '福岡県'],
-            ['area' => '東京都'],
-            ['area' => '大阪府'],
-            ['area' => '東京都'],
-            ['area' => '大阪府'],
-            ['area' => '東京都'],
-            ['area' => '東京都'],
-            ['area' => '福岡県'],
-            ['area' => '大阪府'],
+            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '福岡県', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '福岡県', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '福岡県', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '福岡県', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
 
         ]);
     }
