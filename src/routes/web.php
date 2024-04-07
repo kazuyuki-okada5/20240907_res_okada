@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\IndexControllers;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\AreaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,6 @@ Route::post('reservations', [ReservationController::class, 'store'])->name('rese
 Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 Route::get('/stores', [ShopController::class, 'index'])->name('shops.index');
 Route::get('/areas/{area}', [StoreController::class, 'storesByArea'])->name('stores.by_area');
+Route::get('/areas',[AreaController::class, 'index'])->name('areas.index');
+Route::get('/',[StoreController::class, 'index'])->name('stores.index');
+Route::get('/stores/search', [StoreController::class, 'search'])->name('store.search');

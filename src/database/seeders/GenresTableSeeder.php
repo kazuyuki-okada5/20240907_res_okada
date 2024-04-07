@@ -8,37 +8,25 @@ use Carbon\Carbon;
 
 class GenresTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+        public function run()
     {
         $currentTimestamp = Carbon::now();
 
-        DB::table('genres')->insert([
-            ['genre' => '寿司', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '焼肉', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '居酒屋', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => 'イタリアン', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => 'ラーメン', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '焼肉', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => 'イタリアン', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => 'ラーメン', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '居酒屋', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '寿司', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '焼肉', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '焼肉', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '居酒屋', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '寿司', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => 'ラーメン', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '居酒屋', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '寿司', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '焼肉', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => 'イタリアン', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['genre' => '寿司', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+        $genres = [
+            '寿司',
+            '焼肉',
+            '居酒屋',
+            'イタリアン',
+            'ラーメン',
+        ];
 
-        ]);
+        foreach ($genres as $genre) {
+            // ジャンルをデータベースに挿入
+            DB::table('genres')->insert([
+                'genre' => $genre,
+                'created_at' => $currentTimestamp,
+                'updated_at' => $currentTimestamp,
+            ]);
+        }
     }
 }

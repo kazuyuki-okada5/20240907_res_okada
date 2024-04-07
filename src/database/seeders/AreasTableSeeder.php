@@ -8,37 +8,23 @@ use Carbon\Carbon;
 
 class AreasTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        $currentTimestamp = Carbon::now();
+        $currentTimestamp =Carbon::now();
 
-        DB::table('areas')->insert([
-            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '福岡県', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '福岡県', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '福岡県', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '東京都', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '福岡県', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['area' => '大阪府', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-
-        ]);
+        $areas = [
+            '東京都',
+            '大阪府',
+            '福岡県',
+        ];
+      
+        foreach ($areas as $area) {
+            // エリアをデータベースに挿入
+            DB::table('areas')->insert([
+                'area' => $area,
+                'created_at' => $currentTimestamp,
+                'updated_at' => $currentTimestamp,
+            ]);
+        }
     }
 }

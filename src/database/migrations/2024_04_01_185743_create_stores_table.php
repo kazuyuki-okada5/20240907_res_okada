@@ -16,10 +16,8 @@ class CreateStoresTable extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->unsignedBigInteger('area_id');
-            $table->foreign('area_id')->references('id')->on('areas');
-            $table->unsignedBigInteger('genre_id');
-            $table->foreign('genre_id')->references('id')->on('genres');
+            $table->foreignId('area_id')->constrained('areas');
+            $table->foreignId('genre_id')->constrained('genres');
             $table->text('store_overview');
             $table->string('image_url', 255);
             $table->timestamps();

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use Illuminate\Http\Request;
+use App\Models\user;
+use App\Models\store;
 
 class FavoriteController extends Controller
 
@@ -25,5 +27,11 @@ class FavoriteController extends Controller
     public function destroy(Favorite $favorite)
     {
     
+    }
+
+    public function favoritesArea(Area $area)
+    {
+        $favorites = $area->favorites;
+        return view('favorite.index', compact('favorite'));
     }
 }

@@ -8,18 +8,22 @@
 <div class="search-container">
     <div class="search-group">
         <div class="search-area">
-            <select class="search-area-select" onchange="selectRegistrationArea()">
-            <option value="area1">エリア1</option>
-            <option value="area2">エリア2</option>
-            <option value="area3">エリア3</option>
-            </select>
+            <form action="{{ route('store.search') }}" method="GET">
+                <select name="area_id">
+                    <option value="">All area</option>
+                    <option value="1">東京都</option>
+                    <option value="2">大阪府</option>
+                    <option value="3">福岡県</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
         </div>
         <div class="search-genre">
             <select class="search-genre-select" onchange="selectRegistrationGenre()">
-            <option value="genre1">ジャンル1</option>
-            <option value="genre2">ジャンル2</option>
-            <option value="genre3">ジャンル3</option>
-            <!-- 必要に応じて他のジャンルを追加 -->
+                <option value="genre1">ジャンル1</option>
+                <option value="genre2">ジャンル2</option>
+                <option value="genre3">ジャンル3</option>
+                <!-- 必要に応じて他のジャンルを追加 -->
             </select>
         </div>
         <div class="search-words">
