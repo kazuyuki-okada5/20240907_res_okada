@@ -19,28 +19,35 @@
             </form>
         </div>
         <div class="search-genre">
-            <select class="search-genre-select" onchange="selectRegistrationGenre()">
-                <option value="genre1">ジャンル1</option>
-                <option value="genre2">ジャンル2</option>
-                <option value="genre3">ジャンル3</option>
-                <!-- 必要に応じて他のジャンルを追加 -->
-            </select>
+            <form action="{{ route('store.search') }}" method='GET'>
+                <select name="genre_id">
+                    <option value="">All genre</option>
+                    <option value="1">寿司</option>
+                    <option value="2">焼肉</option>
+                    <option value="3">居酒屋</option>
+                    <option value="4">イタリアン</option>
+                    <option value="5">ラーメン</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
         </div>
         <div class="search-words">
             <input type="text" id="keyword" placeholder="キーワードを入力" onkeydown="handleKeyDown(event)">
             <button onclick="search()">検索</button>
         </div>
     </div>
-<div class="store-container">
-    <div class="store-group">
-        <div class="store-info">
-            <img src="store_image.jpg" alt="店画像">
-            <h3>店舗名</h3>
-            <p>地域名</p>
-            <p>ジャンル名</p>
-            <button class="detail-button" onclick="location.href='/store_detail'">詳細</button>
-            <button class="favorite-button"><i class="fas fa-heart"></i></button>
+@foreach($stores as $store)
+    <div class="store-container">
+        <div div class="store-group">
+            <div class="store-info">
+                <img src="{{ $store->image_url }}" alt="{{ $store->name }}">
+                <h3>{{ $store->name }}</h3>
+                <p>{{ $store->area->area }}</p>
+                <p>{{ $store->genre->genre }}</p>
+                <button class="detail-button" onclick="location.href='/store_detail/{{ $store->id }}'">詳細</button>
+                <button class="favorite-button"><i class="fas fa-heart"></i></button>
+            </div>
         </div>
     </div>
-</div>
+@endforeach
 @endsection

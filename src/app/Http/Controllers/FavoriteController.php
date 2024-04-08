@@ -4,34 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use Illuminate\Http\Request;
-use App\Models\user;
-use App\Models\store;
+use App\Models\User;
+use App\Models\Store;
 
 class FavoriteController extends Controller
-
 {
     public function index()
     {
-        //　特定のユーザーのお気に入りを取得する例
         $userId = auth()->user()->id;
         $favorites = Favorite::where('user_id', $userId)->get();
 
-        return view('favorites.index', compact('favorites'));
+        return view('favorite', compact('favorites'));
     }
 
     public function store(Request $request)
     {
-
+        // お気に入りを追加する処理を実装
     }
 
     public function destroy(Favorite $favorite)
     {
-    
+        // お気に入りを削除する処理を実装
     }
 
     public function favoritesArea(Area $area)
     {
         $favorites = $area->favorites;
-        return view('favorite.index', compact('favorite'));
+        return view('favorite', compact('favorites'));
     }
 }

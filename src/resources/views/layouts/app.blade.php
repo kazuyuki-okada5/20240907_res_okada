@@ -33,8 +33,8 @@
                                 <a class="header-nav__link" href="/">Home</a>
                             </li>
                             <li class="header-nav__item" id="mypageItem">
-                                <a class="header-nav__link" href="{{ route('favorite.index')}}">マイページ</a>
-                            </li>
+    <a class="header-nav__link" href="{{ route('favorite.index') }}">マイページ</a>
+</li>
                             <li class="header-nav__item" id="logoutItem" style="display: none;">
                                 <a class="header-nav__link" href="/logout">ログアウト</a>
                             </li>

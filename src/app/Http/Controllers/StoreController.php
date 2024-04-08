@@ -18,8 +18,23 @@ class StoreController extends Controller
 
     public function search(Request $request)
     {
-        $areaID = $request->input('area_id');
+        $areaId = $request->input('area_id');
         $stores = Store::where('area_id', $areaId)->get();
+        $genreId = $request->input('area_id');
+        $genres = Store::where('genre_id', $genreID)->get();
+
+        $query = Store::query();
+
+        if($genreId){
+            $query->where('genre_id', $genreId);
+        }
+
+        if($areaId){
+            $query->where('area_id', $areaId);
+        }
+
+        $stores = $query->get();
+        
         return view('index', compact('stores'));
     }
 
