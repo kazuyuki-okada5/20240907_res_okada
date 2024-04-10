@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/index.css') }}">
-@endsection
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 @section('content')
 <div class="search-container">
@@ -36,18 +35,29 @@
             <button onclick="search()">検索</button>
         </div>
     </div>
+</div>
+<div class="store-container" style="max-width: 1200px; margin: 0 auto;">
 @foreach($stores as $store)
-    <div class="store-container">
-        <div div class="store-group">
-            <div class="store-info">
+    <div class="store-group"> <!-- ここが.store-groupになる -->
+        <div class="store-info">
+            <div class="store-image">
                 <img src="{{ $store->image_url }}" alt="{{ $store->name }}">
-                <h3>{{ $store->name }}</h3>
-                <p>{{ $store->area->area }}</p>
-                <p>{{ $store->genre->genre }}</p>
-                <button class="detail-button" onclick="location.href='/store_detail/{{ $store->id }}'">詳細</button>
-                <button class="favorite-button"><i class="fas fa-heart"></i></button>
             </div>
+            <h3>{{ $store->name }}</h3>
+            <p>#{{ $store->area->area }}</p>
+            <p>#{{ $store->genre->genre }}</p>
+            <button class="detail-button" onclick="location.href='/store_detail/{{ $store->id }}'">詳しく見る</button>
+            <button class="favorite-button"><i class="fas fa-heart"></i></button>
         </div>
     </div>
 @endforeach
+</div>
+
+<script>
+document.querySelectorAll('.favorite-button').forEach(button => {
+    button.addEventListener('click', function() {
+        this.classList.toggle('active');
+    });
+});
+</script>
 @endsection

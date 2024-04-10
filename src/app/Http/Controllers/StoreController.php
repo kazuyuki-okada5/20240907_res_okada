@@ -10,6 +10,15 @@ use App\Models\Store;
 
 class StoreController extends Controller
 {
+    public function show($id)
+    {
+        // 引数で受け取ったIDni対応するストアを取得
+        $store = Store::findOrFail($id);
+
+        // 取得したストアを詳細ページに渡して表示する
+        return view('store_detail',['store' => $store]);
+    }
+
     public function index()
     {
         $stores = Store::all();
@@ -36,11 +45,6 @@ class StoreController extends Controller
         $stores = $query->get();
         
         return view('index', compact('stores'));
-    }
-
-    public function show()
-    {
-        return view('store_detail');
     }
 
     public function store(Request $request)

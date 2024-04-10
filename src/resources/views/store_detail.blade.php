@@ -12,13 +12,14 @@
             <div class="store-group">
                 <div class="store-info">
                     <form action="{{ url('/') }}" method="get">
-    @csrf
-    <button type="submit" class="return-button">戻る</button>
-</form>
-                    <h3>店舗名</h3>
-                    <img src="store_image.jpg" alt="店画像">
-                    <p>地域名</p><p>ジャンル名</p>
-                    <p>詳細</p>
+                        @csrf
+                        <button type="submit" class="return-button">戻る</button>
+                    </form>
+                    <h3>{{ $store->name }}</h3>
+                    <img src="{{ $store->image_url }}" alt="{{ $store->name }}">
+                    <p>{{ $store->area->area }}</p>
+                    <p>{{ $store->genre->genre }}</p>
+                    <p>{{ $store->store_overview }}</p>
                 </div>
             </div>
         </div>
@@ -29,35 +30,34 @@
                     <form action="/reservation" method="post">
                         @csrf
                         <div>
-                            <label for="store_name">店舗名:</label>
-                            
+                            <label for="store_name">Shop:</label>
+                            <span>{{ $store->name }}</span>
                         </div>
                         <div>
-                            <label for="date">日付:</label>
+                            <label for="date">Date:</label>
                             <input type="date" name="date" id="date">
                         </div>
                         <div>
-                            <label for="time">時間:</label>
-                            
+                            <label for="time">Time:</label>
+                            <select name="time" id="time">
+                                @foreach($times as $time)
+                                    <option value="{{ $time }}">{{ $time }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div>
-                            <label for="num_people">人数:</label>
-                            
+                            <label for="num_people">Number:</label>
                         </div>
-                        <form action="{{ route('booking_is_done') }}" method="post">
-                        @csrf
                         <button type="submit">予約する</button>
                     </form>
                 </div>
                 <div class="booking-confirm">
-                    
-                        <div>
-                            <p>店舗名:</p>
-                            <p>日付:</p>
-                            <p>選択された時間:</p>
-                            <p>選択された人数:</p>
-                        </div>
-                    
+                    <div>
+                        <p>Shop:{{ $store->name }}</p>
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Number:</p>
+                    </div>
                 </div>
             </div>
         </div>
