@@ -9,6 +9,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\IndexControllers;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\StoreDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,4 @@ Route::get('/',[StoreController::class, 'index'])->name('stores.index');
 Route::get('/stores/search', [StoreController::class, 'search'])->name('store.search');
 Route::get('/login',[AuthenticatedSessionController::class,'create'])->middleware('guest')->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->middleware('guest');
+Route::get('/store_detail', [StoreDetailController::class, 'index']);

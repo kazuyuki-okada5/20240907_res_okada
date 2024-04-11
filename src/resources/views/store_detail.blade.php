@@ -39,14 +39,24 @@
                         </div>
                         <div>
                             <label for="time">Time:</label>
-                            <select name="time" id="time">
-                                @foreach($times as $time)
-                                    <option value="{{ $time }}">{{ $time }}</option>
-                                @endforeach
-                            </select>
+                                <select name="time" id="time">
+                                    @php
+                                        $startTime = strtotime('20:00');
+                                        $endTime = strtotime('22:00');
+                                        $interval = 15 * 60; // 15分を秒に変換
+                                    @endphp
+                                    @for ($time = $startTime; $time <= $endTime; $time += $interval)
+                                        <option value="{{ date('H:i', $time) }}">{{ date('H:i', $time) }}</option>
+                                    @endfor
+                                </select>
                         </div>
                         <div>
                             <label for="num_people">Number:</label>
+                            <select name="num_people" id="num_people">
+                                @for ($i = 1; $i <= 20; $i++)
+                                    <option value="{{ $i }}">{{ $i }}</optiom>
+                                @endfor
+                            </select>
                         </div>
                         <button type="submit">予約する</button>
                     </form>
@@ -63,4 +73,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    document.getElementById('time').addEventListener('click', function() {
+        this.setAttribute('size', '5');
+    });
+
+    document.getElementById('time').addEventListener('blur', function() {
+        this.removeAttribute('size');
+    });
+</script>
 @endsection
