@@ -88,26 +88,26 @@ class StoresTableSeeder extends Seeder
         ];
         // エリアとジャンルの対応付け
         $areaGenreMapping = [
-            ['area_id' => 1, 'genre_id' => 1], //エリアIDが1でジャンルIDが1の組み合わせ
-            ['area_id' => 2, 'genre_id' => 2],
-            ['area_id' => 3, 'genre_id' => 3],
-            ['area_id' => 1, 'genre_id' => 4],
-            ['area_id' => 3, 'genre_id' => 5],
-            ['area_id' => 1, 'genre_id' => 2],
-            ['area_id' => 2, 'genre_id' => 4],
-            ['area_id' => 1, 'genre_id' => 5],
-            ['area_id' => 2, 'genre_id' => 3],
-            ['area_id' => 1, 'genre_id' => 1],
-            ['area_id' => 2, 'genre_id' => 2],
-            ['area_id' => 3, 'genre_id' => 2],
-            ['area_id' => 1, 'genre_id' => 3],
-            ['area_id' => 2, 'genre_id' => 1],
-            ['area_id' => 1, 'genre_id' => 5],
-            ['area_id' => 2, 'genre_id' => 3],
-            ['area_id' => 1, 'genre_id' => 1],
-            ['area_id' => 1, 'genre_id' => 2],
-            ['area_id' => 3, 'genre_id' => 4],
-            ['area_id' => 2, 'genre_id' => 1],
+            ['area_id' => 12, 'genre_id' => 1], //エリアIDが1でジャンルIDが1の組み合わせ
+            ['area_id' => 26, 'genre_id' => 2],
+            ['area_id' => 39, 'genre_id' => 3],
+            ['area_id' => 12, 'genre_id' => 4],
+            ['area_id' => 39, 'genre_id' => 5],
+            ['area_id' => 12, 'genre_id' => 2],
+            ['area_id' => 26, 'genre_id' => 4],
+            ['area_id' => 12, 'genre_id' => 5],
+            ['area_id' => 26, 'genre_id' => 3],
+            ['area_id' => 12, 'genre_id' => 1],
+            ['area_id' => 26, 'genre_id' => 2],
+            ['area_id' => 39, 'genre_id' => 2],
+            ['area_id' => 12, 'genre_id' => 3],
+            ['area_id' => 26, 'genre_id' => 1],
+            ['area_id' => 12, 'genre_id' => 5],
+            ['area_id' => 26, 'genre_id' => 3],
+            ['area_id' => 12, 'genre_id' => 1],
+            ['area_id' => 12, 'genre_id' => 2],
+            ['area_id' => 39, 'genre_id' => 4],
+            ['area_id' => 26, 'genre_id' => 1],
         ];
 
         // エリアとジャンルに対応するデータを stores テーブルに作成

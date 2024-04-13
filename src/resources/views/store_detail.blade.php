@@ -29,6 +29,7 @@
                     <h3>予約</h3>
                     <form action="/reservation" method="post">
                         @csrf
+                        <input type="hiden" name="store_id" value="{{ $store->id }}">
                         <div>
                             <label for="store_name">Shop:</label>
                             <span>{{ $store->name }}</span>
