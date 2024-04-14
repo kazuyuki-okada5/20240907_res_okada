@@ -18,8 +18,7 @@ Route::get('/registration', function () {
 Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 Route::get('/favorite', [FavoriteController::class, 'index'])->name('favorite.index');
-Route::post('/favorites', [FavoriteController::class, 'store'])->name('favorites.store');
-Route::delete('/favorites/{favorite}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+Route::post('/toggle-favorite/{storeId}', [FavoriteController::class, 'toggleFavorite'])->middleware('auth');
 Route::post('/stores', [StoreController::class, 'store'])->name('stores.store');
 Route::delete('/stores/{store}', [StoreController::class, 'destroy'])->name('stores.destroy');
 Route::get('/stores', [StoreController::class, 'index'])->name('stores.index');

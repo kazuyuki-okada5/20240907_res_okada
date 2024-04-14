@@ -50,7 +50,7 @@
                     <button class="detail-button" onclick="location.href='/store_detail/{{ $store->id }}'">詳しく見る</button>
                     <!-- 認証されている場合のみアイコンを表示 -->
                     @auth
-                    <button class="favorite-button" onclick="changeIconColor(this)">
+                    <button class="favorite-button" data-store-id="{{ $store->id }}" onclick="changeIconColor(this)">
                         <i class="fa fa-heart" id="heart-icon" style="color: #A9A9A9;"></i>
                     </button>
                     @endauth
@@ -64,18 +64,29 @@
 
 <!-- スクリプト追記部分 -->
 <script>
-    function changeIconColor(buttonElement) {
+    async function changeIconColor(buttonElement) {
+        const storeId = buttonElement.getAttribute('data-store-id');
+
         const icon = buttonElement.querySelector('.fa-heart');
         
         // 現在の色を取得
         const currentColor = window.getComputedStyle(icon).color;
 
-        // 現在の色がグレーであれば、赤色に、それ以外の場合はグレーに変更
-        if (currentColor === 'rgb(169, 169, 169)' || currentColor === 'rgb(169,169,169)') {
+        const response = await fetch(`/toggle-favorite/${storeId}`, { // テンプレートリテラルを使用して修正
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
+
+        const data = await response.json();
+
+        if(data.status === 'added') {
             icon.style.color = 'red';
-        } else {
+        }else{
             icon.style.color = '#A9A9A9';
         }
-    }
+        }
 </script>
 @endsection
