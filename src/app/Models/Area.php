@@ -20,5 +20,6 @@ class Area extends Model
 
     // モデルで更新可能なフィールドを指定
     protected $fillable = ['area'];
+    
 }
 

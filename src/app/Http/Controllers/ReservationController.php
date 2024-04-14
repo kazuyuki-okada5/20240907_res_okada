@@ -56,6 +56,22 @@ class ReservationController extends Controller
         return redirect()->route('booking_is_done')->with('success', '予約が完了しました！');
     }
 
+    public function index()
+    {
+        // ログインしているユーザーのIDを取得
+        $userId = auth()->user()->id;
+
+        // 予約データを取得
+        $reservations = Reservation::where('user_id', $userId)->get();
+        
+
+        // ビューにデータを渡す
+        return view('favorite', [
+            'reservationDetails' => $reservations,
+            // その他のデータも渡す場合はここに追加
+        ]);
+    }
+
     public function destroy(Reservation $reservation)
     {
         // 予約を削除するロジックをここに記述
