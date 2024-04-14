@@ -30,7 +30,7 @@
                         <ul class="header-nav">
                             <!-- メニューアイテム -->
                             <li class="header-nav__item" id="homeItem">
-                                <a class="header-nav__link" href="/">Home</a>
+                                <a class="header-nav__link" href="/stores">Home</a>
                             </li>
                             <li class="header-nav__item" id="mypageItem">
     <a class="header-nav__link" href="{{ route('favorite.index') }}">マイページ</a>
@@ -114,6 +114,7 @@ function search() {
   <main>
     @yield('content')
   </main>
+  @yield('scripts')
 </body>
 
 </html>

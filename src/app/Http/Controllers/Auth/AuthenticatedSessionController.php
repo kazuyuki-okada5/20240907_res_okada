@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::attempt($request->only('email', 'password'))){
             $request->session()->regenerate();
 
-            return redirect()->intended('/'); // ログイン後にリダイレクトする先を指定
+            return redirect('/stores');
         }
 
         return back()->withErrors([
@@ -53,6 +53,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate(); //セッションを無効にする
         $request->session()->regenerateToken(); //新しいCSRFトークンを生成する
 
-        return redirect('/'); //ログアウト後に'/'ページにリダイレクトする
+        return redirect('/stores'); //ログアウト後に'/stores'ページにリダイレクトする
     }
 }

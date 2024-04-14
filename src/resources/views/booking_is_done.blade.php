@@ -10,11 +10,11 @@
   <div class="registration_end__heading">
     <h2>ご予約ありがとうございます</h2>
   </div>
-  <div class="login__link">
-    <form action="{{ url('/') }}" method="get">
+   <div class="login__link">
+    <form action="{{ route('stores.index') }}" method="get">
     @csrf
     <button type="submit" class="return-button">戻る</button>
-</form>
+    </form>
   </div>
 </div>
 @endsection

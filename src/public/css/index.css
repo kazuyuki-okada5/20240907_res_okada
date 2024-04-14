@@ -60,8 +60,9 @@
         /* 要素を右側に寄せる */
 }
 
+
 .favorite-button {
-    background-color: rgb(159, 158, 158);
+    background-color: rgb(255, 255, 255);
     border: none;
     cursor: pointer;
     transition: color 0.3s;

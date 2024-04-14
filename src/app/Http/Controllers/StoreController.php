@@ -19,33 +19,33 @@ class StoreController extends Controller
         return view('store_detail',['store' => $store]);
     }
 
-    public function index()
-    {
-        $stores = Store::all();
-        return view('index', compact('stores'));
-    }
+public function index()
+{
+    $stores = Store::with(['area', 'genre'])->get();
+    
+    return view('index', compact('stores'));
+}
 
     public function search(Request $request)
-    {
-        $areaId = $request->input('area_id');
-        $stores = Store::where('area_id', $areaId)->get();
-        $genreId = $request->input('area_id');
-        $genres = Store::where('genre_id', $genreID)->get();
+{
+    $areaId = $request->input('area_id');
+    $genreId = $request->input('genre_id');
 
-        $query = Store::query();
+    $query = Store::query();
 
-        if($genreId){
-            $query->where('genre_id', $genreId);
-        }
-
-        if($areaId){
-            $query->where('area_id', $areaId);
-        }
-
-        $stores = $query->get();
-        
-        return view('index', compact('stores'));
+    if ($areaId) {
+        $query->where('area_id', $areaId);
     }
+
+    if ($genreId) {
+        $query->where('genre_id', $genreId);
+    }
+
+    $stores = $query->get();
+    
+    return view('index', compact('stores'));
+}
+
 
     public function store(Request $request)
     {

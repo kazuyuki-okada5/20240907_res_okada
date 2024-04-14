@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 <link rel="stylesheet" href="/css/index.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 @section('content')
 <div class="search-container">
@@ -37,27 +37,45 @@
     </div>
 </div>
 <div class="store-container" style="max-width: 1200px; margin: 0 auto;">
-@foreach($stores as $store)
-    <div class="store-group"> <!-- ここが.store-groupになる -->
-        <div class="store-info">
-            <div class="store-image">
-                <img src="{{ $store->image_url }}" alt="{{ $store->name }}">
+    @if(isset($stores) && $stores->count() > 0)
+        @foreach($stores as $store)
+            <div class="store-group">
+                <div class="store-info">
+                    <div class="store-image">
+                        <img src="{{ $store->image_url }}" alt="{{ $store->name }}">
+                    </div>
+                    <h3>{{ $store->name }}</h3>
+                    <p>#{{ $store->area->area }}</p>
+                    <p>#{{ $store->genre->genre }}</p>
+                    <button class="detail-button" onclick="location.href='/store_detail/{{ $store->id }}'">詳しく見る</button>
+                    <!-- 認証されている場合のみアイコンを表示 -->
+                    @auth
+                    <button class="favorite-button" onclick="changeIconColor(this)">
+                        <i class="fa fa-heart" id="heart-icon" style="color: #A9A9A9;"></i>
+                    </button>
+                    @endauth
+                </div>
             </div>
-            <h3>{{ $store->name }}</h3>
-            <p>#{{ $store->area->area }}</p>
-            <p>#{{ $store->genre->genre }}</p>
-            <button class="detail-button" onclick="location.href='/store_detail/{{ $store->id }}'">詳しく見る</button>
-            <button class="favorite-button"><i class="fas fa-heart"></i></button>
-        </div>
-    </div>
-@endforeach
+        @endforeach
+    @else
+        <p>現在、登録されている店舗はありません。</p>
+    @endif
 </div>
 
+<!-- スクリプト追記部分 -->
 <script>
-document.querySelectorAll('.favorite-button').forEach(button => {
-    button.addEventListener('click', function() {
-        this.classList.toggle('active');
-    });
-});
+    function changeIconColor(buttonElement) {
+        const icon = buttonElement.querySelector('.fa-heart');
+        
+        // 現在の色を取得
+        const currentColor = window.getComputedStyle(icon).color;
+
+        // 現在の色がグレーであれば、赤色に、それ以外の場合はグレーに変更
+        if (currentColor === 'rgb(169, 169, 169)' || currentColor === 'rgb(169,169,169)') {
+            icon.style.color = 'red';
+        } else {
+            icon.style.color = '#A9A9A9';
+        }
+    }
 </script>
 @endsection

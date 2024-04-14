@@ -1,0 +1,64 @@
+.detail-container {
+    display: flex;
+    justify-content: space-between;
+    /* グループ間のスペースを均等に */
+}
+
+.detail-group,
+.booking-container {
+    flex: 1;
+    /* 両方のコンテナを均等に広げる */
+    margin-right: 20px;
+    /* 右側にマージンを追加してスペースを作る */
+}
+.booking-container {
+    background-color: #007BFF;
+    /* 青色の背景色 */
+    padding: 20px;
+    /* 必要に応じて内側の余白を設定 */
+    border-radius: 8px;
+    /* 角を丸くする */
+}
+
+/* モバイルデバイスでのレイアウト調整 */
+@media (max-width: 768px) {
+    .detail-container {
+        flex-direction: column;
+        /* モバイルでは縦並びに */
+    }
+
+    .detail-group,
+    .booking-container {
+        margin-right: 0;
+        /* モバイルではマージンを0に */
+    }
+}
+.detail-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.store-container {
+    flex: 1;
+    margin-right: 20px;
+    /* 余白を追加 */
+}
+
+.booking-container {
+    flex: 1;
+    margin-left: 20px;
+    /* 余白を追加 */
+}
+/* 画像のサイズを変更する */
+.store-info img {
+    width: 500px;
+    /* 幅を指定 */
+    height: auto;
+    /* 高さは自動調整 */
+    display: block;
+        /* ブロック要素として扱う */
+        margin: auto;
+        /* 左右のマージンを自動で調整して中央寄せ */
+        text-align: center;
+        /* テキストを中央寄せ */
+}
