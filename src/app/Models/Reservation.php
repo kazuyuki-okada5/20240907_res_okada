@@ -13,17 +13,18 @@ class Reservation extends Model
         'user_id', 'store_id', 'start_at', 'number_of_people'
     ];
 
-    protected $casts =[
+    protected $casts = [
         'start_at' => 'datetime',
     ];
 
+
     public function user()
     {
-        return $this->beLongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function store()
     {
-        return $this->belongsTo(Store::class, );
+        return $this->belongsTo(Store::class);
     }
 }

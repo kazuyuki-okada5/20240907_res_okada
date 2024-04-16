@@ -21,9 +21,11 @@ class StoreController extends Controller
 
 public function index()
 {
+    $userFavoriteStores = auth()->check() ? auth()->user()->favorites->pluck('store_id')->toArray() : [];
+
     $stores = Store::with(['area', 'genre'])->get();
     
-    return view('index', compact('stores'));
+    return view('index', compact('stores', 'userFavoriteStores'));
 }
 
     public function search(Request $request)

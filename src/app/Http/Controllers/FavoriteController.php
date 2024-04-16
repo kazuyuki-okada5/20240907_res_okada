@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Favorite; // 修正
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Store;
 use App\Models\Reservation;
-use App\Models\Area;
 use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
@@ -58,19 +57,21 @@ class FavoriteController extends Controller
     }
 
     public function destroy(Favorite $favorite)
-    {
-        // お気に入りを削除する処理を実装
+{
+    // 認証ユーザーのお気に入りとしてお気に入りを削除
+    if ($favorite->user_id === auth()->id()) {
+        $favorite->delete();
+        return back()->with('success', 'お気に入りを削除しました');
     }
+
+    return back()->with('error', 'お気に入りの削除に失敗しました');
+}
 
 public function favoritesArea(Area $area)
 {
-    // $area->favorites の取得が正しいか確認
     $favorites = $area->favorites;
 
     return view('favorite', ['favoriteStores' => $favorites]);
 }
-public function __construct()
-{
-    $this->middleware('auth');
-}
+
 }

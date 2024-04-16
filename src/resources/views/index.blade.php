@@ -50,9 +50,12 @@
                     <button class="detail-button" onclick="location.href='/store_detail/{{ $store->id }}'">詳しく見る</button>
                     <!-- 認証されている場合のみアイコンを表示 -->
                     @auth
-                    <button class="favorite-button" data-store-id="{{ $store->id }}" onclick="changeIconColor(this)">
-                        <i class="fa fa-heart" id="heart-icon" style="color: #A9A9A9;"></i>
-                    </button>
+<button class="favorite-button" 
+        data-store-id="{{ $store->id }}" 
+        onclick="changeIconColor(this)"
+        style="color: {{ in_array($store->id, $userFavoriteStores) ? 'red' : '#A9A9A9' }};">
+    <i class="fa fa-heart" id="heart-icon"></i>
+</button>
                     @endauth
                 </div>
             </div>
