@@ -1,38 +1,38 @@
 @extends('layouts.app')
 
 <link rel="stylesheet" href="/css/index.css">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 @section('content')
 <div class="search-container">
     <div class="search-group">
         <div class="search-area">
-            <form action="{{ route('store.search') }}" method="GET">
+            <form action="javascript:void(0);" method="GET" id="areaForm">
                 <select name="area_id">
                     <option value="">All area</option>
-                    <option value="1">東京都</option>
-                    <option value="2">大阪府</option>
-                    <option value="3">福岡県</option>
+                    @foreach($areas as $area)
+                        <option value="{{ $area->id }}" {{ $selectedAreaId == $area->id ? 'selected' : '' }}>{{ $area->area }}</option>
+                    @endforeach
                 </select>
-                <button type="submit">Search</button>
             </form>
         </div>
         <div class="search-genre">
-            <form action="{{ route('store.search') }}" method='GET'>
-                <select name="genre_id">
-                    <option value="">All genre</option>
-                    <option value="1">寿司</option>
-                    <option value="2">焼肉</option>
-                    <option value="3">居酒屋</option>
-                    <option value="4">イタリアン</option>
-                    <option value="5">ラーメン</option>
-                </select>
-                <button type="submit">Search</button>
-            </form>
+            @if(isset($genres))
+                <form action="javascript:void(0);" method='GET' id="genreForm">
+                    <select name="genre_id">
+                        <option value="">All genre</option>
+                        @foreach($genres as $genre)
+                            <option value="{{ $genre->id }}" {{ $selectedGenreId == $genre->id ? 'selected' : '' }}>{{ $genre->genre }}</option>
+                        @endforeach
+                    </select>
+                </form>
+            @endif
         </div>
         <div class="search-words">
-            <input type="text" id="keyword" placeholder="キーワードを入力" onkeydown="handleKeyDown(event)">
-            <button onclick="search()">検索</button>
+            <form action="javascript:void(0);" method='GET' id="keywordForm">
+                <input type="text" name="keyword" id="keyword" placeholder="キーワードを入力" value="{{ $keyword ?? ''}}">
+
+            </form>
         </div>
     </div>
 </div>
@@ -52,8 +52,8 @@
                     @auth
 <button class="favorite-button" 
         data-store-id="{{ $store->id }}" 
-        onclick="changeIconColor(this)"
-        style="color: {{ in_array($store->id, $userFavoriteStores) ? 'red' : '#A9A9A9' }};">
+        onclick="toggleFavorite(this)"
+        style="color: {{ in_array($store->id, $userFavoriteStores ?? []) ? 'red' : '#A9A9A9' }};">
     <i class="fa fa-heart" id="heart-icon"></i>
 </button>
                     @endauth
@@ -67,29 +67,88 @@
 
 <!-- スクリプト追記部分 -->
 <script>
-    async function changeIconColor(buttonElement) {
-        const storeId = buttonElement.getAttribute('data-store-id');
+    const userFavoriteStores = {!! $userFavoriteStoresJson !!};
 
-        const icon = buttonElement.querySelector('.fa-heart');
-        
-        // 現在の色を取得
-        const currentColor = window.getComputedStyle(icon).color;
+    async function toggleFavorite(buttonElement) {
+    const storeId = buttonElement.getAttribute('data-store-id');
+    const icon = buttonElement.querySelector('.fa-heart');
 
-        const response = await fetch(`/toggle-favorite/${storeId}`, { // テンプレートリテラルを使用して修正
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
+    const response = await fetch(`/toggle-favorite/${storeId}`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+
+    const data = await response.json();
+
+    if (data.status === 'added') {
+        icon.style.color = 'red';
+    } else {
+        icon.style.color = '#A9A9A9';
+    }
+
+    // お気に入りのボタンの色を更新
+    updateFavoriteButtonColors();
+}
+
+function search() {
+    const areaId = document.querySelector('#areaForm select[name="area_id"]').value;
+    const genreId = document.querySelector('#genreForm select[name="genre_id"]').value;
+    const keyword = document.getElementById('keyword').value;
+
+    let params = [];
+
+    if (areaId) {
+        params.push(`area_id=${areaId}`);
+    }
+
+    if (genreId) {
+        params.push(`genre_id=${genreId}`);
+    }
+
+    if (keyword) {
+        params.push(`keyword=${keyword}`);
+    }
+
+    const queryString = params.join('&');
+
+    // Ajaxを使用して検索結果を取得
+    fetch(`/stores/search?${queryString}`)
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('.store-container').innerHTML = data;
+            // ここでお気に入りのボタンの色を更新する
+            updateFavoriteButtonColors();
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
+}
 
-        const data = await response.json();
+// お気に入りボタンの色を更新する関数
+function updateFavoriteButtonColors() {
+    const buttons = document.querySelectorAll('.favorite-button');
 
-        if(data.status === 'added') {
+    buttons.forEach(button => {
+        const storeId = button.getAttribute('data-store-id');
+        const icon = button.querySelector('.fa-heart');
+
+        if (in_array(storeId, userFavoriteStores)) {
             icon.style.color = 'red';
-        }else{
+        } else {
             icon.style.color = '#A9A9A9';
         }
-        }
+    });
+}
+
+// フォームの変更時に検索を自動的に実行
+document.getElementById('areaForm').addEventListener('change', search);
+document.getElementById('genreForm').addEventListener('change', search);
+document.getElementById('keywordForm').addEventListener('input', search);
+
+updateFavoriteButtonColors();
+
 </script>
 @endsection

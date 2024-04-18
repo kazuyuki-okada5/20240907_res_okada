@@ -12,26 +12,33 @@ class StoreController extends Controller
 {
     public function show($id)
     {
-        // 引数で受け取ったIDni対応するストアを取得
+        // 引数で受け取ったIDに対応するストアを取得
         $store = Store::findOrFail($id);
 
         // 取得したストアを詳細ページに渡して表示する
-        return view('store_detail',['store' => $store]);
+        return view('store_detail', ['store' => $store]);
     }
 
-public function index()
+    public function index(Request $request)
 {
+    $selectedAreaId = $request->input('area_id', '');  
+    $selectedGenreId = $request->input('genre_id', '');  
+
     $userFavoriteStores = auth()->check() ? auth()->user()->favorites->pluck('store_id')->toArray() : [];
+    $userFavoriteStoresJson = json_encode($userFavoriteStores); 
 
     $stores = Store::with(['area', 'genre'])->get();
+    $areas = \App\Models\Area::all();  
+    $genres = \App\Models\Genre::all();  
     
-    return view('index', compact('stores', 'userFavoriteStores'));
+    return view('index', compact('stores', 'areas', 'selectedAreaId', 'selectedGenreId', 'userFavoriteStores', 'genres', 'userFavoriteStoresJson')); 
 }
 
-    public function search(Request $request)
+public function search(Request $request)
 {
     $areaId = $request->input('area_id');
     $genreId = $request->input('genre_id');
+    $keyword = $request->input('keyword');
 
     $query = Store::query();
 
@@ -43,11 +50,27 @@ public function index()
         $query->where('genre_id', $genreId);
     }
 
-    $stores = $query->get();
-    
-    return view('index', compact('stores'));
-}
+    if ($keyword) {
+        $query->where(function ($q) use ($keyword){
+            $q->where('name', 'like', '%' . $keyword . '%')
+              ->orWhere('store_overview', 'like', '%' . $keyword . '%');
+        });
+    }
 
+    $stores = $query->with(['area', 'genre'])->get(); 
+
+    $areas = \App\Models\Area::all(); 
+    $genres = \App\Models\Genre::all(); 
+    
+    $selectedAreaId = $areaId;
+    $selectedGenreId = $genreId;
+    $keywordValue = $keyword;
+    
+    $userFavoriteStores = auth()->check() ? auth()->user()->favorites->pluck('store_id')->toArray() : [];
+    $userFavoriteStoresJson = json_encode($userFavoriteStores); 
+
+    return view('index', compact('stores', 'areas', 'selectedAreaId', 'genres', 'selectedGenreId', 'keywordValue', 'userFavoriteStoresJson')); 
+}
 
     public function store(Request $request)
     {
@@ -59,9 +82,11 @@ public function index()
         // ストアを削除するロジックをここに追加
     }
 
-     public function storesByArea(Area $area)
+    public function storesByArea(Area $area)
     {
         $stores = $area->stores;
         return view('stores.index', compact('stores'));
     }
+
+    
 }

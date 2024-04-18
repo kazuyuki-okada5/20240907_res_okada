@@ -61,10 +61,8 @@ class FavoriteController extends Controller
     // 認証ユーザーのお気に入りとしてお気に入りを削除
     if ($favorite->user_id === auth()->id()) {
         $favorite->delete();
-        return back()->with('success', 'お気に入りを削除しました');
+        return back();
     }
-
-    return back()->with('error', 'お気に入りの削除に失敗しました');
 }
 
 public function favoritesArea(Area $area)

@@ -88,7 +88,7 @@
                         </div>
                         
                         <!-- 予約ボタン -->
-                        <button type="submit">予約する</button>
+                        <button type="submit" @guest onclick="event.preventDefault(); location.href='/login';" @else type="submit" @endguest>予約する</button>
                     </form>
                 </div>
             </div>

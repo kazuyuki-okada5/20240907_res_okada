@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\Store;
 
+
 class ReservationController extends Controller
 {
     public function store(Request $request)
@@ -53,7 +54,10 @@ class ReservationController extends Controller
         $reservation->save();
 
         // リダイレクトなどの適切なレスポンスを返す
-        return redirect()->route('booking_is_done')->with('success', '予約が完了しました！');
+        return redirect()->route('booking_is_done');
+
+        // ユーザーが認証されていない場合、ログインページにリダイレクト
+        
     }
 
     public function index()

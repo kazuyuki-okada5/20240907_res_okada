@@ -9,6 +9,7 @@
   <div class="login-form__heading">
     <h2>ログイン</h2>
   </div>
+  
   <form class="form" action="/login" method="post">
      @csrf
     <div class="form__group">
@@ -46,4 +47,6 @@
     </div>
   </form>
 </div>
+
+
 @endsection
