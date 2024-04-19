@@ -37,8 +37,10 @@ class FavoriteController extends Controller
         // ログインしているユーザーのIDを取得
         $userId = $user->id;
 
-        // 予約データを取得
-        $reservations = Reservation::where('user_id', $userId)->get();
+         // 予約データを取得し、日付が近い順にソートする
+    $reservations = Reservation::where('user_id', $userId)
+                               ->orderBy('start_at', 'asc')  // start_atで昇順ソート
+                               ->get();
 
         // お気に入りの店舗データを取得
         $favoriteStores = $user->favorites;
