@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Store;
+use App\Models\Favorite; // Favoriteモデルを使用する場合
 
 class StoreController extends Controller
 {
@@ -33,6 +34,7 @@ class StoreController extends Controller
     
     return view('index', compact('stores', 'areas', 'selectedAreaId', 'selectedGenreId', 'userFavoriteStores', 'genres', 'userFavoriteStoresJson')); 
 }
+
 
 public function search(Request $request)
 {
@@ -66,10 +68,11 @@ public function search(Request $request)
     $selectedGenreId = $genreId;
     $keywordValue = $keyword;
     
-    $userFavoriteStores = auth()->check() ? auth()->user()->favorites->pluck('store_id')->toArray() : [];
+     $userFavoriteStores = auth()->check() ? auth()->user()->favorites->pluck('store_id')->toArray() : [];
     $userFavoriteStoresJson = json_encode($userFavoriteStores); 
 
-    return view('index', compact('stores', 'areas', 'selectedAreaId', 'genres', 'selectedGenreId', 'keywordValue', 'userFavoriteStoresJson')); 
+    // ここでユーザーのお気に入り情報をビューに渡す
+    return view('index', compact('stores', 'areas', 'selectedAreaId', 'genres', 'selectedGenreId', 'keywordValue', 'userFavoriteStores', 'userFavoriteStoresJson')); 
 }
 
     public function store(Request $request)

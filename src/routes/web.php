@@ -39,3 +39,4 @@ Route::middleware(['auth'])->group(function() {
 }); 
 Route::delete('/reservations/{id}', 'ReservationController@destroy')->name('reservations.destroy');
 Route::delete('/favorites/{favorite}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');

@@ -23,19 +23,19 @@
         <div class="reservation-details">
             @foreach ($reservationDetails as $reservation)
                 <div class="reservation-item">
-                    <span class="material-symbols-outlined">schedule</span>
-                    <strong>予約:</strong> {{ $loop->iteration }}
-                    <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" onsubmit="return confirm('この予約を削除しますか？');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="cancel-button"><i class="fas fa-times"></i></button>
-                    </form>
-                    <br>
-                    <strong>Shop:</strong> {{ $reservation->store->name }}<br>
-                    <strong>Date:</strong> {{ $reservation->start_at->format('Y-m-d') }}<br>
-                    <strong>Time:</strong> {{ $reservation->start_at->format('H:i') }}<br>
-                    <strong>Number:</strong> {{ $reservation->number_of_people }}
-                </div>
+    <span class="material-symbols-outlined">schedule</span>
+    <strong>予約:</strong> {{ $loop->iteration }}
+    <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" onsubmit="return confirm('この予約を削除しますか？');">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="cancel-button"><i class="fas fa-times"></i></button>
+    </form>
+    <br>
+    <strong>Shop:</strong> {{ $reservation->store->name }}<br>
+    <strong>Date:</strong> {{ $reservation->start_at->format('Y-m-d') }}<br>
+    <strong>Time:</strong> {{ $reservation->start_at->format('H:i') }}<br>
+    <strong>Number:</strong> {{ $reservation->number_of_people }}
+</div>
             @endforeach
                 </div>
             </div>

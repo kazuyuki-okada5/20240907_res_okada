@@ -42,7 +42,7 @@ class ReservationController extends Controller
             return redirect()->back()->with('error', '指定された店舗は存在しません');
         }
 
-        // 日時を結合
+        // 日時を結合結合
         $startDateTime = $request->date . ' ' . $request->time;
 
         // 予約を作成して保存
@@ -74,7 +74,11 @@ class ReservationController extends Controller
 }
 
     public function destroy(Reservation $reservation)
-    {
-        // 予約を削除するロジックをここに記述
+{
+    // 認証ユーザーの予約として予約を削除
+    if ($reservation->user_id === auth()->id()) {
+        $reservation->delete();
+        return back();
     }
+}
 }

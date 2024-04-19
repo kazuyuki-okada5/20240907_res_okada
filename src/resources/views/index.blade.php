@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+
+
 <link rel="stylesheet" href="/css/index.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -69,31 +71,27 @@
 <script>
     const userFavoriteStores = {!! $userFavoriteStoresJson !!};
 
-    async function toggleFavorite(buttonElement) {
-    const storeId = buttonElement.getAttribute('data-store-id');
-    const icon = buttonElement.querySelector('.fa-heart');
+    async function toggleFavorite(buttonElement){
+        const storeId = buttonElement.getAttribute('data-store-id');
+        const icon = buttonElement.querySelector('.fa-heart');
 
-    const response = await fetch(`/toggle-favorite/${storeId}`, {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        const response = await fetch(`/toggle-favorite/${storeId}`, { // テンプレートリテラルを使用して修正
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
+
+        const data = await response.json();
+
+        if(data.status === 'added') {
+            icon.style.color = 'red';
+        }else{
+            icon.style.color = '#A9A9A9';
         }
-    });
-
-    const data = await response.json();
-
-    if (data.status === 'added') {
-        icon.style.color = 'red';
-    } else {
-        icon.style.color = '#A9A9A9';
-    }
-
-    // お気に入りのボタンの色を更新
-    updateFavoriteButtonColors();
-}
-
-function search() {
+        }
+    function search() {
     const areaId = document.querySelector('#areaForm select[name="area_id"]').value;
     const genreId = document.querySelector('#genreForm select[name="genre_id"]').value;
     const keyword = document.getElementById('keyword').value;
@@ -113,42 +111,25 @@ function search() {
     }
 
     const queryString = params.join('&');
-
+    
     // Ajaxを使用して検索結果を取得
     fetch(`/stores/search?${queryString}`)
         .then(response => response.text())
         .then(data => {
-            document.querySelector('.store-container').innerHTML = data;
-            // ここでお気に入りのボタンの色を更新する
-            updateFavoriteButtonColors();
+            // ここでレイアウトを取り除く
+            const container = document.createElement('div');
+            container.innerHTML = data;
+            const content = container.querySelector('.store-container').innerHTML;
+            document.querySelector('.store-container').innerHTML = content;
         })
         .catch(error => {
             console.error('Error:', error);
         });
 }
 
-// お気に入りボタンの色を更新する関数
-function updateFavoriteButtonColors() {
-    const buttons = document.querySelectorAll('.favorite-button');
-
-    buttons.forEach(button => {
-        const storeId = button.getAttribute('data-store-id');
-        const icon = button.querySelector('.fa-heart');
-
-        if (in_array(storeId, userFavoriteStores)) {
-            icon.style.color = 'red';
-        } else {
-            icon.style.color = '#A9A9A9';
-        }
-    });
-}
-
-// フォームの変更時に検索を自動的に実行
-document.getElementById('areaForm').addEventListener('change', search);
-document.getElementById('genreForm').addEventListener('change', search);
-document.getElementById('keywordForm').addEventListener('input', search);
-
-updateFavoriteButtonColors();
-
+    // フォームの変更時に検索を自動的に実行
+    document.getElementById('areaForm').addEventListener('change', search);
+    document.getElementById('genreForm').addEventListener('change', search);
+    document.getElementById('keywordForm').addEventListener('input', search); // inputイベントはキーワード入力時に発火
 </script>
 @endsection
