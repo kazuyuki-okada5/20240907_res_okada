@@ -1,3 +1,74 @@
+body {
+    background-color: #f2f2f2;
+    /* 背景色を薄い灰色に設定 */
+    margin: 0;
+    /* 余白を削除 */
+    padding: 0;
+    /* パディングを削除 */
+}
+
+.search-container {
+    position: absolute;
+        /* 画面内で絶対位置 */
+    top: 50px; /* topの値を50に修正 */
+    right: 0;
+    /* 右端に配置 */
+    padding: 10px;
+    /* 必要に応じて調整 */
+}
+
+
+.search-group {
+    border: 1px solid #ccc;
+    /* 枠線 */
+    border-radius: 5px;
+    /* 角を丸める */
+    padding: 1px;
+    /* パディング */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 影 */
+    height: 32px;
+    /* 必要に応じて高さを調整 */
+}
+
+.search-area,
+.search-genre,
+.search-words {
+    display: inline-block;
+    /* インラインブロック要素にする */
+    margin-right: 1px;
+    /* 要素間のスペース */
+}
+
+.search-area select,
+.search-genre select,
+.search-words input[type="text"] {
+    width: 100px;
+    /* 幅を指定（必要に応じて変更） */
+    height: 30px;
+    /* 高さを指定（必要に応じて変更） */
+    padding: 5px;
+    /* 内部のパディング */
+    border: 1px solid #ccc;
+    /* 枠線を追加 */
+    border-radius: 5px;
+    /* 角を丸くする */
+    appearance: none;
+    /* デフォルトのセレクトボックスのスタイルをリセット */
+    background-color: #fff;
+    /* 背景色 */
+    font-size: 16px;
+    /* フォントサイズ */
+    outline: none;
+    /* フォーカス時のアウトラインを消す */
+}
+
+.search-words input[type="text"] {
+    width: 350px;
+    /* 幅を広げる値に調整 */
+    /* 他のスタイルはそのまま */
+}
+
 .store-container {
     display: flex;
     flex-wrap: wrap;
@@ -5,7 +76,7 @@
 }
 
 .store-group {
-    width: calc(25% - 20px);
+    width: calc(25% - 20px); 
     margin-bottom: 20px;
     box-sizing: border-box;
 }
@@ -21,15 +92,12 @@
     /* 角の丸みを設定 */
 }
 
-.store-info h3 {
-    margin-bottom: 10px;
-    /* 見出しの下に余白を追加 */
+.store-meta {
+    display: inline-block;
+    margin-right: 10px;
+    /* 要素間のスペース */
 }
 
-.store-info p {
-    margin-bottom: 5px;
-    /* 段落の下に余白を追加 */
-}
 
 .detail-button,
 .favorite-button {
@@ -54,29 +122,13 @@
     /* アイコンのサイズを調整 */
 }
 
-.search-group {
-    display: flex;
-    justify-content:flex-end;
-        /* 要素を右側に寄せる */
-}
-
-
 .favorite-button {
-    background-color: rgb(255, 255, 255);
+    background-color: #f2f2f2;
     border: none;
     cursor: pointer;
     transition: color 0.3s;
     /* 色の変化をなめらかにするためのトランジション */
 }
 
-.search-group select,
-.search-group input[type="text"] {
-    width: 100px;
-    /* 入力フィールドの幅を親要素に合わせる */
-}
 
-.store-info p {
-    display: inline-block;
-    margin-right: 10px;
-    /* 要素間の間隔を調整する場合は適宜設定してください */
-}
+

@@ -47,9 +47,9 @@
                         </ul>
                     </nav>
                     <!-- Reseロゴ -->
-                    <a class="header__logo" href="/">
-                        Rese
-                    </a>
+                   <h1 class="header__logo">
+        Rese
+</h1>
                     
                     </div>
                 </div>

@@ -1,3 +1,40 @@
+/* 768px以下のスタイル */
+@media (max-width: 768px) {
+    .mypage-container {
+        justify-content: center;
+        /* 中央寄せ */
+    }
+
+div.reservation-header {
+    margin-top: 20px;
+    /* 上部に20pxのマージンを追加 */
+    display: flex;
+    align-items: center;
+    /* アイテムを垂直中央に配置 */
+font-size: 20px;
+    /* フォントサイズを大きく */
+    gap: 10px;
+    /* アイテム間のスペース */
+}
+
+    .favorite-items h3 {
+        font-size: 15px;
+        /* 文字サイズを調整 */
+        margin-left: 0;
+        /* マージンを0にリセット */
+        margin-bottom: 10px;
+        /* 下のマージンを追加 */
+    }
+
+    .detail-button {
+        margin-left: auto;
+        /* 右寄せ */
+        padding: 8px 16px;
+        /* パディングを調整 */
+        font-size: 16px;
+        /* フォントサイズを調整 */
+    }
+}
 /* Flexboxを使用して要素を横並びにする */
 .user-name {
     font-size: 24px;
@@ -15,11 +52,20 @@ h2 {
 
 .mypage-container {
     display: flex;
+    justify-content: center;
+    /* 横方向の中央揃え */
+    width: 100%;
+    /* 幅を100%に設定 */
+    max-width: 1800px;
+    /* 最大幅を設定（例：1200px） */
+    margin: 0 auto;
+    /* 左右のマージンを自動的に設定 */
 }
 
 .reservation-item {
     border-radius: 10px;
         /* 角を丸くする */
+    height: 380px;
     background-color: #007bff;
     /* 青塗り潰しを追加 */
 
@@ -35,7 +81,7 @@ h2 {
 
 .reservation-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     justify-content: flex-start;
     padding: 0 20px;
 }
@@ -61,23 +107,27 @@ h2 {
 }
 
 .reservation-header {
-        margin-top: 20px;
-            /* 上部に20pxのマージンを追加 */
+    margin-top: 20px;
+    /* 上部に20pxのマージンを追加 */
     display: flex;
     align-items: center;
     /* アイテムを垂直中央に配置 */
+    font-size: 30px;
+        /* フォントサイズを大きく */
     gap: 10px;
     /* アイテム間のスペース */
 }
 
 .cancel-button {
-    margin-left: 250px;
+    margin-left: 150px;
         /* 左側に10pxのマージンを追加 */
+    font-size: 30px;
+        /* フォントサイズを大きく */
 
 }
 
 .reservation-info {
-    margin-top: 20px;
+    margin-top: 40px;
     /* 上部のマージンを追加 */
     margin-bottom: 20px;
     /* 下部のマージンを追加 */
@@ -90,9 +140,11 @@ h2 {
     /* インラインブロック要素に */
     width: 100px;
     /* ラベルの幅を固定 */
+    font-size: 20px;
+        /* フォントサイズを大きく */
     margin-right: 10px;
     /* ラベルと値の間にマージンを追加 */
-    margin-bottom: 5px;
+    margin-bottom: 15px;
         /* 各項目の下にマージンを追加 */
 }
 
@@ -116,6 +168,8 @@ h2 {
 }
 
 .favorite-item {
+    max-width: 320px;
+    height: 380px;
     flex: 0 0 calc(30% - 10px);
     display: flex;
     flex-direction: column;
@@ -132,7 +186,7 @@ h2 {
 }
 
 .favorite-item img {
-    max-width: 350px;
+    max-width: 320px;
     flex: 0 0 80px;
     /* 画像の固定幅 */
     border-top-left-radius: 10px;
@@ -142,7 +196,7 @@ h2 {
 }
 
 .favorite-items h3 {
-    font-size: 24px;
+    font-size: 20px;
     margin-top: 0;
         /* 上側のマージンを無くす */
      margin-bottom: 0;

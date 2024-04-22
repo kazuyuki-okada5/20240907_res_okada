@@ -38,7 +38,7 @@
         </div>
     </div>
 </div>
-<div class="store-container" style="max-width: 1200px; margin: 0 auto;">
+<div class="store-container">
     @if(isset($stores) && $stores->count() > 0)
         @foreach($stores as $store)
             <div class="store-group">
@@ -47,8 +47,9 @@
                         <img src="{{ $store->image_url }}" alt="{{ $store->name }}">
                     </div>
                     <h3>{{ $store->name }}</h3>
-                    <p>#{{ $store->area->area }}</p>
-                    <p>#{{ $store->genre->genre }}</p>
+                    <p class="store-meta">#{{ $store->area->area }}</p>
+                    <p class="store-meta">#{{ $store->genre->genre }}</p>
+                    
                     <button class="detail-button" onclick="location.href='/store_detail/{{ $store->id }}'">詳しく見る</button>
                     <!-- 認証されている場合のみアイコンを表示 -->
                     @auth
