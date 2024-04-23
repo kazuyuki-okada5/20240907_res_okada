@@ -1,7 +1,51 @@
+/* ブレイクポイント 768px 未満のスタイル */
+@media screen and (max-width: 767px) {
+    body {
+        font-size: 50%;
+        /* 全体を50%のサイズで表示 */
+    }
+
+    /* 他のレスポンシブスタイル */
+    .header__hamburger,
+    .header__close {
+        font-size: 1.5em;
+    }
+
+    .header__logo {
+        font-size: 1.2em;
+    }
+}
+
+
+/* ブレイクポイント 768px 以上のスタイル */
+@media screen and (min-width: 768px) {
+    .store-group {
+        max-width: 300px;
+        /* 最大幅を300pxに */
+        margin-bottom: 20px;
+        /* 下のマージンを元に戻す */
+    }
+
+    .store-info {
+        padding: 15px;
+        /* パディングを元に戻す */
+    }
+
+    .store-info h3 {
+        font-size: 1.5em;
+        /* フォントサイズを元に戻す */
+    }
+
+    .store-meta {
+        font-size: 1em;
+        /* フォントサイズを元に戻す */
+    }
+}
+
 body {
     background-color: #f2f2f2;
     /* 背景色を薄い灰色に設定 */
-    margin: 0;
+    margin: 10px;
     /* 余白を削除 */
     padding: 0;
     /* パディングを削除 */
@@ -19,7 +63,7 @@ body {
 
 
 .search-group {
-    border: 1px solid #ccc;
+    border: 1px solid #ffffff;
     /* 枠線 */
     border-radius: 5px;
     /* 角を丸める */
@@ -76,9 +120,25 @@ body {
 }
 
 .store-group {
-    width: calc(25% - 20px); 
+    width: 100%;
+    /* 100%の幅 */
+    max-width: 300px;
+    /* 最大幅を300pxに設定 */
+    height: auto;
+    /* 高さは内容に応じて自動調整 */
     margin-bottom: 20px;
-    box-sizing: border-box;
+    /* 下の要素とのマージン */
+}
+
+.store-info {
+    border: 1px solid #c3c3c3;
+    /* 外枠を1pxの実線でグレー色に設定 */
+    padding: 0%;
+    /* パディングを0%に設定 */
+    border-radius: 8px;
+    /* 角を丸める */
+    box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.1);
+    /* 影を追加 */
 }
 
 .store-image img{
@@ -92,12 +152,29 @@ body {
     /* 角の丸みを設定 */
 }
 
-.store-meta {
-    display: inline-block;
-    margin-right: 10px;
-    /* 要素間のスペース */
+.store-info h3 {
+    margin: 5px;
+    /* マージンを0に設定 */
 }
 
+.store-meta {
+    display: inline-block;
+    margin-top: 5px;
+        /* 上部のマージン */
+        margin-bottom: 5px;
+        /* 下部のマージン */
+        margin-left: 5px;
+        /* 左側のマージン */
+        margin-right: 0px;
+        /* 右側のマージン */
+}
+
+.detail-button {
+    margin-left: 10px;
+    /* 左側のマージン */
+    margin-bottom: 10px;
+    /* 下部のマージン */
+}
 
 .detail-button,
 .favorite-button {
@@ -120,6 +197,8 @@ body {
 .favorite-button i {
     font-size: 40px;
     /* アイコンのサイズを調整 */
+    padding-left: 100px;
+        /* ボタンの内側の余白を調整 */
 }
 
 .favorite-button {

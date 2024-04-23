@@ -1,4 +1,58 @@
- /* ここにCSSを記述 */
+/* ブレイクポイント 768px 未満のスタイル */
+@media screen and (max-width: 767px) {
+    body {
+        font-size: 50%;
+        /* 全体を50%のサイズで表示 */
+    }
+
+    /* 他のレスポンシブスタイル */
+    .header__hamburger,
+    .header__close {
+        font-size: 1.5em;
+    }
+
+    .header__logo {
+        font-size: 1.2em;
+    }
+}
+
+/* ブレイクポイント 768px 以上のスタイル */
+@media screen and (min-width: 768px) {
+    .header__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+    .header__menu {
+        position: static;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        transition: none;
+    }
+
+    .header-nav {
+        flex-direction: row;
+        /* メニュー項目を横に配置 */
+        padding: 0;
+        /* パディングを削除 */
+    }
+
+    .header-nav__item {
+        margin-right: 20px;
+        /* メニュー項目間のマージンを追加 */
+    }
+
+    .header__logo {
+        font-size: 2em;
+        /* ロゴのフォントサイズをさらに大きく */
+    }
+}
+
+/* ここにCSSを記述 */
+
  .header__logo-container {
      display: flex;
      align-items: center;
@@ -12,6 +66,7 @@
      /* ロゴのフォントサイズを調整 */
      font-weight: bold;
      /* フォントを太字にする */
+     margin-bottom: 15px;
  }
 
  /* ハンバーガーアイコンのスタイル */
@@ -21,29 +76,20 @@
      /* ハンバーガーアイコンのフォントサイズを調整 */
  }
 
- /* ハンバーガーメニューを開いたときのリンクのスタイル */
- .header-nav__link {
-     font-size: 18px;
-     /* リンクのテキストサイズを変更 */
-     padding: 4px 4px;
-     /* リンクのパディングを調整 */
-     margin: 5px 0;
-     /* リンク間のマージンを調整 */
- }
-
  /* ハンバーガーメニューを開いたときのリンクアイテムのスタイル */
  .header__menu {
      display: none;
      position: absolute;
      /* 絶対位置に配置 */
-     top: 12%;
+     top: 15%;
      /* ハンバーガーアイコンの下に配置 */
-     left: -40;
+     left: 10;
      background-color: #fff;
      /* メニューの背景色 */
      border: 1px solid #ccc;
      /* メニューの境界線 */
-     padding: 10px;
+     padding-top: 10px;
+     padding-bottom: 10px;
      /* メニューの余白 */
     font-size: 60px;
         /* ×アイコンのフォントサイズを調整 */
@@ -55,7 +101,7 @@
  .header__close {
      display: none;
      /* 初期状態では非表示 */
-     font-size: 60px;
+     font-size: 90px;
      /* ×アイコンのフォントサイズを調整 */
  }
 
@@ -67,35 +113,39 @@
 
  .header-nav {
     width: 150px;
-        /* 幅を200pxに設定 */
-        height: 250px;
-        /* 高さを300pxに設定 */
+    /* 幅を200pxに設定 */
+    height: 250px;
+    /* 高さを300pxに設定 */
      margin: 0;
      /* マージンを0に設定 */
      padding: 0;
      /* パディングも0に設定 */
  }
+
  /* リンクの共通スタイル */
  .header-nav__link {
-     font-size: 20px;
+     font-size: 30px;
      /* テキストサイズ */
      color: #1d6ac1;
      /* テキストの色 */
      text-decoration: none;
      /* 下線なし */
-     padding: 10px 20px;
+     padding: 10px 10px;
      /* パディング */
      display: block;
      /* リンクをブロック要素に変更 */
+    font-weight: bold;
+    /* フォントを太字にする */
  }
 
  .header__menu.show {
      display: block;
      /* 表示される際に表示 */
+    width: 230px;
+    /* 幅を150pxに設定 */
+    height: 210px;
+    /* 高さを40pxに設定 */
+    border-radius: 20px;
+        /* 角の丸みを10pxに設定 */
  }
 
- /* メニューアイテムのスタイル */
- .header-nav__item {
-     margin-bottom: 50px;
-     /* メニューアイテム間の間隔を調整 */
- }

@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" href="/css/index.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 @section('content')
 <div class="search-container">
@@ -31,11 +32,10 @@
             @endif
         </div>
         <div class="search-words">
-            <form action="javascript:void(0);" method='GET' id="keywordForm">
-                <input type="text" name="keyword" id="keyword" placeholder="キーワードを入力" value="{{ $keyword ?? ''}}">
-
-            </form>
-        </div>
+    <form action="javascript:void(0);" method='GET' id="keywordForm">
+        <input type="text" name="keyword" id="keyword" value="{{ $keyword ?? ''}}">
+    </form>
+</div>
     </div>
 </div>
 <div class="store-container">
@@ -49,7 +49,7 @@
                     <h3>{{ $store->name }}</h3>
                     <p class="store-meta">#{{ $store->area->area }}</p>
                     <p class="store-meta">#{{ $store->genre->genre }}</p>
-                    
+                    <br>
                     <button class="detail-button" onclick="location.href='/store_detail/{{ $store->id }}'">詳しく見る</button>
                     <!-- 認証されている場合のみアイコンを表示 -->
                     @auth
@@ -70,13 +70,18 @@
 
 <!-- スクリプト追記部分 -->
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const keywordInput = document.getElementById('keyword');
+        keywordInput.setAttribute('placeholder', '🔍 キーワードを入力');
+    });
+
     const userFavoriteStores = {!! $userFavoriteStoresJson !!};
 
-    async function toggleFavorite(buttonElement){
+    async function toggleFavorite(buttonElement) {
         const storeId = buttonElement.getAttribute('data-store-id');
         const icon = buttonElement.querySelector('.fa-heart');
 
-        const response = await fetch(`/toggle-favorite/${storeId}`, { // テンプレートリテラルを使用して修正
+        const response = await fetch(`/toggle-favorite/${storeId}`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -88,49 +93,57 @@
 
         if(data.status === 'added') {
             icon.style.color = 'red';
-        }else{
+        } else {
             icon.style.color = '#A9A9A9';
         }
-        }
+    }
+
     function search() {
-    const areaId = document.querySelector('#areaForm select[name="area_id"]').value;
-    const genreId = document.querySelector('#genreForm select[name="genre_id"]').value;
-    const keyword = document.getElementById('keyword').value;
+        const areaId = document.querySelector('#areaForm select[name="area_id"]').value;
+        const genreId = document.querySelector('#genreForm select[name="genre_id"]').value;
+        const keyword = document.getElementById('keyword').value;
 
-    let params = [];
+        let params = [];
 
-    if (areaId) {
-        params.push(`area_id=${areaId}`);
+        if (areaId) {
+            params.push(`area_id=${areaId}`);
+        }
+
+        if (genreId) {
+            params.push(`genre_id=${genreId}`);
+        }
+
+        if (keyword) {
+            params.push(`keyword=${keyword}`);
+        }
+
+        const queryString = params.join('&');
+
+        fetch(`/stores/search?${queryString}`)
+            .then(response => response.text())
+            .then(data => {
+                const container = document.createElement('div');
+                container.innerHTML = data;
+                const content = container.querySelector('.store-container').innerHTML;
+                document.querySelector('.store-container').innerHTML = content;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
 
-    if (genreId) {
-        params.push(`genre_id=${genreId}`);
+// Enterキーを押したときに検索をトリガーする
+document.getElementById('keyword').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        search();
+        event.preventDefault(); // フォームの送信をキャンセル
     }
-
-    if (keyword) {
-        params.push(`keyword=${keyword}`);
-    }
-
-    const queryString = params.join('&');
-    
-    // Ajaxを使用して検索結果を取得
-    fetch(`/stores/search?${queryString}`)
-        .then(response => response.text())
-        .then(data => {
-            // ここでレイアウトを取り除く
-            const container = document.createElement('div');
-            container.innerHTML = data;
-            const content = container.querySelector('.store-container').innerHTML;
-            document.querySelector('.store-container').innerHTML = content;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
+});
 
     // フォームの変更時に検索を自動的に実行
     document.getElementById('areaForm').addEventListener('change', search);
     document.getElementById('genreForm').addEventListener('change', search);
-    document.getElementById('keywordForm').addEventListener('input', search); // inputイベントはキーワード入力時に発火
+   
+
 </script>
 @endsection
