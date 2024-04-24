@@ -1,18 +1,62 @@
-.register-form__content {
-    margin: 0 auto;
-    padding: 30px 15px;
-    max-width: 1230px;
+body {
+    background-color: #f2f2f2;
+    margin: 10px;
+    padding: 0;
+}
+.register__content {
+    background-color: #ffffff;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 影を追加 */
 }
 
+
 .register-form__heading {
+    margin-bottom: 5px;
+    text-align: left;
+    background-color: #007BFF;
+    /* 青背景 */
+    color: white;
+    /* 文字色を白色にする */
+    padding: 1px 20px;
+    /* 上下10px, 左右20pxのパディングを追加 */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    /* 角を丸くする */
     margin-bottom: 20px;
-    text-align: center;
+    /* 下の余白を追加 */
 }
 
 .form {
     margin: 0 auto;
-    width: 25%;
+    width: 80%;
     text-align: center;
+}
+
+.form__input--text {
+    display: flex;
+    align-items: center;
+    /* 垂直方向の中央揃え */
+}
+
+.form__input--text input[type="text"],
+.form__input--text input[type="email"],
+.form__input--text input[type="password"]{
+    margin-left: 10px;
+        border: none;
+            /* 枠線を削除 */
+            border-bottom: 1px solid #000000;
+            /* 下線を追加 */
+            margin-left: 10px;
+            /* 左側のマージン */
+            padding-bottom: 5px;
+            /* 下線とテキストの間のスペース */
+            width: 100%;
+            /* 幅を100%にして下線を伸ばす */
+            box-sizing: border-box;
+            /* パディングとボーダーを含めたボックスサイズ */
 }
 
 .form__group {
@@ -27,6 +71,7 @@
     height: 20px;
     color: #ff0000;
     text-align: left;
+    margin-left: 60px;
 }
 
 .form__input--text input {
@@ -41,15 +86,16 @@
 
 .form__button {
     margin-top: 20px;
+    padding-bottom: 20px;
 }
 
 .form__button-submit {
     padding: 10px;
     width: 30%;
-    height: 50px;
+    height: 40px;
     border: none;
-    border-radius: 3px;
-    background: #000;
+    border-radius: 8px;
+    background: #0800ff;
     color: #fff;
     cursor: pointer;
 }

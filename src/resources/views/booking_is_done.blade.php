@@ -1,9 +1,9 @@
 
 @extends('layouts.app')
 
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/register.css') }}">
-@endsection
+
+<link rel="stylesheet" href="{{ asset('css/booking_is_done.css') }}">
+
 
 @section('content')
 <div class="registration_end__content">

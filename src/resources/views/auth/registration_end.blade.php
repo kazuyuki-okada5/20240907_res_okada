@@ -1,11 +1,9 @@
 
 @extends('layouts.app')
 
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/register.css') }}">
-@endsection
-
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/registration_end.css') }}">
+
 <div class="registration_end__content">
   <div class="registration_end__heading">
     <h2>会員登録ありがとうございます</h2>
