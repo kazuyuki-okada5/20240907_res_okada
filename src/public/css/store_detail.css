@@ -1,64 +1,172 @@
+body {
+    background-color: #f2f2f2;
+    margin: 10px;
+    padding: 0;
+}
+
 .detail-container {
     display: flex;
     justify-content: space-between;
-    /* グループ間のスペースを均等に */
 }
 
+.back-button {
+    background-color: #c9c9ca;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    margin-top: 4px;
+    margin-right: 10px;
+    /* ボタンと店舗名の間に少しスペースを開ける */
+    padding-top: 1px;
+}
+
+.back-button .material-icons-outlined {
+    vertical-align: middle;
+}
+
+.detail-group h3 {
+    font-size: 30px;
+    /* サイズを28pxに設定 */
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+
+
+.store-info p {
+    display: inline-block;
+    /* インラインブロック要素として扱う */
+    margin-right: 10px;
+    /* 右側に少しマージンを追加 */
+}
+
+
+
 .detail-group,
+.store-container,
 .booking-container {
     flex: 1;
-    /* 両方のコンテナを均等に広げる */
     margin-right: 20px;
-    /* 右側にマージンを追加してスペースを作る */
 }
+
 .booking-container {
     background-color: #007BFF;
-    /* 青色の背景色 */
     padding: 20px;
-    /* 必要に応じて内側の余白を設定 */
     border-radius: 8px;
+    margin-left: 0;
+}
+
+.booking-info {
+    color: white;
+}
+
+.date-label,
+.date-time,
+.date-num-people{
+    padding-right: 18px;
+    /* ラベルの右側に10pxのパディングを追加 */
+}
+
+#bookingForm div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* 各フォーム要素の下に20pxのマージンを追加 */
+    padding-left: 18px;
+
+}
+input#date{
+    width: 50%;
+    /* 幅を100%に設定 */
+    padding: 8px;
+    /* 内側のパディングを追加 */
+    border: 1px solid #ccc;
+    /* ボーダーを追加 */
+    border-radius: 4px;
+    /* 角を丸める */
+    margin-top: 5px;
+    /* 上部のマージンを追加 */
+    margin-bottom: 15px;
+    /* 下部のマージンを追加 */
+}
+select#time,
+select#num_people {
+    width: 100%;
+    /* 幅を100%に設定 */
+    padding: 8px;
+    /* 内側のパディングを追加 */
+    border: 1px solid #ccc;
+    /* ボーダーを追加 */
+    border-radius: 4px;
+    /* 角を丸める */
+    margin-top: 5px;
+    /* 上部のマージンを追加 */
+    margin-bottom: 15px;
+    /* 下部のマージンを追加 */
+}
+
+.booking-confirm{
+    padding-right: 18px;
+}
+
+#displayStoreName,
+#displayDate {
+    margin-left: 27px;
+    /* 左側のマージンを20pxに設定 */
+}
+
+#displayTime,
+#displayNumPeople {
+    margin-left: 10px;
+    /* 左側のマージンを20pxに設定 */
+}
+
+.submit-button {
+    display: block;
+    /* ボタンをブロックレベル要素にする */
+    margin: 20px auto 0;
+    /* 上に20px、左右は自動マージンを使って中央に寄せる */
+    padding: 20px 100px;
+    /* 必要に応じてパディングを調整 */
+    text-align: center;
+    /* テキストを中央に寄せる */
+    background-color: #004fe1d8;
+    /* ボタンの背景色 */
+    color: white;
+    /* ボタンのテキスト色 */
+    border: none;
+    /* ボーダーをなしに */
+    border-radius: 4px;
     /* 角を丸くする */
+    cursor: pointer;
+    /* カーソルをポインターに変更 */
+    font-size: 24px;
+    /* フォントサイズを18pxに */
+    font-weight: bold;
+    /* フォントの太さをboldに */
 }
 
 /* モバイルデバイスでのレイアウト調整 */
 @media (max-width: 768px) {
     .detail-container {
         flex-direction: column;
-        /* モバイルでは縦並びに */
     }
 
     .detail-group,
+    .store-container,
     .booking-container {
         margin-right: 0;
-        /* モバイルではマージンを0に */
     }
 }
+
 .detail-group {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
-.store-container {
-    flex: 1;
-    margin-right: 20px;
-    /* 余白を追加 */
-}
-
-.booking-container {
-    flex: 1;
-    margin-left: 20px;
-    /* 余白を追加 */
-}
-/* 画像のサイズを変更する */
 .store-info img {
     width: 500px;
-    /* 幅を指定 */
     height: auto;
-    /* 高さは自動調整 */
     display: block;
-        /* ブロック要素として扱う */
-        margin: auto;
-        /* 左右のマージンを自動で調整して中央寄せ */
-        text-align: center;
-        /* テキストを中央寄せ */
+    margin: auto;
+    text-align: center;
 }

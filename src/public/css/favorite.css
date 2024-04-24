@@ -36,6 +36,15 @@ font-size: 20px;
     }
 }
 /* Flexboxを使用して要素を横並びにする */
+body {
+    background-color: #f2f2f2;
+    /* 背景色を薄い灰色に設定 */
+    margin: 10px;
+    /* 余白を削除 */
+    padding: 0;
+    /* パディングを削除 */
+}
+
 .user-name {
     font-size: 24px;
     /* 例として24pxに設定 */
@@ -183,6 +192,7 @@ h2 {
     /* 枠線を追加 */
     border-radius: 10px;
     /* 角を丸くする */
+    background-color: #ffffff;
 }
 
 .favorite-item img {
@@ -330,7 +340,7 @@ h2 {
 }
 
 .favorite-button {
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff;
     border: none;
     cursor: pointer;
     transition: color 0.3s;

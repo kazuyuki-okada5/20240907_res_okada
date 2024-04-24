@@ -136,6 +136,7 @@
      /* リンクをブロック要素に変更 */
     font-weight: bold;
     /* フォントを太字にする */
+    width: 230px;
  }
 
  .header__menu.show {

@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>予約ページ</title>
+    <title>Restaurant reservation service</title>
     <link rel="stylesheet" href="{{ asset('css/store_detail.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
 <body>
     @extends('layouts.app')
@@ -16,14 +17,18 @@
         <div class="store-container">
             <div class="store-group">
                 <div class="store-info">
-                    <form action="{{ route('stores.index') }}" method="get"> <!-- こちらを変更 -->
+                    <div class="detail-group">
+                        <form action="{{ route('stores.index') }}" method="get"> <!-- こちらを変更 -->
                             @csrf
-                            <button type="submit" class="return-button">戻る</button>
+                            <button type="button" onclick="location.href='/stores'" class="back-button">
+                                <i class="material-icons-outlined">arrow_back_ios</i>
+                            </button>
                         </form>
-                    <h3>{{ $store->name }}</h3>
+                        <h3>{{ $store->name }}</h3>
+                    </div>
                     <img src="{{ $store->image_url }}" alt="{{ $store->name }}">
-                    <p>{{ $store->area->area }}</p>
-                    <p>{{ $store->genre->genre }}</p>
+                    <p>#{{ $store->area->area }}</p>
+                    <p>#{{ $store->genre->genre }}</p>
                     <p>{{ $store->store_overview }}</p>
                 </div>
             </div>
@@ -41,19 +46,19 @@
                             </ul>
                         </div>
                     @endif
-
-                    <!-- フォーム -->
+                    @if (Auth::check())
+                    <!-- ログインしている場合の予約フォーム -->
                     <form action="/reservation" method="post" id="bookingForm">
                         @csrf
                         <input type="hidden" name="store_id" value="{{ $store->id }}">
                         
                         <div>
-                            <label for="date">日付:</label>
-                            <input type="date" name="date" id="date" value="{{ old('date') }}">
+                        <label for="date" class="date-label"></label>
+                        <input type="date" name="date" id="date" value="{{ old('date') }}" min="{{ date('Y-m-d') }}">
                         </div>
                         
                         <div>
-                            <label for="time">予約時間:</label>
+                            <label for="date" class="date-time"></label>
                             <select name="time" id="time">
                                 <option value="" {{ old('time') == "" ? 'selected' : '' }}>予約時間を選択</option>
                                 @php
@@ -68,7 +73,7 @@
                         </div>
 
                         <div>
-                            <label for="num_people">予約人数:</label>
+                            <label for="date" class="date-num-people"></label>
                             <select name="num_people" id="num_people">
                                 <option value="" {{ old('num_people') == ""?'selected' : ''}}>予約人数を選択</option>
                                 @for ($i = 1; $i <= 20; $i++)
@@ -80,16 +85,26 @@
                         <!-- 予約確認エリア -->
                         <div class="booking-confirm">
                             <div>
-                                <p>Shop: <span id="displayStoreName">{{ $store->name }}</span></p>
-                                <p>Date: <span id="displayDate"></span></p>
-                                <p>Time: <span id="displayTime"></span></p>
-                                <p>Number of People: <span id="displayNumPeople"></span></p>
+                                <p>店舗名: <span id="displayStoreName">{{ $store->name }}</span></p>
+                                <p>予約日: <span id="displayDate"></span></p>
+                                <p>予約時間: <span id="displayTime"></span></p>
+                                <p>予約人数: <span id="displayNumPeople"></span></p>
                             </div>
                         </div>
                         
                         <!-- 予約ボタン -->
-                        <button type="submit" @guest onclick="event.preventDefault(); location.href='/login';" @else type="submit" @endguest>予約する</button>
+                        <button type="submit" class="submit-button">予約する</button>
+
                     </form>
+                    
+                @else
+                    <!-- ログインしていない場合のメッセージとボタン -->
+                    <p>予約を行うにはログインが必要です</p>
+                    <div>
+                        <button onclick="location.href='/login'">ログイン</button>
+                        <button onclick="location.href='/register'">新規登録</button>
+                    </div>
+                @endif
                 </div>
             </div>
         </div>
