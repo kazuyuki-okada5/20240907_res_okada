@@ -5,15 +5,46 @@ body {
 }
 
 .registration_end__content {
-    border: 1px solid #ccc;
-    /* 外枠の色と太さを設定 */
-    padding: 20px;
-    /* 内側の余白を追加 */
-    border-radius: 8px;
-    /* 角を丸くする */
-    max-width: 400px;
-    /* 最大幅を設定 */
-    margin: 40px auto;
-    /* 上下にマージンを追加して中央寄せ */
+    background-color: #ffffff;
+        border: 1px solid #ffffff;
+        /* 外枠の色と太さを設定 */
+        padding-top: 60px;
+        padding-bottom: 60px;
+        padding-left: 20px;
+        padding-right: 20px;
+        /* 内側の余白を追加 */
+        border-radius: 8px;
+        /* 角を丸くする */
+        max-width: 400px;
+        /* 最大幅を設定 */
+        margin: 40px auto;
+        /* 上下にマージンを追加して中央寄せ */
+        text-align: center;
+        /* テキストの水平方向の中央配置 */
+        align-items: center;
+        /* テキストの垂直方向の中央配置 */
+        justify-content: center;
+        /* テキストの水平方向の中央配置 */
+        box-shadow: 3px 5px 5px 4px rgba(0, 0, 0, 0.1);
+        /* 枠に影を付ける */
 }
 
+
+.login__button-submit {
+    background-color: #007BFF;
+    /* 青背景 */
+    color: #ffffff;
+    /* 白文字 */
+    text-decoration: none;
+    /* ボーダーをなし */
+    border-radius: 10px;
+    /* 角を丸める */
+    padding: 10px 20px;
+    /* 上下左右のパディング */
+    cursor: pointer;
+    /* カーソルをポインタに */
+    display: inline-block;
+    /* インラインブロック要素として表示 */
+    margin-top: 20px;
+    /* 上側のマージン */
+}

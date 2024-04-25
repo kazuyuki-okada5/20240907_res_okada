@@ -3,6 +3,7 @@ body {
     margin: 10px;
     padding: 0;
 }
+
 .register__content {
     background-color: #ffffff;
     border-radius: 8px;
@@ -11,7 +12,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* 影を追加 */
 }
-
 
 .register-form__heading {
     margin-bottom: 5px;
@@ -95,7 +95,7 @@ body {
     height: 40px;
     border: none;
     border-radius: 8px;
-    background: #0800ff;
+    background: #007BFF;
     color: #fff;
     cursor: pointer;
 }
