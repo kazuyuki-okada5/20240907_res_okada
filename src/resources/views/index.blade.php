@@ -143,7 +143,7 @@ document.getElementById('keyword').addEventListener('keydown', function(event) {
     // フォームの変更時に検索を自動的に実行
     document.getElementById('areaForm').addEventListener('change', search);
     document.getElementById('genreForm').addEventListener('change', search);
-   
+
 
 </script>
 @endsection

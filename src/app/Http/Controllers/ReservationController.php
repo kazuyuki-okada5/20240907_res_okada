@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\Store;
+use Illuminate\Support\Facades\DB; // 追加
 
 
 class ReservationController extends Controller
@@ -79,6 +80,50 @@ class ReservationController extends Controller
     if ($reservation->user_id === auth()->id()) {
         $reservation->delete();
         return back();
+    }
+}
+
+    public function edit(Reservation $reservation)
+    {
+        return view('reservations.edit', compact('reservation'));
+    }
+
+    public function update(Request $request, Reservation $reservation)
+{
+    try {
+        DB::beginTransaction();
+
+        // バリデーションルールを定義
+        $rules = [
+            'date' => 'required|date',
+            'time' => 'required',
+            'num_people' => 'required|integer|min:1|max:20',
+        ];
+
+        // バリデーションを実行
+        $validatedData = $request->validate($rules);
+
+        // ログを追加してデータを確認
+        \Log::info('Request Data:', $request->all());
+        \Log::info('Validated Data:', $validatedData);
+
+        // 新しい日付を結合
+        $newStartDateTime = $validatedData['date'].' '.$validatedData['time'];
+
+        // 予約情報を更新
+        \Log::info('Reservation Data Before Save:', $reservation->toArray());
+        $reservation->start_at = $newStartDateTime;
+        $reservation->number_of_people = $validatedData['num_people'];
+        $reservation->save();
+
+        DB::commit();
+
+        // リダイレクトなどの適切なレスポンスを返す
+        return redirect()->route('reservations.index')->with('success', '予約情報を更新しました');
+    } catch (\Exception $e) {
+        DB::rollback();
+        // トランザクションがロールバックされた場合の処理
+        throw $e; // 例外を再スローしてエラーを処理する
     }
 }
 }

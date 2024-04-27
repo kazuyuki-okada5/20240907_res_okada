@@ -40,3 +40,6 @@ Route::middleware(['auth'])->group(function() {
 Route::delete('/reservations/{id}', 'ReservationController@destroy')->name('reservations.destroy');
 Route::delete('/favorites/{favorite}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
 Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+Route::get('reservations/{reservation}/edit', 'App\Http\Controllers\ReservationController@edit')->name('reservations.edit');
+Route::put('reservations/{reservation}',[ReservationController::class, 'update'])->name('reservations.update');
+Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');

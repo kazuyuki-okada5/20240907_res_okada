@@ -39,7 +39,12 @@
                             <strong>Time:</strong> {{ $reservation->start_at->format('H:i') }}<br>
                             <strong>Number:</strong> {{ $reservation->number_of_people }}人
                         </div>
+                        <div class="reservation-action">
+                            <form action="{{ route('reservations.edit', $reservation->id) }}" method="GET">
+                                <button type="submit" class="edit-button">変更</button>
+                            </form>
                         </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
