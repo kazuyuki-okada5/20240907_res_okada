@@ -43,3 +43,8 @@ Route::delete('/reservations/{reservation}', [ReservationController::class, 'des
 Route::get('reservations/{reservation}/edit', 'App\Http\Controllers\ReservationController@edit')->name('reservations.edit');
 Route::put('reservations/{reservation}',[ReservationController::class, 'update'])->name('reservations.update');
 Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+Route::get('reservations/{reservation}/evaluate', [ReservationController::class, 'evaluateForm'])->name('reservations.evaluateForm');
+Route::post('reservations/{reservation}/evaluate', [ReservationController::class, 'evaluate'])->name('reservations.evaluate');
+Route::get('/evaluation/complete', function (){
+    return view('evaluation_complete');
+})->name('evaluation_complete');

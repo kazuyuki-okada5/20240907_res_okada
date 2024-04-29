@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evaluation;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\Store;
@@ -126,4 +127,27 @@ class ReservationController extends Controller
         throw $e; // 例外を再スローしてエラーを処理する
     }
 }
+    public function evaluateForm(Reservation $reservation)
+    {
+        return view('evaluation', compact('reservation'));
+    }
+
+    public function evaluate(Request $request, Reservation $reservation)
+    {
+        // バリデーションを実行
+        $validatedData = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string|max:255',
+        ]);
+
+        // バリデーションが成功した場合、評価とコメントを保存
+        $evaluation = new Evaluation();
+        $evaluation->reservation_id = $reservation->id;
+        $evaluation->rating = $validatedData['rating'];
+        $evaluation->comment = $validatedData['comment'];
+        $evaluation->save();
+
+        // リダイレクトして評価完了ページに移動
+        return redirect()->route('evaluation_complete');
+    }
 }

@@ -27,4 +27,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(Store::class);
     }
+
+    public function evaluation()
+    {
+        return $this->hasOne(Evaluation::class);
+    }
 }
