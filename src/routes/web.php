@@ -11,6 +11,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\StoreDetailController;
 
+
 Route::get('/', [AuthController::class, 'index']);
 Route::get('/registration', function () {
     return view('auth.register');
@@ -44,7 +45,9 @@ Route::get('reservations/{reservation}/edit', 'App\Http\Controllers\ReservationC
 Route::put('reservations/{reservation}',[ReservationController::class, 'update'])->name('reservations.update');
 Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
 Route::get('reservations/{reservation}/evaluate', [ReservationController::class, 'evaluateForm'])->name('reservations.evaluateForm');
-Route::post('reservations/{reservation}/evaluate', [ReservationController::class, 'evaluate'])->name('reservations.evaluate');
+
 Route::get('/evaluation/complete', function (){
     return view('evaluation_complete');
 })->name('evaluation_complete');
+Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
+Route::post('/reservation/{reservation}/evaluate', [ReservationController::class, 'evaluate'])->name('reservation.evaluate');

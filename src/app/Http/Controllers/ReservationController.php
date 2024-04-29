@@ -6,35 +6,16 @@ use App\Models\Evaluation;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\Store;
-use Illuminate\Support\Facades\DB; // 追加
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreReservationRequest;
 
 
 class ReservationController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreReservationRequest $request)
     {
-        // バリデーションルールを定義
-        $rules = [
-            'store_id' => 'required|exists:stores,id',
-            'date' => 'required|date',
-            'time' => 'required',
-            'num_people' => 'required|integer|min:1|max:20',
-        ];
-
-        // バリデーションメッセージを定義
-        $messages = [
-            'store_id.exists' => '指定された店舗は存在しません。',
-            'date.required' => '日付は必須です。',
-            'date.date' => '日付の形式が不正です。',
-            'time.required' => '時間は必須です。',
-            'num_people.required' => '人数は必須です。',
-            'num_people.integer' => '人数は整数で入力してください。',
-            'num_people.min' => '人数は1以上で入力してください。',
-            'num_people.max' => '人数は20以下で入力してください。',
-        ];
-
-        // バリデーションを実行
-        $validatedData = $request->validate($rules, $messages);
+        // リクエストがバリデートされたデータは、$request->validated() を使用して取得できます
+        $validatedData = $request->validated();
 
         // $storeオブジェクトを取得
         $store = Store::find($validatedData['store_id']);
@@ -45,7 +26,7 @@ class ReservationController extends Controller
         }
 
         // 日時を結合結合
-        $startDateTime = $request->date . ' ' . $request->time;
+        $startDateTime = $validatedData['date'] . ' ' . $validatedData['time'];
 
         // 予約を作成して保存
         $reservation = new Reservation();
