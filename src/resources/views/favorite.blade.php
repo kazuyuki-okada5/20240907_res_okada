@@ -50,7 +50,9 @@
                                             <button type="submit" class="edit-button">変更</button>
                                         </form>
                                     @endunless
-                                    <a href="{{ route('reservations.evaluateForm', $reservation->id) }}" class="btn btn-primary">評価する</a>
+                                    @if($reservation->isPastReservation)
+    <a href="{{ route('reservations.evaluateForm', $reservation->id) }}" class="btn btn-primary">評価する</a>
+@endif
                                 </div>
                             </div>
                         @endforeach

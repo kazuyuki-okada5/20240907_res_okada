@@ -1,3 +1,11 @@
+/* ブレイクポイント 768px 未満のスタイル */
+@media screen and (max-width: 767px) {
+    body {
+        font-size: 50%;
+        /* 全体を50%のサイズで表示 */
+    }
+}
+
 body {
     background-color: #f2f2f2;
     margin: 10px;

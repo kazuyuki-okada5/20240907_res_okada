@@ -10,6 +10,13 @@ use App\Http\Controllers\IndexControllers;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\StoreDetailController;
+use App\Http\Controllers\Auth\AuthRepresentativeLoginController;
+use App\Http\Controllers\RepresentativeController;
+use App\Http\Controllers\EditController;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\Auth\ManagerLoginController;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ManagerDashboardController;
 
 
 Route::get('/', [AuthController::class, 'index']);
@@ -46,8 +53,56 @@ Route::put('reservations/{reservation}',[ReservationController::class, 'update']
 Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
 Route::get('reservations/{reservation}/evaluate', [ReservationController::class, 'evaluateForm'])->name('reservations.evaluateForm');
 
-Route::get('/evaluation/complete', function (){
-    return view('evaluation_complete');
-})->name('evaluation_complete');
+Route::post('/reservations/{reservation}/evaluate', [ReservationController::class, 'evaluate'])->name('reservations.evaluate');
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 Route::post('/reservation/{reservation}/evaluate', [ReservationController::class, 'evaluate'])->name('reservation.evaluate');
+Route::get('/evaluation/complete', function () {
+    return view('evaluation_complete');
+})->name('evaluation_complete');
+Route::get('/representative/login', [AuthRepresentativeLoginController::class, 'showLoginForm'])->name('representative.login');
+Route::post('/representative/login', [AuthRepresentativeLoginController::class, 'login']);
+Route::middleware(['auth', 'representative'])->group(function(){
+    Route::get('/stores/create', [StoreController::class, 'create'])->name('stores.create');
+    Route::post('/stores',[StoreController::class, 'store'])->name('stores.store');
+    Route::get('/stores/{store}/edit', [StoreController::class, 'edit'])->name('stores.edit');
+    Route::put('/stores/{store}', [StoreController::class, 'update'])->name('stores.update');
+});
+
+Route::middleware(['auth', 'editor'])->group(function () {
+    Route::get('/stores/{store}/edit', [StoreController::class, 'edit'])->name('stores.edit');
+    Route::put('/stores/{store}', [StoreController::class, 'update'])->name('stores.update');
+});
+Route::get('/edit_main', [EditController::class, 'showEditMain'])->name('edit_main');
+Route::get('/stores/create', [StoreController::class, 'create'])->name('store.create');
+Route::get('/store/{store}/edit', [StoreController::class, 'edit'])->name('store.edit');
+Route::get('/update_complete', function () {
+    return view('store.update_complete');
+})->name('update.complete');
+Route::get('/update_complete', [StoreController::class, 'updateComplete'])->name('update.complete');
+Route::post('/store-image', [ImageController::class, 'store']);
+Route::get('/store/{storeId}/image-url', [StoreController::class, 'getImageUrl']);
+Route::post('/stores', 'StoreController@store')->name('stores.store');
+Route::post('/upload', [UploadController::class, 'store'])->name('upload.store');
+Route::get('/upload', [UploadController::class, 'showUploadForm'])->name('upload.form');
+Route::get('manager/login', [ManagerLoginController::class, 'showLoginForm'])->name('manager.login');
+Route::post('manager/login', [ManagerLoginController::class, 'login']);
+
+Route::prefix('manager')->group(function () {
+    // 新規データ作成のルート
+    Route::post('/create', [ManagerController::class, 'create'])->name('manager.create');
+
+    // データ変更のルート
+    Route::post('/update/{id}', [ManagerController::class, 'update'])->name('manager.update');
+
+    // データ削除のルート
+    Route::delete('/delete/{id}', [ManagerController::class, 'delete'])->name('manager.delete');
+    Route::get('/managers', [ManagerController::class, 'index'])->name('managers.index');
+});
+Route::get('/manager/dashboard', [ManagerDashboardController::class, 'index'])->name('manager.dashboard');
+Route::get('/manager/dashboard', [RepresentativeController::class, 'dashboard'])->name('manager.dashboard');
+Route::get('/representatives/create', [RepresentativeController::class, 'create'])->name('representatives.create');
+Route::post('/representatives', [RepresentativeController::class, 'store'])->name('representatives.store');
+Route::get('/representatives', [RepresentativeController::class, 'index'])->name('representatives.index');
+
+
+

@@ -33,6 +33,13 @@ class Store extends Model
         return $this->belongsTo(Genre::class);
    }
 
+    public function editors()
+    {
+        return $this->hasMany(Editor::class);
+    }
+
+    protected $table = 'stores';
+
 }
 
 
