@@ -38,6 +38,12 @@ class Store extends Model
         return $this->hasMany(Editor::class);
     }
 
+    // 店舗に関連付けられたユーザーを取得
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_store');
+    }
+
     protected $table = 'stores';
 
 }

@@ -54,6 +54,7 @@ class ReservationController extends Controller
                                     ->get();
 
     return view('reservations.index', compact('reservationDetails'));
+
 }
 
     public function destroy(Reservation $reservation)
@@ -133,4 +134,15 @@ class ReservationController extends Controller
         // リダイレクトして評価完了ページに移動
         return redirect()->route('evaluation_complete');
     }
+
+    public function show($reservationId)
+{
+    $reservation = Reservation::find($reservationId);
+
+    if (!$reservation) {
+        return abort(404); // 予約が見つからない場合は404エラーを返す
+    }
+
+
+}
 }

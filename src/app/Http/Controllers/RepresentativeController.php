@@ -2,42 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Representative;
 use Illuminate\Http\Request;
+use App\Models\User; // User モデルをインポートする
 
 class RepresentativeController extends Controller
 {
-    public function dashboard()
+    public function store(Request $request)
     {
-        $representatives = Representative::all();
-        return view('manager.dashboard', compact('representatives'));
-    }
-
-    public function create()
-{
-    return view('representatives.create');
-}
-
-public function store(Request $request)
-{
-            // バリデーションのルールを定義
-        $rules = [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:representatives,email',
-            'password' => 'required|string|min:6',
-        ];
-
-        // バリデーションを実行
-        $validatedData = $request->validate($rules);
-
-        // 代表者をデータベースに登録
-        $representative = Representative::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => bcrypt($validatedData['password']),
+        // バリデーションを追加
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            // 他のルールも追加可能
         ]);
 
-        // 登録が完了したらリダイレクト
-        return redirect()->route('representatives.index')->with('success', '代表者が登録されました');
+        // ユーザーを作成
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'role' => 'representative', // ロールを固定で設定
+        ]);
+
+        // 関連付ける店舗の ID を取得
+        $storeId = $request->input('store_id');
+
+        // ユーザーと店舗の関連付けを行う
+        $user->stores()->attach($storeId);
+
+        // リダイレクトなどの適切なレスポンスを返します
+        return redirect()->route('home')->with('success', 'Representative created successfully!');
+    }
 }
-}
+

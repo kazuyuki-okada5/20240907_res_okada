@@ -9,6 +9,12 @@ use App\Models\Genre;
 use App\Models\Store;
 use App\Models\Favorite; // Favoriteモデルを使用する場合
 use App\Models\Editor;
+use Illuminate\Support\Facades\Auth;
+use App\Models\UserStore; // 必要に応じて追加する
+use App\Models\User; // Userモデルをインポートする
+use Illuminate\Support\Facades\DB;
+use App\Models\Representative;
+
 
 class StoreController extends Controller
 {
@@ -32,49 +38,50 @@ class StoreController extends Controller
     $stores = Store::with(['area', 'genre'])->get();
     $areas = \App\Models\Area::all();  
     $genres = \App\Models\Genre::all();  
-    
-    return view('index', compact('stores', 'areas', 'selectedAreaId', 'selectedGenreId', 'userFavoriteStores', 'genres', 'userFavoriteStoresJson')); 
+
+    // 店舗代表者のデータを取得するロジックを追加
+    $representatives = User::where('role', 'representative')->get();
+
+    return view('index', compact('stores', 'areas', 'selectedAreaId', 'selectedGenreId', 'userFavoriteStores', 'genres', 'userFavoriteStoresJson', 'representatives')); 
 }
 
+    public function search(Request $request)
+    {
+        $areaId = $request->input('area_id');
+        $genreId = $request->input('genre_id');
+        $keyword = $request->input('keyword');
 
-public function search(Request $request)
-{
-    $areaId = $request->input('area_id');
-    $genreId = $request->input('genre_id');
-    $keyword = $request->input('keyword');
+        $query = Store::query();
 
-    $query = Store::query();
+        if ($areaId) {
+            $query->where('area_id', $areaId);
+        }
 
-    if ($areaId) {
-        $query->where('area_id', $areaId);
+        if ($genreId) {
+            $query->where('genre_id', $genreId);
+        }
+
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword){
+                $q->where('name', 'like', '%' . $keyword . '%')
+                  ->orWhere('store_overview', 'like', '%' . $keyword . '%');
+            });
+        }
+
+        $stores = $query->with(['area', 'genre'])->get(); 
+
+        $areas = \App\Models\Area::all(); 
+        $genres = \App\Models\Genre::all(); 
+        
+        $selectedAreaId = $areaId;
+        $selectedGenreId = $genreId;
+        $keywordValue = $keyword;
+        
+        $userFavoriteStores = auth()->check() ? auth()->user()->favorites->pluck('store_id')->toArray() : [];
+        $userFavoriteStoresJson = json_encode($userFavoriteStores); 
+
+        return view('index', compact('stores', 'areas', 'selectedAreaId', 'genres', 'selectedGenreId', 'keywordValue', 'userFavoriteStores', 'userFavoriteStoresJson')); 
     }
-
-    if ($genreId) {
-        $query->where('genre_id', $genreId);
-    }
-
-    if ($keyword) {
-        $query->where(function ($q) use ($keyword){
-            $q->where('name', 'like', '%' . $keyword . '%')
-              ->orWhere('store_overview', 'like', '%' . $keyword . '%');
-        });
-    }
-
-    $stores = $query->with(['area', 'genre'])->get(); 
-
-    $areas = \App\Models\Area::all(); 
-    $genres = \App\Models\Genre::all(); 
-    
-    $selectedAreaId = $areaId;
-    $selectedGenreId = $genreId;
-    $keywordValue = $keyword;
-    
-     $userFavoriteStores = auth()->check() ? auth()->user()->favorites->pluck('store_id')->toArray() : [];
-    $userFavoriteStoresJson = json_encode($userFavoriteStores); 
-
-    // ここでユーザーのお気に入り情報をビューに渡す
-    return view('index', compact('stores', 'areas', 'selectedAreaId', 'genres', 'selectedGenreId', 'keywordValue', 'userFavoriteStores', 'userFavoriteStoresJson')); 
-}
 
     public function destroy(Store $store)
     {
@@ -93,7 +100,81 @@ public function search(Request $request)
         return view('store.create');
     }
 
-public function store(Request $request)
+    // storeメソッドの追加
+    public function store(Request $request)
+    {
+        // バリデーションルールを定義
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'area_id' => 'required|integer',
+            'genre_id' => 'required|integer',
+            'store_overview' => 'required|string',
+            'image_url' => 'required|string|max:255',
+        ]);
+
+        // 店舗情報を新規作成
+        $store = Store::create([
+            'name' => $request->name,
+            'area_id' => $request->area_id,
+            'genre_id' => $request->genre_id,
+            'store_overview' => $request->store_overview,
+            'image_url' => $request->image_url,
+        ]);
+        
+        // 作成されたストアの詳細ページにリダイレクトする
+        return redirect()->route('representative.home')->with('success', 'ストアが作成されました。');
+    }
+
+    // editメソッドの追加
+    public function edit($id)
+    {
+        $store = Store::findOrFail($id);
+        $user = Auth::user();
+        $areas = Area::all(); // エリアのリストを取得
+        $genres = Genre::all(); // ジャンルのリストを取得
+
+        // ログイン中のユーザーが店舗代表者であるかを確認する
+        if ($user->role === 'representative') {
+            // ログイン中の店舗代表者が編集可能な店舗のリストを取得する
+            $editableStores = $user->stores->pluck('id')->toArray();
+
+            // ユーザーが編集しようとしている店舗が編集可能な店舗リストに含まれているかを確認する
+            if (in_array($store->id, $editableStores)) {
+                // ユーザーが編集可能な店舗である場合は編集ページを表示する
+                return view('representative.edit', compact('store', 'areas', 'genres'));
+            } else {
+                // 編集できない店舗である場合は適切な処理を行う（例: リダイレクト、エラーメッセージの表示など）
+                return redirect()->route('home')->with('error', '編集する権限がありません。');
+            }
+        } else {
+            // 店舗代表者でない場合は適切な処理を行う（例: リダイレクト、エラーメッセージの表示など）
+            return redirect()->route('home')->with('error', '店舗代表者でないため、編集する権限がありません。');
+        }
+    }
+
+
+// 代表者用のホーム画面を表示するメソッド
+    public function representativeHome()
+    {
+        // 1. ログイン状態を確認する
+        if (auth()->check()) {
+            // 2. ログインユーザーのIDを取得する
+            $userId = auth()->id();
+
+            // 3. ユーザーIDを使用して関連付けられた店舗を取得する
+            $userStores = UserStore::where('user_id', $userId)->with('store')->get();
+// 4. エリアのデータを取得
+        $areas = Area::all();
+        $genres = Genre::all();
+
+        // 5. 取得された店舗とエリアを表示する
+        return view('representative.home', ['userStores' => $userStores, 'areas' => $areas, 'genres' => $genres]);
+    } else {
+            // ログインしていない場合は何らかの処理を行う（例えばリダイレクト）
+            return redirect()->route('login')->with('error', 'ログインしてください。');
+        }
+    }
+    public function update(Request $request, $id)
 {
     // バリデーションルールを定義
     $validatedData = $request->validate([
@@ -104,43 +185,36 @@ public function store(Request $request)
         'image_url' => 'required|string|max:255',
     ]);
 
-    // データベースに新しいレコードを作成
-    $store = Store::create($validatedData);
+    // 更新対象の店舗を取得
+    $store = Store::findOrFail($id);
 
-    // リダイレクトまたはビューを返す
-    // 例: 作成されたストアの詳細ページにリダイレクトする
-    return redirect()->route('stores.show', $store->id);
-}
-
-    public function edit(Store $store)
-    {
-        // 代表者またはエディターの場合の処理
-        return view('store.edit',compact('store'));
-    }
-
-
- public function update(Request $request, $id)
-{
-    // リクエストデータの検証
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'area_id' => 'required|exists:areas,id',
-        'genre_id' => 'required|exists:genres,id',
-        'store_overview' => 'required|string',
-        'image_url' => 'required|string|max:255',
+    // 店舗情報を更新
+    $store->update([
+        'name' => $request->name,
+        'area_id' => $request->area_id,
+        'genre_id' => $request->genre_id,
+        'store_overview' => $request->store_overview,
+        'image_url' => $request->image_url,
     ]);
 
-    // ログ出力: 対象のストアを検索する前にIDを確認
-    \Log::info('Updating store with ID: ' . $id);
-
-    // 対象のストアを取得して更新
-    $store = Store::findOrFail($id);
-    $store->update($validatedData);
-
-    // ログ出力: 更新されたストアの内容を確認
-    \Log::info('Updated store: ' . $store);
-
-    // 更新後にリダイレクトするページを検討
-    return redirect()->route('update.complete');
+    // 更新後に店舗詳細ページにリダイレクト
+   return redirect()->route('representative.home')->with('success', 'ストアが更新されました。');
 }
+
+public function attachRepresentative(Request $request)
+    {
+        // フォームから送信されたデータを受け取る
+        $representativeId = $request->input('representative_id');
+        $storeId = $request->input('store_id');
+
+        // 代表者と店舗のIDを使用して、user_storeテーブルに新しいレコードを挿入
+        DB::table('user_store')->insert([
+            'user_id' => $representativeId,
+            'store_id' => $storeId
+        ]);
+
+        // 成功した場合はリダイレクトまたは適切なレスポンスを返す
+        return redirect()->back()->with('success', '関連付けが成功しました。');
+    }
+
 }

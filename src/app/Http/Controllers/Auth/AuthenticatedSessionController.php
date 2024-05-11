@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\Auth\LoginRequest; // フォームリクエストの名前空間を修正
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
@@ -18,23 +17,29 @@ class AuthenticatedSessionController extends Controller
     {
         return view('auth.login');
     }
-    
     /**
      * Destroy an authenticated session.
      * 
-     * @param \App\Http\Requests\Auth\LoginRequest $request // フォームリクエストの名前空間を修正
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request) // フォームリクエストの名前空間を修正
+    public function store(Request $request)
     {
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
-            return redirect('/stores');
-        }
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt($request->only('email', 'password'))){
+    dd('User authenticated successfully');
+    $request->session()->regenerate();
+    return redirect('/stores');
+}
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
+        
     }
 
     /**

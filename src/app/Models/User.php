@@ -23,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_auth_id',
+        'role', // 追加
     ];
 
     /**
@@ -58,5 +60,18 @@ class User extends Authenticatable
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+    public function isManager()
+{
+    return $this->hasRole('manager');
+}
+public function hasRole($role)
+{
+    return $this->role === $role;
+}
+    // ユーザーに関連付けられた店舗を取得
+    public function stores()
+    {
+        return $this->belongsToMany(Store::class, 'user_store');
     }
 }

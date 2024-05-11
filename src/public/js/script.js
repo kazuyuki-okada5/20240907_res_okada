@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ログイン状態が変更された場合に呼び出される関数
 function updateMenu() {
- 
-
   // ログイン状態に応じてメニュー項目を表示または非表示にする
   if (isLoggedIn) {
     document.getElementById('homeItem').style.display = 'block';
@@ -49,4 +47,7 @@ function search() {
   console.log("検索キーワード：" + keyword);
   // ここで実際の検索処理を行う
 }
+
+
+
 

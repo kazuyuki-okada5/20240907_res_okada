@@ -36,21 +36,20 @@
                 <a class="header-nav__link" href="{{ route('favorite.index') }}">マイページ</a>
               </li>
               <li class="header-nav__item" id="logoutItem" style="display: none;">
-                <a class="header-nav__link" href="/logout">ログアウト</a>
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf <!-- CSRFトークンの追加 -->
+</form>
+
+<!-- ログアウトリンク -->
+<a id="logoutLink" class="header-nav__link" href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+  ログアウト
+</a>
               </li>
               <li class="header-nav__item" id="registrationItem">
                 <a class="header-nav__link" href="/registration">Registration</a>
               </li>
               <li class="header-nav__item" id="loginItem">
                 <a class="header-nav__link" href="/login">Login</a>
-              </li>
-              <!-- 代表者用ログインリンク -->
-              <li class="header-nav__item" id="representativeLoginItem">
-                <a class="header-nav__link" href="{{ route('representative.login') }}">代表者ログイン</a>
-              </li>
-              <!-- 管理者用ログインリンク -->
-              <li class="header-nav__item" id="managerLoginItem">
-                <a class="header-nav__link" href="{{ route('manager.login') }}">管理者ログイン</a>
               </li>
             </ul>
           </nav>

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const keywordInput = document.getElementById('keyword');
-    keywordInput.setAttribute('placeholder', '🔍 キーワードを入力');
+    keywordInput.setAttribute('placeholder', '🔍 店舗名を入力');
 });
 
 async function toggleFavorite(buttonElement) {

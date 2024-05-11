@@ -35,28 +35,22 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
-        ],
-
-        'representative' => [
-            'driver' => 'session',
-            'provider' => 'representatives',
-        ],
-
-        'manager' => [
-            'driver' => 'session',
-            'provider' => 'managers',
-        ]
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
     ],
+
+    'manager' => [
+        'driver' => 'session',
+        'provider' => 'managers',
+    ],
+
+    'representative' => [
+        'driver' => 'session',
+        'provider' => 'representatives',
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -75,22 +69,22 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
-        'representatives' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Representative::class,
-        ],
-
-        'managers' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Manager::class,
-        ]
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
     ],
+
+    'managers' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Manager::class,
+    ],
+
+    'representatives' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Representative::class,
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------

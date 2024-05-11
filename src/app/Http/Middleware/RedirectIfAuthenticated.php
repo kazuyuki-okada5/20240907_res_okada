@@ -17,16 +17,23 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, ...$guards)
-    {
-        $guards = empty($guards) ? [null] : $guards;
+public function handle(Request $request, Closure $next, ...$guards)
+{
+    $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+    foreach ($guards as $guard) {
+        if (Auth::guard($guard)->check()) {
+            // 管理者認証の場合のリダイレクト先を設定
+            if ($guard === 'manager') {
+                return redirect('/manager/dashboard');
             }
-        }
+            // その他のガードに関するリダイレクト先はここに追加
 
-        return $next($request);
+            // 通常の認証の場合はデフォルトのリダイレクト先を使用
+            return redirect(RouteServiceProvider::HOME);
+        }
     }
+
+    return $next($request);
+}
 }

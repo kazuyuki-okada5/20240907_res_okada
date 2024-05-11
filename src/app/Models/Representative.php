@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Representative;
 
-
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Representative extends Authenticatable
+class Representative extends Model
 {
     use HasFactory, Notifiable;
 
@@ -16,6 +14,7 @@ class Representative extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     protected $hidden = [
@@ -26,4 +25,14 @@ class Representative extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
+
+    public function isManager()
+    {
+        return $this->hasRole('representative');
+    }
 }
