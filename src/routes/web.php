@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FavoriteController;
@@ -15,8 +15,11 @@ use App\Http\Controllers\RepresentativeController;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\NotificationController;
 
-// Route::get('/', [AuthController::class, 'index']);
+Route::get('/store', [AuthController::class, 'index']);
 Route::get('/registration', function () {
     return view('auth.register');
 });
@@ -94,12 +97,39 @@ Route::get('/home', function () {
     // リダイレクト先の処理を記述するか、ビューを返す
 })->name('home');
 Route::get('/reservations/{reservation}', 'App\Http\Controllers\ReservationController@show')->name('reservations.show');
-Route::post('/logout', function () {
+Route::post('/store', function () {
     auth()->logout();
     return redirect('/stores');
 })->name('logout');
+
 Route::post('/representatives', [RepresentativeController::class, 'store'])->name('representatives.store');
 Route::post('/stores/attach-representative', [StoreController::class, 'attachRepresentative'])->name('stores.attachRepresentative');
 Route::get('/manager/home', [ManagerController::class, 'home'])->name('manager.home');
+Route::resource('upload',ImageController::class);
+Route::post('/upload-image', [ImageController::class, 'store'])->name('upload.image');
+Route::get('/stores/{id}/edit', [ImageController::class, 'edit'])->name('stores.edit');
+Route::post('/upload-image', [ImageController::class, 'uploadImage'])->name('upload.image');
+Route::post('/update-image/{id}', [ImageController::class, 'updateImage'])->name('update.image');
+Route::delete('/delete-image/{id}', [ImageController::class, 'deleteImage'])->name('delete.image');
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (\Illuminate\Foundation\Auth\EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (\Illuminate\Http\Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::post('/send-notification', [NotificationController::class, 'sendNotificationToAllUsers'])->name('send.notification');
+Route::get('/notice/create', function () {
+    return view('manager.notification');
+})->name('notice.create');

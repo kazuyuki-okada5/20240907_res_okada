@@ -6,48 +6,50 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Restaurant reservation service</title>
-  <!-- CSSファイルを読み込む -->
+  <!-- 共通のCSSファイルを読み込む -->
   <link rel="stylesheet" href="/css/common.css">
 </head>
 
 <body>
+  <!-- ヘッダー -->
   <header class="header">
     <div class="header__inner">
       <div class="header-utilities">
-        <!-- ロゴとハンバーガーアイコンを同じレベルに配置 -->
+        <!-- ロゴとハンバーガーアイコン -->
         <div class="header__logo-container">
           <!-- ハンバーガーメニューアイコン -->
           <div class="header__hamburger" onclick="toggleMenu()">
             &#9776; <!-- ハンバーガーアイコンのUnicode文字 -->
           </div>
-          <!-- ×アイコン -->
+          <!-- メニューを閉じるアイコン -->
           <div class="header__close" onclick="toggleMenu()">
-            &times; <!-- ×アイコンのUnicode文字 -->
+            &times; <!-- メニュー閉じるアイコンのUnicode文字 -->
           </div>
-          <!-- 登録エリアを表示させて選択できるボタン -->
           <!-- メニュー -->
           <nav class="header__menu" id="headerMenu">
             <ul class="header-nav">
-              <!-- メニューアイテム -->
+              <!-- ホーム -->
               <li class="header-nav__item" id="homeItem">
                 <a class="header-nav__link" href="/stores">Home</a>
               </li>
+              <!-- マイページ -->
               <li class="header-nav__item" id="mypageItem">
                 <a class="header-nav__link" href="{{ route('favorite.index') }}">マイページ</a>
               </li>
+              <!-- ログアウト -->
               <li class="header-nav__item" id="logoutItem" style="display: none;">
                 <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf <!-- CSRFトークンの追加 -->
-</form>
-
-<!-- ログアウトリンク -->
-<a id="logoutLink" class="header-nav__link" href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
-  ログアウト
-</a>
+                  @csrf <!-- CSRFトークンの追加 -->
+                </form>
+                <a id="logoutLink" class="header-nav__link" href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                  ログアウト
+                </a>
               </li>
+              <!-- 会員登録 -->
               <li class="header-nav__item" id="registrationItem">
                 <a class="header-nav__link" href="/registration">Registration</a>
               </li>
+              <!-- ログイン -->
               <li class="header-nav__item" id="loginItem">
                 <a class="header-nav__link" href="/login">Login</a>
               </li>
@@ -62,19 +64,21 @@
     </div>
   </header>
 
-  <main>
-    <!-- コンテンツ -->
-  </main>
-
-  <script>
-    var isLoggedIn = <?php echo Auth::check() ? 'true' : 'false'; ?>;
-  </script>
-  <script src="/js/script.js"></script>
-
+  <!-- メインコンテンツ -->
   <main>
     @yield('content')
   </main>
+
+  <!-- ログイン状態をJavaScriptに渡す -->
+  <script>
+    var isLoggedIn = <?php echo Auth::check() ? 'true' : 'false'; ?>;
+  </script>
+  <!-- 共通のJavaScriptファイルを読み込む -->
+  <script src="/js/script.js"></script>
+
+  <!-- 追加のスクリプト -->
   @yield('scripts')
 </body>
 
 </html>
+

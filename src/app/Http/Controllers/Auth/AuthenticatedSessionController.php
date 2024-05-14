@@ -31,7 +31,6 @@ class AuthenticatedSessionController extends Controller
         ]);
 
         if (Auth::attempt($request->only('email', 'password'))){
-    dd('User authenticated successfully');
     $request->session()->regenerate();
     return redirect('/stores');
 }

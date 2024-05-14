@@ -30,7 +30,7 @@ public function handle(Request $request, Closure $next, ...$guards)
             // その他のガードに関するリダイレクト先はここに追加
 
             // 通常の認証の場合はデフォルトのリダイレクト先を使用
-            return redirect(RouteServiceProvider::HOME);
+            return redirect('/store');
         }
     }
 
