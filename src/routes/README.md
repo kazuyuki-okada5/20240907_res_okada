@@ -1,13 +1,13 @@
-＃アプリケーション名
+# アプリケーション名
 	　飲食店予約アプリ
 
-＃作成した目的
+# 作成した目的
 	　飲食店の予約を管理するためのシステム
 
-＃アプリケーションURL
+# アプリケーションURL
 　管理者ログイン時はメールアドレス：aaaa　パスワード：aaaaaaaa
 
-＃機能一覧
+# 機能一覧
 	　店舗一覧ページ
 	　店舗詳細ページ
 	　ログイン機能
@@ -29,7 +29,7 @@
 	　に権限付与されている店舗が表示され、各店舗の「編集する」ボタンで編集画面表示され編集可能。
 	　　編集後「更新」ボタンで更新完了する。
 
-＃テーブル設計
+# テーブル設計
 	usersテーブル（登録）
 	カラム名        　型	            PRIMARY KEY	    UNIQUE KEY	NOT NULL	FOREIGN KEY
 	id	           　unsigned bigint	　○		                   　 ○
@@ -99,11 +99,11 @@
 	created_at	        timestamp
 	updated_at	        timestamp
 
-＃ER図
+# ER図
 　https://docs.google.com/spreadsheets/d/1t10kDiHte8iT4K38IrfgD2TRnGLOOVzZAmaw8B5qePE/edit#gid=1270192593
 　　内、ER図シート参照
 
-＃環境構築
+# 環境構築
 　フレームワークはLaravelバージョン8を使用する
 Dockerfile
 # PHPコンテナをベースにする
