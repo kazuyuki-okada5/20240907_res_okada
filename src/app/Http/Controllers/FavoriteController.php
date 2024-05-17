@@ -12,6 +12,12 @@ use Carbon\Carbon;
 
 class FavoriteController extends Controller
 {
+    /**
+     * お気に入りの店舗をトグルする
+     *
+     * @param int $storeId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function toggleFavorite($storeId)
     {
         $user = Auth::user();
@@ -31,46 +37,64 @@ class FavoriteController extends Controller
         }
     }
     
+    /**
+     * お気に入り一覧を表示
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
-{
-    // ログインしているユーザーの情報を取得
-    $user = Auth::user();
+    {
+        // ログインしているユーザーの情報を取得
+        $user = Auth::user();
 
-    // ログインしているユーザーのIDを取得
-    $userId = $user->id;
+        // ログインしているユーザーのIDを取得
+        $userId = $user->id;
 
-     // 予約データを取得し、日付が近い順にソートする
-    $reservations = Reservation::where('user_id', $userId)
-                               ->orderBy('start_at', 'asc')  // start_atで昇順ソート
-                               ->get();
-    
-    // 現在の日付を取得
-    $today = Carbon::now();
+         // 予約データを取得し、日付が近い順にソートする
+        $reservations = Reservation::where('user_id', $userId)
+                                   ->orderBy('start_at', 'asc')  // start_atで昇順ソート
+                                   ->get();
+        
+        // 現在の日付を取得
+        $today = Carbon::now();
 
-    // 予約情報の配列に過去の予約かどうかをフラグとして追加する
-    foreach ($reservations as $reservation) {
-        $reservationDate = Carbon::parse($reservation->start_at);
-        $reservation->isPastReservation = $reservationDate->lt($today);
+        // 予約情報の配列に過去の予約かどうかをフラグとして追加する
+        foreach ($reservations as $reservation) {
+            $reservationDate = Carbon::parse($reservation->start_at);
+            $reservation->isPastReservation = $reservationDate->lt($today);
+        }
+
+        // お気に入りの店舗データを取得
+        $favoriteStores = $user->favorites;
+
+        // ビューに渡すデータをまとめる
+        $viewData = [
+            'reservationDetails' => $reservations,
+            'user' => $user,
+            'favoriteStores' => $favoriteStores,
+        ];
+
+        // ビューを返す
+        return view('favorite', $viewData);
     }
 
-    // お気に入りの店舗データを取得
-    $favoriteStores = $user->favorites;
-
-    // ビューに渡すデータをまとめる
-    $viewData = [
-        'reservationDetails' => $reservations,
-        'user' => $user,
-        'favoriteStores' => $favoriteStores,
-    ];
-
-    // ビューを返す
-    return view('favorite', $viewData);
-}
+    /**
+     * お気に入りを追加する
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         // お気に入りを追加する処理を実装
     }
 
+    /**
+     * お気に入りを削除する
+     *
+     * @param  \App\Models\Favorite  $favorite
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Favorite $favorite)
     {
         // 認証ユーザーのお気に入りとしてお気に入りを削除
@@ -80,6 +104,12 @@ class FavoriteController extends Controller
         }
     }
 
+    /**
+     * エリアごとのお気に入り一覧を表示
+     *
+     * @param  \App\Models\Area  $area
+     * @return \Illuminate\View\View
+     */
     public function favoritesArea(Area $area)
     {
         $favorites = $area->favorites;

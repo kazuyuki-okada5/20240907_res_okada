@@ -35,8 +35,10 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        // ミドルウェアを適用
+        $this->middleware('auth'); // 認証されたユーザーのみがアクセス可能
+        $this->middleware('signed')->only('verify'); // 署名付きURLのみを許可
+        $this->middleware('throttle:6,1')->only('verify', 'resend'); // 頻繁なアクセスを制限
     }
 }
+

@@ -44,29 +44,26 @@ class ReservationController extends Controller
     }
 
     public function index()
-{
-    // ログインしているユーザーのIDを取得
-    $userId = auth()->user()->id;
+    {
+        // ログインしているユーザーのIDを取得
+        $userId = auth()->user()->id;
     
-    // 予約データをstart_atが早い順にソート
-    $reservationDetails = Reservation::where('user_id', $userId)
-                                    ->orderBy('start_at', 'asc')
-                                    ->get();
+        // 予約データをstart_atが早い順にソート
+        $reservationDetails = Reservation::where('user_id', $userId)
+                                        ->orderBy('start_at', 'asc')
+                                        ->get();
 
-    return view('reservations.index', compact('reservationDetails'));
-
-}
+        return view('reservations.index', compact('reservationDetails'));
+    }
 
     public function destroy(Reservation $reservation)
-{
-    // 認証ユーザーの予約として予約を削除
-    if ($reservation->user_id === auth()->id()) {
+    {
+        // 認証ユーザーの予約として予約を削除
+        if ($reservation->user_id === auth()->id()) {
         $reservation->delete();
         return back();
+        }
     }
-}
-
-
 
     public function edit(Reservation $reservation)
     {

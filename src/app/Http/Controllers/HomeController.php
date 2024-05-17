@@ -8,6 +8,7 @@ class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
+     * ユーザーが認証されていることを確認するミドルウェアを追加
      *
      * @return void
      */
@@ -18,6 +19,7 @@ class HomeController extends Controller
 
     /**
      * Show the application dashboard.
+     * アプリケーションのダッシュボードを表示する
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -26,3 +28,4 @@ class HomeController extends Controller
         return view('home');
     }
 }
+

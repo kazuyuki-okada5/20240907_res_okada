@@ -30,7 +30,7 @@ class RepresentativeController extends Controller
         $user->stores()->attach($storeId);
 
         // リダイレクトなどの適切なレスポンスを返します
-        return redirect()->route('home')->with('success', 'Representative created successfully!');
+        return redirect()->route('manager.home')->with('success', 'Representative created successfully!');
     }
 }
 

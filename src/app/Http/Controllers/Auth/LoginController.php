@@ -35,6 +35,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // 未認証のユーザーのみがアクセス可能なゲストミドルウェアを適用
         $this->middleware('guest')->except('logout');
     }
 }
+
