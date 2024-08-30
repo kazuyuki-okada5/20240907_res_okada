@@ -19,6 +19,8 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\NotificationController;
 
+Route::get('/', [StoreController::class, 'index']);
+
 // 認証関連
 Route::get('/registration', function () {
     return view('auth.register');
