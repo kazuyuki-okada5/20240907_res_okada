@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+// use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\IndexControllers;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\StoreDetailController;
@@ -16,7 +15,7 @@ use App\Http\Controllers\EditController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\NoticeController;
+// use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\NotificationController;
 
 Route::get('/', [StoreController::class, 'index']);
@@ -26,11 +25,11 @@ Route::get('/registration', function () {
     return view('auth.register');
 });
 Route::post('/register', [RegisteredUserController::class, 'store']);
-Route::get('/representative/login', [AuthRepresentativeLoginController::class, 'showLoginForm'])->name('representative.login');
-Route::post('/representative/login', [AuthRepresentativeLoginController::class, 'login']);
+// Route::get('/representative/login', [AuthRepresentativeLoginController::class, 'showLoginForm'])->name('representative.login');
+// Route::post('/representative/login', [AuthRepresentativeLoginController::class, 'login']);
 
 
-// お気に入り関連
+// お気に入り関連(済)
 Route::get('/favorite', [FavoriteController::class, 'index'])->name('favorite.index');
 Route::post('/toggle-favorite/{storeId}', [FavoriteController::class, 'toggleFavorite'])->middleware('auth');
 Route::delete('/favorites/{favorite}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
