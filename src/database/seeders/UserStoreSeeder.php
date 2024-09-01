@@ -11,9 +11,9 @@ class UserStoreSeeder extends Seeder
 {
     public function run()
     {
-        // user_id が 6 で store_id が 8 のデータを作成
+        // user_id が 3 で store_id が 8 のデータを作成
         UserStore::create([
-            'user_id' => 22,
+            'user_id' => 3,
             'store_id' => 8,
         ]);
 

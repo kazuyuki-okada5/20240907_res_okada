@@ -7,33 +7,21 @@
     <!-- 店舗情報登録フォーム -->
     <form action="{{ route('stores.store') }}" method="POST">
         @csrf <!-- CSRFトークン -->
-
-        <!-- 店舗名 -->
-        <input type="text" name="name" placeholder="店舗名">
-        
-        <!-- エリア選択 -->
+        <input type="text" name="name" placeholder="店舗名" value="{{ old('name') }}">
         <label for="area_id">エリア:</label>
         <select name="area_id" id="area_id">
             @foreach($areas as $area)
-                <option value="{{ $area->id }}">{{ $area->area }}</option>
+                <option value="{{ $area->id }}" {{ old('area_id') == $area->id ? 'selected' : '' }}>{{ $area->area }}</option>
             @endforeach
         </select>
-        
-        <!-- ジャンル選択 -->
         <label for="genre_id">ジャンル:</label>
         <select name="genre_id" id="genre_id">
             @foreach($genres as $genre)
-                <option value="{{ $genre->id }}">{{ $genre->genre }}</option>
+                <option value="{{ $genre->id }}" {{ old('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->genre }}</option>
             @endforeach
         </select>
-        
-        <!-- 店舗概要 -->
         <textarea name="store_overview" placeholder="店舗概要"></textarea>
-        
-        <!-- 画像URL -->
-        <input type="text" name="image_url" placeholder="画像URL">
-        
-        <!-- 保存ボタン -->
+        <input type="text" name="image_url" placeholder="画像URL" value="{{ old('image_url') }}">
         <button type="submit">保存</button>
     </form>
 
@@ -50,7 +38,6 @@
             
             <!-- 「編集する」ボタン -->
             <button onclick="editStore({{ $userStore->store->id }})">編集する</button>
-
         </li>
         <!-- 予約一覧表示 -->
         @if($userStore->store->reservations->isNotEmpty())

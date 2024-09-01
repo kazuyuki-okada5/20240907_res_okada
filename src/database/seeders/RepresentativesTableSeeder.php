@@ -20,5 +20,26 @@ class RepresentativesTableSeeder extends Seeder
             'password' => bcrypt('aaaaaaaa'),
             'role' => 'representative', // ここでロールを指定する
         ]);
+
+        User::create([
+            'name' => 'a',
+            'email' => 'a@co.jp',
+            'password' => bcrypt('aaaaaaaa'),
+            'role' => 'user', // ここでロールを指定する
+        ]);
+
+        User::create([
+            'name' => 'b',
+            'email' => 'b@co.jp',
+            'password' => bcrypt('bbbbbbbb'),
+            'role' => 'user', // ここでロールを指定する
+        ]); 
+
+        User::create([
+            'name' => 'c',
+            'email' => 'c@co.jp',
+            'password' => bcrypt('cccccccc'),
+            'role' => 'user', // ここでロールを指定する
+        ]); 
     }
 }
