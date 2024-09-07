@@ -1,116 +1,58 @@
 /* ブレイクポイント 768px 未満のスタイル */
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 50%;
-        /* 全体を50%のサイズで表示 */
-    }
+@media screen and (max-width: 1050px) {
 
-    /* 他のレスポンシブスタイル */
-    .header__hamburger,
-    .header__close {
-        font-size: 1.5em;
-    }
-
-    .header__logo {
-        font-size: 1.2em;
-    }
 }
 
 
-/* ブレイクポイント 768px 以上のスタイル */
-@media screen and (min-width: 768px) {
-    .store-group {
-        max-width: 300px;
-        /* 最大幅を300pxに */
-        margin-bottom: 20px;
-        /* 下のマージンを元に戻す */
-    }
+/* ブレイクポイント 1050px 以上のスタイル */
+@media screen and (min-width: 1050px) {
 
-    .store-info {
-        padding: 15px;
-        /* パディングを元に戻す */
-    }
 
-    .store-info h3 {
-        font-size: 1.5em;
-        /* フォントサイズを元に戻す */
-    }
 
-    .store-meta {
-        font-size: 1em;
-        /* フォントサイズを元に戻す */
-    }
+}
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
 }
 
-body {
-    background-color: #f2f2f2;
-    /* 背景色を薄い灰色に設定 */
-    margin: 10px;
-    /* 余白を削除 */
-    padding: 0;
-    /* パディングを削除 */
+.header__logo-container {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin-top: 15px;
+}
+
+.main{
+  margin-top: 30px;
+  max-width: 1200px;
+  background-color: rgb(245, 245, 245);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  flex-direction: column;
+}
+
+.search-group{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-list {
+    font-size: 12px;
 }
 
 .search-container {
     position: absolute;
-        /* 画面内で絶対位置 */
-    top: 50px; /* topの値を50に修正 */
+    top: 50px;
     right: 0;
-    /* 右端に配置 */
-    padding: 10px;
-    /* 必要に応じて調整 */
-}
-
-
-.search-group {
-    border: 1px solid #ffffff;
-    /* 枠線 */
-    border-radius: 5px;
-    /* 角を丸める */
-    padding: 1px;
-    /* パディング */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* 影 */
-    height: 32px;
-    /* 必要に応じて高さを調整 */
-}
-
-.search-area,
-.search-genre,
-.search-words {
-    display: inline-block;
-    /* インラインブロック要素にする */
-    margin-right: 1px;
-    /* 要素間のスペース */
-}
-
-.search-area select,
-.search-genre select,
-.search-words input[type="text"] {
-    width: 100px;
-    /* 幅を指定（必要に応じて変更） */
-    height: 30px;
-    /* 高さを指定（必要に応じて変更） */
     padding: 5px;
-    /* 内部のパディング */
-    border: 1px solid #ccc;
-    /* 枠線を追加 */
-    border-radius: 5px;
-    /* 角を丸くする */
-    appearance: none;
-    /* デフォルトのセレクトボックスのスタイルをリセット */
-    background-color: #fff;
-    /* 背景色 */
-    font-size: 16px;
-    /* フォントサイズ */
-    outline: none;
-    /* フォーカス時のアウトラインを消す */
 }
 
-.search-words input[type="text"] {
-    width: 350px;
-    /* 幅を広げる値に調整 */
-    /* 他のスタイルはそのまま */
+.sort-container{
+    padding-right: 25px;
 }
 
 .store-container {

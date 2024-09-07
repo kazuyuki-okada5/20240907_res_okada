@@ -13,37 +13,67 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\UserStore; // 必要に応じて追加する
 use App\Models\User; // Userモデルをインポートする
 use Illuminate\Support\Facades\DB;
-use App\Models\Representative;
+use App\Models\Review;
+
 
 
 class StoreController extends Controller
 {
-    public function show($id)
-    {
-        // 引数で受け取ったIDに対応するストアを取得
-        $store = Store::findOrFail($id);
+public function show($id)
+{
+    // 引数で受け取ったIDに対応するストアを取得
+    $store = Store::findOrFail($id);
 
-        // 取得したストアを詳細ページに渡して表示する
-        return view('store_detail', ['store' => $store]);
-    }
+    // 該当するストアの口コミを取得
+    $review = Review::where('store_id', $store->id)->latest()->first();
+
+    // 取得したストアと口コミを詳細ページに渡して表示する
+    return view('store_detail', [
+        'store' => $store,
+        'review' => $review,
+    ]);
+}
 
     public function index(Request $request)
-{
-    $selectedAreaId = $request->input('area_id', '');  
-    $selectedGenreId = $request->input('genre_id', '');  
+    {
+        $selectedAreaId = $request->input('area_id', '');  
+        $selectedGenreId = $request->input('genre_id', '');  
 
-    $userFavoriteStores = auth()->check() ? auth()->user()->favorites->pluck('store_id')->toArray() : [];
-    $userFavoriteStoresJson = json_encode($userFavoriteStores); 
+        $userFavoriteStores = auth()->check() ? auth()->user()->favorites->pluck('store_id')->toArray() : [];
+        $userFavoriteStoresJson = json_encode($userFavoriteStores); 
 
-    $stores = Store::with(['area', 'genre'])->get();
-    $areas = \App\Models\Area::all();  
-    $genres = \App\Models\Genre::all();  
+        $query = Store::query()->with(['area', 'genre']);
 
-    // 店舗代表者のデータを取得するロジックを追加
-    $representatives = User::where('role', 'representative')->get();
+        // エリアとジャンルのフィルタリング
+        if ($selectedAreaId) {
+            $query->where('area_id', $selectedAreaId);
+        }
 
-    return view('index', compact('stores', 'areas', 'selectedAreaId', 'selectedGenreId', 'userFavoriteStores', 'genres', 'userFavoriteStoresJson', 'representatives')); 
-}
+        if ($selectedGenreId) {
+            $query->where('genre_id', $selectedGenreId);
+        }
+
+        // ソート機能
+        if ($request->filled('sort')) {
+            switch($request->sort) {
+                case 'high_rating':
+                    $query->withAvg('reviews', 'rating')->orderByDesc('reviews_avg_rating');
+                    break;
+                case 'low_rating':
+                    $query->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating');
+                    break;
+                case 'random':
+                    $query->inRandomOrder();
+                    break;
+            }
+        }
+
+        $stores = $query->get();
+        $areas = Area::all();
+        $genres = Genre::all();
+
+        return view('index', compact('stores', 'areas', 'selectedAreaId', 'selectedGenreId', 'userFavoriteStores', 'genres', 'userFavoriteStoresJson'));
+    }
 
     public function search(Request $request)
     {
@@ -216,5 +246,4 @@ public function attachRepresentative(Request $request)
         // 成功した場合はリダイレクトまたは適切なレスポンスを返す
         return redirect()->back()->with('success', '関連付けが成功しました。');
     }
-
 }

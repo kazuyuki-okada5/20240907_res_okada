@@ -1,180 +1,339 @@
-/* ブレイクポイント 768px 未満のスタイル */
-@media screen and (max-width: 767px) {
-    body {
-        font-size: 50%;
-        /* 全体を50%のサイズで表示 */
-    }
+.header__inner{
+    height: 60px;
+    margin-bottom: 20px;
+}
+.header__logo-container {
+    display: flex;
+    align-items: center;
+    height: 50px;
 }
 
-body {
-    background-color: #f2f2f2;
-    margin: 10px;
-    padding: 0;
+.main {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: rgb(245, 245, 245);    
 }
 
 .detail-container {
+    
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    flex-direction: column;
+}
+
+.detail-group{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+}
+
+.store-container {
+    max-width: 580px;
 }
 
 .back-button {
-    background-color: #c9c9ca;
-    border: none;
+    margin-top: 7px;
+    background-color: white;
+    border: 2px solid white;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 30px;
-    margin-top: 4px;
-    margin-right: 10px;
-    /* ボタンと店舗名の間に少しスペースを開ける */
-    padding-top: 1px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 1.1);
+    transition: all 0.3s ease;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-button:hover {
+    box-shadow: 0 3px 4px 1px rgba(0, 0, 0, 1.2);
+    transform: translateY(-2px);
 }
 
 .back-button .material-icons-outlined {
-    vertical-align: middle;
+    font-size: 18px;
 }
 
-.detail-group h3 {
+.store-name{
+    margin-left: 15px;
+}
+
+.store-image{
+    max-width: 400px;
+    max-height: 400px;
+}
+.store-name {
     font-size: 30px;
-    /* サイズを28pxに設定 */
     margin-top: 1px;
     margin-bottom: 1px;
 }
 
-
-
-.store-info p {
+.store-info {
+    height: auto;
+    display: block;
+    margin: auto;
+    text-align: center;
     display: inline-block;
-    /* インラインブロック要素として扱う */
     margin-right: 10px;
-    /* 右側に少しマージンを追加 */
+    max-height: 560px;
 }
 
+.move-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    max-width: 560px;
+    background-color: #004fe1d8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+}
 
+.move-button-container {
+  margin-bottom: 10px;
+}
 
-.detail-group,
-.store-container,
-.booking-container {
-    flex: 1;
-    margin-right: 20px;
+.review{
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+.store-area-genre {
+    display: flex;
+    max-width: 200px;
+    margin-left: 100px;
+}
+
+.genre{
+     margin-left: 10px;
+}
+
+.overview{
+    text-align: justify;
 }
 
 .booking-container {
+    max-width: 325px;
+    max-height: 800px;
     background-color: #007BFF;
     padding: 20px;
     border-radius: 8px;
-    margin-left: 0;
+    margin-left: 20px;
 }
 
 .booking-info {
     color: white;
 }
 
-.date-label,
-.date-time,
-.date-num-people{
-    padding-right: 18px;
-    /* ラベルの右側に10pxのパディングを追加 */
+.reservation-time,
+.reservation-people{
+    max-width: 360px;    
 }
 
 #bookingForm div {
     margin-top: 10px;
     margin-bottom: 10px;
-    /* 各フォーム要素の下に20pxのマージンを追加 */
     padding-left: 18px;
+}
 
-}
-input#date{
-    width: 50%;
-    /* 幅を100%に設定 */
+.date-label{
+    max-width: 170px;
     padding: 8px;
-    /* 内側のパディングを追加 */
     border: 1px solid #ccc;
-    /* ボーダーを追加 */
     border-radius: 4px;
-    /* 角を丸める */
     margin-top: 5px;
-    /* 上部のマージンを追加 */
     margin-bottom: 15px;
-    /* 下部のマージンを追加 */
 }
-select#time,
-select#num_people {
-    width: 100%;
-    /* 幅を100%に設定 */
+
+.reservation-time,
+.reservation-people{
+    max-width: 295px;
     padding: 8px;
-    /* 内側のパディングを追加 */
     border: 1px solid #ccc;
-    /* ボーダーを追加 */
     border-radius: 4px;
-    /* 角を丸める */
     margin-top: 5px;
-    /* 上部のマージンを追加 */
     margin-bottom: 15px;
-    /* 下部のマージンを追加 */
 }
 
 .booking-confirm{
-    padding-right: 18px;
-}
-
-#displayStoreName,
-#displayDate {
-    margin-left: 27px;
-    /* 左側のマージンを20pxに設定 */
-}
-
-#displayTime,
-#displayNumPeople {
-    margin-left: 10px;
-    /* 左側のマージンを20pxに設定 */
+    padding: 10px;
+     background-color: #3996fa;
+     border-radius: 4px;
 }
 
 .submit-button {
     display: block;
-    /* ボタンをブロックレベル要素にする */
-    margin: 20px auto 0;
-    /* 上に20px、左右は自動マージンを使って中央に寄せる */
-    padding: 20px 100px;
-    /* 必要に応じてパディングを調整 */
+    max-width: ;width: 325px;
+    padding: 5px 100px;
     text-align: center;
-    /* テキストを中央に寄せる */
     background-color: #004fe1d8;
-    /* ボタンの背景色 */
     color: white;
-    /* ボタンのテキスト色 */
     border: none;
-    /* ボーダーをなしに */
     border-radius: 4px;
-    /* 角を丸くする */
     cursor: pointer;
-    /* カーソルをポインターに変更 */
-    font-size: 24px;
-    /* フォントサイズを18pxに */
-    font-weight: bold;
-    /* フォントの太さをboldに */
+    font-size: 18px;
+     margin-top: 100px;
 }
 
-/* モバイルデバイスでのレイアウト調整 */
-@media (max-width: 768px) {
+.star-rating .star {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.star-rating .star.selected {
+    color: #ffcc00;
+}
+
+.star-rating{
+    display: flex;
+    align-items: center;
+}
+
+.review-actions {
+    display: flex;
+    gap: 10px;
+    margin-right: 20px;
+    width: 210px;
+}
+
+.review-comment{
+    max-width: ;width: 600px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.review-posted{
+    display: flex;
+    gap: 30px;
+}
+
+/* 1025px以下のレスポンシブ設定 */
+@media (max-width: 1025px) {
+    .main {
+        max-width: 840px;
+    }
     .detail-container {
-        flex-direction: column;
+        display: flex;
+    }
+
+    .store-container {
+    max-width: 400px;
+    }
+
+    .store-area-genre {
+        display: flex;
+        max-width: 200px;
+        margin-left: 35px;
     }
 
     .detail-group,
-    .store-container,
-    .booking-container {
+    .store-info {
         margin-right: 0;
+    }
+
+    .booking-container {
+        max-width: 310px;
+        max-height: 800px;
+        background-color: #007BFF;
+        padding: 20px;
+        border-radius: 8px;
+        margin-left: 20px;
+    }
+
+    .star-rating .star {
+        font-size: 1.8rem;
+        color: #ccc;
+        cursor: pointer;
+    }
+
+    .review-comment {
+        max-width: ;
+        width: 400px;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 }
 
-.detail-group {
-    display: flex;
-    justify-content: flex-start;
+/* 840px以下のレスポンシブ設定 */
+@media (max-width: 840px) {
+    .header__logo-container {
+        height: 50px;
+    }
+
+    .detail-container {
+        align-items: flex-start;
+        background-color: white;
+    }
+
+    .detail-group {
+        width: 50%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .store-info {
+        width: 100%;
+        text-align: justify;
+    }
+
+    .booking-container {
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .move-button {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .store-name {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .store-area-genre {
+        display: -webkit-box;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+        height: 25px;
+    }
+
+    .star-rating {
+    display: contents;
+    }
+
+    .review-comment {
+        width: 100%;
+    }
+
+    .review-posted {
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .review-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .booking-container {
+        margin: 20px 0;
+        width: 360px;
+    }
+
 }
 
-.store-info img {
-    width: 500px;
-    height: auto;
-    display: block;
-    margin: auto;
-    text-align: center;
-}
+
+
+
+

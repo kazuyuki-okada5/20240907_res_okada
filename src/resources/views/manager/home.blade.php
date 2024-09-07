@@ -4,6 +4,19 @@
 <body>
     <h2>管理者用ホーム画面</h2>
 
+    <!-- メッセージ表示 -->
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <!-- 店舗代表者を店舗に新規登録フォーム -->
     <h3>店舗代表者を店舗に新規登録</h3>
     <form action="{{ route('representatives.store') }}" method="POST">
@@ -72,7 +85,18 @@
         </div>
         <button type="submit">関連付ける</button>
     </form>
+
+    <!-- CSVインポートフォーム -->
+    <h3>CSVインポート</h3>
+    <form action="{{ route('stores.import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="file" required>
+        <button type="submit">インポート</button>
+    </form>
+
+    <!-- CSVエクスポートリンク -->
+    <h3>CSVエクスポート</h3>
+    <a href="{{ route('stores.export') }}">エクスポート</a>
 </body>
-</html>
 @endsection
 

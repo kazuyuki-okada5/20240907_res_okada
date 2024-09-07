@@ -74,4 +74,9 @@ public function hasRole($role)
     {
         return $this->belongsToMany(Store::class, 'user_store');
     }
+
+        public function getIsAdminAttribute()
+    {
+        return $this->role === 'manager'; 
+    }
 }

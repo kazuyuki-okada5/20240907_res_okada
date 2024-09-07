@@ -1,0 +1,166 @@
+.header__logo-container {
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.main {
+  margin-top: 40px;
+  background-color: rgb(245, 245, 245);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.review-page {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.rating,
+.comment,
+.image,
+.before-image {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.star-rating {
+  padding: 10px 0 10px;
+}
+
+.star-rating .star {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star-rating .star.selected {
+  color: #ffcc00;
+}
+
+.comment-text-form {
+    width: 415px;
+    height: 150px;
+    padding-top: 5px;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 12px;
+  color: #555;
+}
+
+.drop-area {
+  width: 380px;
+  height: 120px;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.drop-area.dragover {
+  border-color: #000;
+  background-color: #f0f0f0;
+}
+
+.image-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 420px;
+  height: 160px;
+  background: rgba(239, 239, 239, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 10;
+}
+
+#preview-img {
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.drop-area:hover .image-preview {
+  opacity: 1;
+}
+
+.submit-button {
+  width: 400px;
+  height: 40px;
+  border-radius: 20px;
+  background: white;
+  margin-top: 30px;
+}
+
+@media (max-width: 500px) {
+  .header__logo {
+    margin-left: 30px;
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 7px;
+  }
+
+  .main {
+  margin-top: 40px;
+  background-color: rgb(245, 245, 245);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: block; 
+}
+  .rating,
+  .comment,
+  .image,
+  .before-image {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .star-rating .star {
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .comment-text-form {
+    width: 170px;
+    height: 150px;
+    padding-top: 5px;
+  }
+
+  .char-count {
+    text-align: left;
+    font-size: 12px;
+    color: #555;
+  }
+
+   .drop-guid {
+    width: 140px;
+    text-align: left;
+   }
+
+   .drop-area {
+    width: 165px;
+    height: 150px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    position: relative;
+  }
+
+  .submit-button {
+    width: 180px;
+  }
+}

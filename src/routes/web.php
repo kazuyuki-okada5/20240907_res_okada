@@ -16,9 +16,10 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ImageController;
 // use App\Http\Controllers\NoticeController;
-use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\StoreCsvController;
 
-Route::get('/', [StoreController::class, 'index']);
+Route::get('/', [StoreController::class, 'index'])->name('index');
 
 // 認証関連
 Route::get('/registration', function () {
@@ -132,6 +133,34 @@ Route::get('/edit_main', [EditController::class, 'showEditMain'])->name('edit_ma
 Route::get('/update_complete', function () {
     return view('store.update_complete');
 })->name('update.complete');
+
+// 口コミ関連のルート
+
+Route::post('stores/{store}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+Route::get('/store_detail/{id}', [StoreController::class, 'show'])->name('store_detail');
+// Route::get('/store_reviews/{store_id}', [StoreReviewController::class, 'show'])->name('store_reviews.show');
+// ストア詳細ページ
+Route::get('/store/{id}', [ReviewController::class, 'show'])->name('store_detail');
+// 口コミ一覧ページ
+Route::get('/store_reviews/{storeId}', [ReviewController::class, 'reviewPage'])->name('store_reviews.show');
+
+// 口コミ編集フォーム表示
+Route::get('reviews/{id}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+
+// 口コミ更新
+Route::put('reviews/{id}', [ReviewController::class, 'update'])->name('reviews.update');
+Route::get('/store/{id}/reviews', [ReviewController::class, 'review_index'])->name('review_list');
+
+
+// web.php
+Route::get('stores/{storeId}/reviews', [ReviewController::class, 'reviewPage'])->name('store_reviews.store_review');
+
+Route::get('/store_reviews_list/{id}', [ReviewController::class, 'review_index'])->name('store.reviews_list');
+
+// Csvインポート
+Route::post('/stores/import', [StoreCsvController::class, 'import'])->name('stores.import');
+Route::get('/stores/export', [StoreCsvController::class, 'export'])->name('stores.export');
 
 //Auth::routes();
 

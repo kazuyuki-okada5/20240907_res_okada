@@ -44,6 +44,12 @@ class Store extends Model
         return $this->belongsToMany(User::class, 'user_store');
     }
 
+    // 口コミソート機能用
+    public function reviews()
+    {
+    return $this->hasMany(Review::class);
+    }
+
     protected $table = 'stores';
 
 }

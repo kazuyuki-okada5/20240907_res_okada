@@ -1,0 +1,299 @@
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+.header__logo-container {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin-top: 15px;
+}
+
+.main{
+  margin-top: 30px;
+  max-width: 800px;
+  background-color: rgb(245, 245, 245);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container-store{
+  border-right: 2px solid #ccc;
+  width: 500px;
+  height: 300px;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 16px 50px 16px;
+  margin-right: 100px;
+}
+
+.store-info {
+    max-width: 780px;
+}
+
+.detail-group {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+}
+
+.store-name{
+  margin: 0 0 0 5px;
+}
+
+.store-area-genre{
+  height: 30px;
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.store-area
+.store-genre{
+  margin: 0px;
+}
+
+.image-overview {
+
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.store-image{
+  width: 150px;
+  height: auto;
+  margin-right: 0px;
+  border-radius: 5px 5px 0 0;
+}
+
+.reviews-container {
+  max-width: 785px;
+}
+
+.review {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.user-name-day {
+  display: flex;
+  height: 40px;
+}
+
+.comment-image {
+  display: flex;
+}
+
+.creat-day {
+  margin-left: 20px;
+}
+
+.comment {
+  max-width: 600px;
+  padding: 10px 15px 10px;
+}
+
+.img {
+    width: 200px;
+    max-height: 200px;
+    padding-bottom: 10px;
+}
+
+.container-button{
+  display: flex;
+  align-items: center;  
+}
+
+.detail-button {
+  margin-left: 10px;
+}
+
+.detail-button,
+.favorite-button {
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.detail-button{
+  background-color: #007bff;
+}
+
+.favorite-button{
+  font-size: 40px;
+  margin-left: 80px;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  background-color:rgb(245, 245, 245);
+}
+
+.rating{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.star-update-destroy {
+  display: flex;
+  align-items: baseline;
+}
+
+.update-destroy {
+  margin-left: 50px;
+}
+
+.btn-danger {
+  margin-left: 20px;
+}
+
+.star-rating .star {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star-rating .star.selected {
+  color: #ffcc00;
+}
+
+.validation-error{
+  color: red;
+  font-weight: bold;
+}
+
+.custom-textarea {
+  width: 400px;
+  height: 120px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 12px;
+  color: #555;
+}
+
+.drop-area {
+  width: 380px;
+  height: 120px;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.drop-area.dragover {
+  border-color: #000;
+  background-color: #f0f0f0;
+}
+
+.image-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 420px;
+  height: 160px;
+  background: rgba(239, 239, 239, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 10;
+}
+
+#preview-img {
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.drop-area:hover .image-preview {
+  opacity: 1;
+}
+
+.hidden-label {
+  display: none;
+}
+
+.review-container {
+  position: relative;
+}
+
+.submit-button-container {
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.submit-button{
+  width: 400px;
+  height: 40px;
+  border-radius: 20px;
+  background: white;
+}
+
+@media (max-width: 540px) {
+  .store-image {
+      width: 80px;
+      height: 80px;
+      margin-top: 15px;
+      border-radius: 5px 5px 0 0;
+  }
+
+  .overview,
+  .store-area-genre {
+      font-size: 12px;
+  }
+
+  .star-rating .star {
+      font-size: 1rem;
+  }
+
+  .update-destroy {
+      margin-left: 15px;
+      font-size: 10px;
+  }
+
+  .btn-danger {
+      margin-left: 5px;
+  }
+
+  .user-name-day {
+      font-size: 12px;
+      height: 25px;
+  }
+
+  .comment {
+      max-width: 600px;
+      padding: 5px 5px 0px;
+      font-size: 12px;
+  }
+
+  .img {
+      margin-top: 20px;
+      width: 80px;
+      height: 80px;
+      padding-bottom: 10px;
+  }
+}

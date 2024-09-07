@@ -1,0 +1,416 @@
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+.header__logo-container {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.main{
+  margin-top: 40px;
+  max-width: 1200px;
+  max-height: 640px;
+  background-color: rgb(245, 245, 245);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container-wrapper{
+  display: flex;
+}
+
+.container-store{
+  border-right: 2px solid #ccc;
+  width: 500px;
+  height: 300px;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 16px 50px 16px;
+  margin-right: 100px;
+}
+
+.store-info {
+    font-size: 24px;
+}
+
+.container-storebox{
+  width: 250px;
+  height: 300px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.store-name{
+  margin: 0 0 0 5px;
+}
+
+.store-area-genre{
+  height: 30px;
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.store-area
+.store-genre{
+  margin: 0px;
+}
+
+.store-image{
+  width: 250px;
+  height: auto;
+  margin-right: 0px;
+  border-radius: 5px 5px 0 0;
+}
+
+.container-button{
+  display: flex;
+  align-items: center;  
+}
+
+.detail-button {
+  margin-left: 10px;
+}
+
+.detail-button,
+.favorite-button {
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.detail-button{
+  background-color: #007bff;
+}
+
+.favorite-button{
+  font-size: 40px;
+  margin-left: 80px;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  background-color:rgb(245, 245, 245);
+}
+
+.rating{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.star-rating .star {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star-rating .star.selected {
+  color: #ffcc00;
+}
+
+.validation-error{
+  color: red;
+  font-weight: bold;
+}
+
+.custom-textarea {
+  width: 400px;
+  height: 120px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 12px;
+  color: #555;
+}
+
+.drop-area {
+  width: 380px;
+  height: 120px;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.drop-area.dragover {
+  border-color: #000;
+  background-color: #f0f0f0;
+}
+
+.image-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 420px;
+  height: 160px;
+  background: rgba(239, 239, 239, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 10;
+}
+
+#preview-img {
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.drop-area:hover .image-preview {
+  opacity: 1;
+}
+
+.hidden-label {
+  display: none;
+}
+
+.review-container {
+  position: relative;
+}
+
+.submit-button-container {
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.submit-button{
+  width: 400px;
+  height: 40px;
+  border-radius: 20px;
+  background: white;
+}
+
+@media (max-width: 850px) {
+  .header__inner {
+    flex-direction: unset;
+    height: auto;
+  }
+
+  .header__logo-container {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .main {
+    margin-top: 20px;
+    max-width: 100%;
+    max-height: 990px;
+    padding: 10px;
+    box-shadow: none;
+  }
+
+  .container-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container-store {
+    width: 40%;
+    margin-right: 0;
+    padding: 20px 20px 60px 20px;
+    margin-top: 30px;
+    border-right: none;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .store-info {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .store-image {
+    width: 100%;
+    max-width: 400px;
+    margin-right: 0;
+  }
+
+  .detail-button {
+    width: 60%;
+    margin-left: 0;
+  }
+
+  .favorite-button {
+    margin-left: 0;
+    margin-top: 10px;
+    font-size: 30px;
+  }
+
+  .custom-textarea {
+    width: 100%;
+    height: 100px;
+  }
+
+  .drop-area {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .submit-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .container-storebox {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .container-button {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .detail-button {
+    width: 80%;
+    margin-left: 10px;
+  }
+
+  .favorite-button {
+    margin-left: 20px;
+    margin-top: 0px;
+    font-size: 30px;
+  }
+
+  .review-container {
+    margin-top: 20px;
+  }
+
+  .image-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 265px;
+    height: 50px;
+    background: rgba(239, 239, 239, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+  }
+
+  .submit-button-container {
+    transform: translateX(10px);
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .container-store {
+    width: 40%;
+    margin-right: 0;
+    padding: 3px 20px 0px 20px;
+    margin-top: 0px;
+    border-right: none;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .container-storebox {
+    width: 150px;
+    height: 180px;
+    margin-bottom: 20px;
+  }
+
+  .store-info {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .store-name {
+    margin: 0 0 0 5px;
+    font-size: 16px;
+  }
+
+  .store-area-genre {
+    height: 18px;
+    align-items: center;
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+    font-size: 12px;
+  }
+
+  .container-button {
+    display: inline-flex;
+    align-items: center;
+    height: 10px;
+  }
+
+  .detail-button {
+    width: 80%;
+    margin-left: 10px;
+    font-size: 10px;
+  }
+
+  .favorite-button {
+    margin-left: 10px;
+    margin-top: 0px;
+    font-size: 20px;
+  }
+
+  .rating {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .star-rating .star {
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .comment{
+    font-size: 15px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .custom-textarea {
+    width: 100%;
+    height: 50px;
+    font-size: 12px;
+    padding: 2px;
+  }
+
+  .review-image {
+    font-size: 15px;
+    margin: 0;
+  }
+
+  .drop-area {
+    width: 100%;
+    height: auto;
+    padding: 2px;
+    font-size: 12px;
+  }
+}
