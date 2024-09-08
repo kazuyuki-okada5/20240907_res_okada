@@ -1,0 +1,202 @@
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+.header__logo-container {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin-top: 15px;
+}
+/* 管理者ホーム画面の全体レイアウト */
+.admin-container {
+    width: 80%;
+    margin: 35px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* タイトル */
+.admin-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 各フォームセクション */
+.form-section {
+    margin-bottom: 40px;
+}
+
+/* フォームタイトル */
+.form-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* フォーム全体のスタイル */
+.form-container {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* フォーム内の入力フィールド */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-field, .file-input, select {
+    width: 95%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+/* サブミットボタン */
+.submit-button {
+    background-color: #3c46ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submit-button:hover {
+    background-color: #0900b7;
+}
+
+.submit-inport-button{
+    background-color: #3c46ff;
+    color: white;
+    border: none;
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submit-inport-button:hover {
+    background-color: #0900b7;
+}
+
+/* エラーメッセージのスタイル */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* アラートメッセージ */
+.alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* ドラッグ＆ドロップエリアのスタイル */
+.drop-area {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.drop-area p {
+    color: #888;
+    font-size: 16px;
+}
+
+.drop-area.highlight {
+    background-color: #e0ffe0;
+    border-color: #28a745;
+}
+
+/* ファイル名表示用のスタイル */
+.file-name {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
+
+/* ドラッグ＆ドロップエリアのスタイル */
+.drop-area {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    min-height: 120px;
+}
+
+.drop-area p {
+    color: #888;
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.drop-area.highlight {
+    background-color: #e0ffe0;
+    border-color: #28a745;
+}
+
+/* ファイルインプットは非表示 */
+.file-input {
+    display: none;
+}
+
+/* ファイル名表示部分のスタイル */
+.file-name {
+    color: #28a745;
+    font-weight: bold;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+}

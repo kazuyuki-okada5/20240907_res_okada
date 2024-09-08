@@ -25,12 +25,12 @@ public function show($id)
     $store = Store::findOrFail($id);
 
     // 該当するストアの口コミを取得
-    $review = Review::where('store_id', $store->id)->latest()->first();
+    $reviews = Review::where('store_id', $store->id)->latest()->first();
 
     // 取得したストアと口コミを詳細ページに渡して表示する
     return view('store_detail', [
         'store' => $store,
-        'review' => $review,
+        'reviews' => $review,
     ]);
 }
 

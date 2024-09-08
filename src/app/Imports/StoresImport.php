@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class StoresImport implements ToModel, WithHeadingRow
 {
@@ -27,6 +28,12 @@ class StoresImport implements ToModel, WithHeadingRow
             'store_overview' => 'required|string|max:400',
             'image_url' => ['required', 'url', 'regex:/\.(jpg|jpeg|png)$/i'] // 拡張子の正規表現
         ]);
+
+                // バリデーションエラーがあればログに記録し、例外を投げる
+        if ($validator->fails()) {
+            Log::error('バリデーションエラー: ' . json_encode($validator->errors()));
+            throw new \Illuminate\Validation\ValidationException($validator);
+        }
 
         // バリデーションをパスしたデータを使用してデータベースに保存する処理
         return new Store([
