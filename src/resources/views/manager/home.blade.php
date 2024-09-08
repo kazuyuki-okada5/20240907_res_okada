@@ -88,15 +88,20 @@
 
     <!-- CSVインポートフォーム -->
     <h3>CSVインポート</h3>
-    <form action="{{ route('stores.import') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file" required>
-        <button type="submit">インポート</button>
-    </form>
+<form action="{{ route('stores.import') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <input type="file" name="file" required>
+    <button type="submit">インポート</button>
+</form>
 
-    <!-- CSVエクスポートリンク -->
-    <h3>CSVエクスポート</h3>
-    <a href="{{ route('stores.export') }}">エクスポート</a>
-</body>
 @endsection
 

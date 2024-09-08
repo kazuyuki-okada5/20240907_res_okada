@@ -1,15 +1,59 @@
-/* ブレイクポイント 768px 未満のスタイル */
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 590px) {
 
+.manager-representative-group, .search-group {
+margin-top: 60px;
 }
 
-
-/* ブレイクポイント 1050px 以上のスタイル */
-@media screen and (min-width: 1050px) {
-
-
+.search-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 590px;
+    margin: 0 auto;
+}
 
 }
+@media screen and (max-width: 768px) {
+    .search-group {
+        gap: 0px;
+        padding: 6px;
+    }
+
+    .search-group label {
+        margin-right: 4px;
+        font-size: 11px;
+    }
+
+    .sort-container select,
+    .search-area select,
+    .search-genre select {
+        max-width: 75px;
+    }
+
+    .search-area,
+    .search-words{
+        min-width: 70px;
+    }
+
+    .search-words input[type="text"] {
+        width: 100%;
+        max-width: 150px;
+        padding: 3px;
+        font-size: 10px;
+    }
+}
+
+body {
+    min-width: 590px;
+}
+
 .header__inner {
   display: flex;
   justify-content: space-between;
@@ -24,8 +68,144 @@
   margin-top: 15px;
 }
 
+.manager-representative-group,
+.search-group{
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 管理者・代表者ボタンの共通スタイル */
+.manager-button, .create-notice-button, .representative-button {
+    margin: 10px 0;
+}
+
+.manager-button button, .create-notice-button a, .representative-button button {
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+/* ホバーステートのスタイル */
+.manager-button button:hover, 
+.create-notice-button a:hover, 
+.representative-button button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* ボタンのアクティブ状態のスタイル */
+.manager-button button:active, 
+.create-notice-button a:active, 
+.representative-button button:active {
+    background-color: #003d80;
+    transform: scale(1);
+}
+
+/* ボタン配置の調整 */
+.manager-button, .create-notice-button, .representative-button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+
+.manager-button,
+.create-notice-button {
+    margin: 0 10px 10px;
+}
+.search-list {
+    font-size: 12px;
+}
+
+.search-container {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    padding: 5px;
+}
+
+.sort-container{
+    padding-right: 25px;
+}
+
+.search-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 0px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    min-width: 590px;
+}
+
+/* ラベルのスタイル */
+.search-group label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* フォームコンポーネントの共通スタイル */
+.search-group form select, 
+.search-group form input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+    outline: none;
+}
+
+.search-group form select:focus, 
+.search-group form input[type="text"]:focus {
+    border-color: #007bff;
+}
+
+.sort-container {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    min-width: 150px;
+}
+
+.search-area {
+
+    display: flex;
+    align-items: center;
+    min-width: 75px;
+}
+
+.search-genre {
+
+    display: flex;
+    align-items: center;
+    min-width: 75px;
+}
+
+.search-words {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+}
+
+.search-words input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+}
+
 .main{
-  margin-top: 30px;
+  margin-top: 80px;
   max-width: 1200px;
   background-color: rgb(245, 245, 245);
   padding: 20px;
@@ -33,26 +213,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   justify-content: center;
   flex-direction: column;
-}
-
-.search-group{
-    display: flex;
-    justify-content: flex-end;
-}
-
-.search-list {
-    font-size: 12px;
-}
-
-.search-container {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    padding: 5px;
-}
-
-.sort-container{
-    padding-right: 25px;
 }
 
 .store-container {
@@ -63,84 +223,53 @@
 
 .store-group {
     width: 100%;
-    /* 100%の幅 */
     max-width: 300px;
-    /* 最大幅を300pxに設定 */
     height: auto;
-    /* 高さは内容に応じて自動調整 */
     margin-bottom: 20px;
-    /* 下の要素とのマージン */
 }
 
 .store-info {
     border: 1px solid #c3c3c3;
-    /* 外枠を1pxの実線でグレー色に設定 */
     padding: 0%;
-    /* パディングを0%に設定 */
     border-radius: 8px;
-    /* 角を丸める */
     box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.1);
-    /* 影を追加 */
 }
 
 .store-image img{
     width: 100%;
-    /* 画像の幅を調整 */
     height: auto;
-    /* 高さを自動調整して画像が歪まないようにする */
     margin-right: 0px;
-    /* 画像の右側に余白を追加 */
     border-radius: 5px 5px 0 0;
-    /* 角の丸みを設定 */
 }
 
 .store-info h3 {
     margin: 5px;
-    /* マージンを0に設定 */
 }
 
 .store-meta {
     display: inline-block;
-    margin-top: 5px;
-        /* 上部のマージン */
-        margin-bottom: 5px;
-        /* 下部のマージン */
-        margin-left: 5px;
-        /* 左側のマージン */
-        margin-right: 0px;
-        /* 右側のマージン */
+    margin-top: 5px 5px 5px 0;
 }
 
 .detail-button {
     margin-left: 10px;
-    /* 左側のマージン */
     margin-bottom: 10px;
-    /* 下部のマージン */
 }
 
 .detail-button,
 .favorite-button {
     cursor: pointer;
-    /* ボタンをクリック可能にする */
     background-color: #007bff;
-    /* ボタンの背景色を設定 */
     color: #fff;
-    /* ボタンのテキスト色を設定 */
     border: none;
-    /* ボタンの枠線をなくす */
     border-radius: 5px;
-    /* ボタンの角を丸くする */
     padding: 5px 10px;
-    /* ボタンの内側の余白を調整 */
     margin-right: 10px;
-    /* ボタンの右側に余白を追加 */
 }
 
 .favorite-button i {
     font-size: 40px;
-    /* アイコンのサイズを調整 */
     padding-left: 100px;
-        /* ボタンの内側の余白を調整 */
 }
 
 .favorite-button {
@@ -148,7 +277,6 @@
     border: none;
     cursor: pointer;
     transition: color 0.3s;
-    /* 色の変化をなめらかにするためのトランジション */
 }
 
 
