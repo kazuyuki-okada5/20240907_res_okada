@@ -45,16 +45,18 @@ Rese
 
 https://docs.google.com/spreadsheets/d/1t10kDiHte8iT4K38IrfgD2TRnGLOOVzZAmaw8B5qePE/edit#gid=1270192593
 　　内、テーブル仕様書シート参照
+    ※赤字部Pro追加分
 
 # ER 図
 
 https://docs.google.com/spreadsheets/d/1t10kDiHte8iT4K38IrfgD2TRnGLOOVzZAmaw8B5qePE/edit#gid=1270192593
 　　内、ER 図シート参照
+    ※赤字部Pro追加分
 
 ## 使用技術
 
 - Laravel 8.83.27
-- php 7.4.9
+- php 8.0
 - mysql 8.0.26
 - nginx 1.21.1
 
@@ -72,7 +74,7 @@ git@github.com:kazuyuki-okada5/20240907_res_okada.git
 
 インストール済みの場合は省略して下さい。
 
-### 3.プロジェクトのルートディレクトリに移動して下さい。
+### 3.プロジェクトのルートディレクトリに移動しているか確認して下さい。
 
 ```
 cd 20240907_res_okada
@@ -129,13 +131,12 @@ php artisan key:generate
 php artisan migrate:refresh --seed
 ```
 
-### 9.ローカルへのアクセス
+### 10.ローカルへのアクセス
 
 1.〜８.までの作業が滞りなく終了したら下記リンク先からアプリケーションが開きます。<br>
-[トップページ](http://localhost/) <br>
-[MailHog](http://localhost:8025/)
+[トップページ](http://localhost/)
 
-### 10.ログインパスワード
+### 11.ログインパスワード
 
 ユーザー用 <br>
 メールアドレス:a@co.jp <br>
@@ -146,3 +147,18 @@ php artisan migrate:refresh --seed
 パスワード:aaaaaaaa
 
 ※管理者用のパスワードを使用するとアプリ内新規プロフィール作成以外全ての認証必須ページを閲覧することが出来ます。
+
+### 12.CSVインポート機能は下記をコピーして.空のCSVファイルに貼り付けてインポートして下さい。
+
+```
+name,area,genre,store_overview,image_url
+寿司太郎,東京都,寿司,最高の寿司を提供するお店です。,"https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg"
+焼肉キング,大阪府,焼肉,美味しい焼肉をお楽しみください。,"https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg"
+ラーメン一番,福岡県,ラーメン,博多の味をそのまま再現したラーメン店です。,"https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg"
+イタリアンマリオ,東京都,イタリアン,厳選素材を使用した本格イタリアン。,"https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg"
+居酒屋花,大阪府,居酒屋,おいしいお酒と食事を楽しめる居酒屋です。,"https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg"
+```
+
+### 13.その他注意点
+
+ログインする時に再度ログインを求められる不具合が発生する場合があります。再度パスワード入力後ログインして下さい。
