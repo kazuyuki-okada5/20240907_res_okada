@@ -65,7 +65,7 @@ https://docs.google.com/spreadsheets/d/1t10kDiHte8iT4K38IrfgD2TRnGLOOVzZAmaw8B5q
 ### 1.GIT リポジトリをクローンして下さい。
 
 ```
-git@github.com:kazuyuki-okada5/20240315_Res-Web.git
+git@github.com:kazuyuki-okada5/20240907_res_okada.git
 ```
 
 ### 2.Docker と Docker Composer をインストールして下さい。
@@ -75,7 +75,7 @@ git@github.com:kazuyuki-okada5/20240315_Res-Web.git
 ### 3.プロジェクトのルートディレクトリに移動して下さい。
 
 ```
-cd 20240315_Res-Web
+cd 20240907_res_okada
 ```
 
 ### 4.`.env.example`ファイルをコピーして`.env`ファイルを作成して下さい。
@@ -106,18 +106,27 @@ MAIL_FROM_ADDRESS=your-email@example.com
 docker-compose up -d --build
 ```
 
-### 7.php コンテナに入り Composer をインストール後、暗号化キーを作成して下さい。
+### 7.srcフォルダ内のcomposer.jsonディレクトリを開き以下のように変更して下さい
+
+```
+    "require": {
+        "php": "^7.4",を"php": "^7.4 || ^8.0",
+```
+
+### 8.php コンテナに入り Composer をインストール後、暗号化キーを作成して下さい。
 
 ```
 docker-compose exec php bash
+apt-get update && apt-get install -y libpng-dev
+docker-php-ext-install gd
 composer install
 php artisan key:generate
 ```
 
-### 8.マイグレーション及びシーディングを実行して下さい。
+### 9.マイグレーションリフレッシュ及びシーディングを実行して下さい。
 
 ```
-php artisan migrate --seed
+php artisan migrate:refresh --seed
 ```
 
 ### 9.ローカルへのアクセス
@@ -129,11 +138,11 @@ php artisan migrate --seed
 ### 10.ログインパスワード
 
 ユーザー用 <br>
-メールアドレス:a@ne.jp <br>
-パスワード:11111111
+メールアドレス:a@co.jp <br>
+パスワード:aaaaaaaa
 
 管理者用 <br>
-メールアドレス:aa@ne.jp <br>
-パスワード:12345678
+メールアドレス:aaaa@co.jp <br>
+パスワード:aaaaaaaa
 
 ※管理者用のパスワードを使用するとアプリ内新規プロフィール作成以外全ての認証必須ページを閲覧することが出来ます。
