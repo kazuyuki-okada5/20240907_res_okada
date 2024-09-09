@@ -76,7 +76,14 @@
                     </div>
                     <div class="submit-button-container">
                         <button type="submit" class="submit-button">口コミを投稿</button>
+                            <!-- 成功メッセージの表示 -->
+                        @if (session('success'))
+                            <div class="alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif                        
                     </div>
+
                 </form>
             @else
                 <p>口コミを投稿するにはログインが必要です</p>

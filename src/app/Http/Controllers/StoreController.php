@@ -30,7 +30,7 @@ public function show($id)
     // 取得したストアと口コミを詳細ページに渡して表示する
     return view('store_detail', [
         'store' => $store,
-        'reviews' => $review,
+        'reviews' => $reviews,
     ]);
 }
 

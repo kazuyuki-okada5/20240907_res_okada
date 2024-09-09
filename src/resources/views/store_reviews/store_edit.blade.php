@@ -5,11 +5,11 @@
 <!-- 口コミ編集 -->
 <main class="main">
     <h3 class="review-page">口コミ編集ページ</h3>
-    <form action="{{ route('reviews.update', $review->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('reviews.update', $review->id) }}" method="POST" enctype="multipart/form-data" class="review-edit-form">
         @csrf
         @method('PUT')
         <div class="rating-form">
-            <label for="rating" class="rating">評価:</label>
+            <label for="rating" class="rating-label">評価:</label>
             <div id="star-rating" class="star-rating">
                 @for ($i = 1; $i <= 5; $i++)
                     <span class="star" data-value="{{ $i }}" style="color: gray;">&#9733;</span>
@@ -31,7 +31,7 @@
             @enderror
         </div>
         <div class="image-form">
-            <label for="image" class="image">画像:</label>         
+            <label for="image" class="image-label">画像:</label>         
             <div id="drop-area" class="drop-area">
                 <p class="drop-guid">ここに画像をドロップまたはクリックして選択</p>
                 <input type="file" name="image" id="image" class="file-input" accept="image/jpeg, image/png" style="display: none;">

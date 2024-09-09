@@ -86,18 +86,13 @@
                         </ul>
                     </div>
                 @endif
-                
-                <!-- ドラッグ＆ドロップエリア -->
                 <div id="drop-area" class="drop-area">
                     <p>ここにファイルをドラッグ＆ドロップするか、クリックしてファイルを選択</p>
                     <input type="file" name="file" id="fileInput" class="file-input" required hidden>
-                    <!-- ファイル名を表示する要素（破線内） -->
                     <div id="file-name" class="file-name"></div>
                 </div>
-
                 <button type="submit" class="submit-button">インポート</button>
             </form>
-
             @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -148,7 +143,7 @@
         dropArea.addEventListener('drop', (e) => {
             const files = e.dataTransfer.files;
             fileInput.files = files;
-            displayFileName(files[0].name);  // ドロップされたファイルの名前を表示
+            displayFileName(files[0].name);
         });
 
         // ドロップエリアをクリックしたときにファイル選択を開く
@@ -160,7 +155,7 @@
         fileInput.addEventListener('change', (e) => {
             const files = e.target.files;
             if (files.length > 0) {
-                displayFileName(files[0].name);  // 選択されたファイルの名前を表示
+                displayFileName(files[0].name);
             }
         });
 

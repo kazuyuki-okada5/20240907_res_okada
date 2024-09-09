@@ -13,7 +13,7 @@
 }
 
 .main{
-  margin-top: 30px;
+  margin: 30px auto;
   max-width: 800px;
   background-color: rgb(245, 245, 245);
   padding: 20px;
@@ -93,6 +93,7 @@
 
 .comment-image {
   display: flex;
+  justify-content: space-between;
 }
 
 .creat-day {
@@ -105,9 +106,10 @@
 }
 
 .img {
-    width: 200px;
+    width: 150px;
     max-height: 200px;
     padding-bottom: 10px;
+    border-radius: 10px;
 }
 
 .container-button{

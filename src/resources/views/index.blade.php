@@ -28,7 +28,6 @@
         @endauth
     </div>
     <div class="search-group">
-        <!-- ソートオプション -->
         <div class="sort-container">
             <form action="{{ route('index') }}" method="GET" id="sortForm">
                 <label for="sort">並び替え:</label>
@@ -40,12 +39,10 @@
                 </select>
             </form>
         </div>
-        <!-- エリアの選択 -->
         <div class="search-area">
             <form action="javascript:void(0);" method="GET" id="areaForm">
                 <select name="area_id">
                     <option value="">All area</option>
-                    <!-- エリアのオプション -->
                     @isset($areas)
                         @foreach($areas as $area)
                             <option value="{{ $area->id }}" {{ $selectedAreaId == $area->id ? 'selected' : '' }}>{{ $area->area }}</option>
@@ -54,13 +51,11 @@
                 </select>
             </form>
         </div>
-        <!-- ジャンルの選択 -->
         <div class="search-genre">
             @if(isset($genres))
                 <form action="javascript:void(0);" method='GET' id="genreForm">
                     <select name="genre_id">
                         <option value="">All genre</option>
-                        <!-- ジャンルのオプション -->
                         @foreach($genres as $genre)
                             <option value="{{ $genre->id }}" {{ $selectedGenreId == $genre->id ? 'selected' : '' }}>{{ $genre->genre }}</option>
                             @endforeach
@@ -68,7 +63,6 @@
                 </form>
             @endif
         </div>
-            <!-- キーワード検索 -->
         <div class="search-words">
             <form action="javascript:void(0);" method='GET' id="keywordForm">
                 <input type="text" name="keyword" id="keyword" value="{{ $keyword ?? ''}}">
@@ -76,28 +70,22 @@
         </div>
     </div>
 </div>
+<!-- 店舗リスト -->
 <main class="main">
-    <!-- 店舗リスト -->
     <div class="store-container">
-        <!-- 店舗が登録されている場合 -->
         @if(isset($stores) && $stores->count() > 0)
             @foreach($stores as $store)
                 <div class="store-group">
                     <div class="store-info">
-                        <!-- 店舗画像 -->
                         <div class="store-image">
                             <img src="{{ $store->image_url }}" alt="{{ $store->name }}">
                         </div>
-                        <!-- 店舗情報 -->
                         <h3>{{ $store->name }}</h3>
                         <p class="store-meta">#{{ $store->area->area }}</p>
                         <p class="store-meta">#{{ $store->genre->genre }}</p>
                         <br>
-                        <!-- 詳細ページへのリンク -->
                         <button class="detail-button" onclick="location.href='/store_detail/{{ $store->id }}'">詳しく見る</button>
-                        <!-- お気に入りボタン -->
                         @auth
-                            <!-- 認証されたユーザーの場合 -->
                             <button class="favorite-button" 
                                     data-store-id="{{ $store->id }}" 
                                     onclick="toggleFavorite(this)"
@@ -109,7 +97,6 @@
                 </div>
             @endforeach
         @else
-            <!-- 登録された店舗がない場合 -->
             <p>現在、登録されている店舗はありません。</p>
         @endif
     </div>
