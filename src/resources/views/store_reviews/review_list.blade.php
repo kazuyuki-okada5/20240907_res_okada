@@ -32,7 +32,7 @@
     <div class="reviews-container">
         <h3>口コミ一覧</h3>
         @if(isset($reviews) && $reviews->isNotEmpty())
-            @foreach($reviews as $review)
+            @foreach($reviews->sortByDesc('created_at') as $review)
                 <div class="review">
                     <div class="star-update-destroy">
                         <div class="star-rating">
@@ -63,7 +63,6 @@
                             <img src="{{ asset('storage/' . $review->image_path) }}" class="img" alt="Review Image">
                         @endif
                     </div>
-
                 </div>
             @endforeach
         @else

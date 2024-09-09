@@ -76,7 +76,6 @@
                     </div>
                     <div class="submit-button-container">
                         <button type="submit" class="submit-button">口コミを投稿</button>
-                            <!-- 成功メッセージの表示 -->
                         @if (session('success'))
                             <div class="alert-success">
                                 {{ session('success') }}
@@ -189,8 +188,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const reader = new FileReader();
             reader.onload = function (e) {
                 previewImg.src = e.target.result;
-                previewImg.style.display = 'block'; // 画像を表示
-                imagePreview.style.opacity = '1'; // プレビューを表示
+                previewImg.style.display = 'block';
+                imagePreview.style.opacity = '1';
             };
             reader.readAsDataURL(file);
         }

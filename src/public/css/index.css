@@ -1,23 +1,23 @@
 @media screen and (max-width: 590px) {
 
-.manager-representative-group, .search-group {
-margin-top: 60px;
-}
+    .manager-representative-group, .search-group {
+        margin-top: 60px;
+    }
 
-.search-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    padding: 6px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 590px;
-    margin: 0 auto;
-}
+    .search-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        padding: 6px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 590px;
+        margin: 0 auto;
+    }
 
 }
 @media screen and (max-width: 768px) {
@@ -55,18 +55,19 @@ body {
 }
 
 .header__inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
 }
 
 .header__logo-container {
-  display: flex;
-  align-items: center;
-  height: 50px;
-  margin-top: 15px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    margin-top: 15px;
 }
+
 
 .manager-representative-group,
 .search-group{
@@ -74,7 +75,6 @@ body {
     justify-content: flex-end;
 }
 
-/* 管理者・代表者ボタンの共通スタイル */
 .manager-button, .create-notice-button, .representative-button {
     margin: 10px 0;
 }
@@ -93,7 +93,6 @@ body {
     text-decoration: none;
 }
 
-/* ホバーステートのスタイル */
 .manager-button button:hover, 
 .create-notice-button a:hover, 
 .representative-button button:hover {
@@ -101,7 +100,6 @@ body {
     transform: scale(1.05);
 }
 
-/* ボタンのアクティブ状態のスタイル */
 .manager-button button:active, 
 .create-notice-button a:active, 
 .representative-button button:active {
@@ -109,7 +107,6 @@ body {
     transform: scale(1);
 }
 
-/* ボタン配置の調整 */
 .manager-button, .create-notice-button, .representative-button {
     display: flex;
     justify-content: flex-start;
@@ -121,6 +118,7 @@ body {
 .create-notice-button {
     margin: 0 10px 10px;
 }
+
 .search-list {
     font-size: 12px;
 }
@@ -149,13 +147,11 @@ body {
     min-width: 590px;
 }
 
-/* ラベルのスタイル */
 .search-group label {
     font-weight: bold;
     margin-right: 10px;
 }
 
-/* フォームコンポーネントの共通スタイル */
 .search-group form select, 
 .search-group form input[type="text"] {
     padding: 8px;
@@ -179,14 +175,12 @@ body {
 }
 
 .search-area {
-
     display: flex;
     align-items: center;
     min-width: 75px;
 }
 
 .search-genre {
-
     display: flex;
     align-items: center;
     min-width: 75px;
@@ -205,8 +199,8 @@ body {
 }
 
 .main{
-  margin-top: 80px;
-  max-width: 1200px;
+  margin: 80px auto;
+  max-width: 2000px;
   background-color: rgb(245, 245, 245);
   padding: 20px;
   border-radius: 8px;

@@ -5,35 +5,34 @@
 <body>
     <div class="admin-container">
         <h2 class="admin-title">管理者用ホーム画面</h2>
-        
         <!-- 店舗代表者を店舗に新規登録フォーム -->
         <div class="form-section">
             <h3 class="form-title">店舗代表者を店舗に新規登録</h3>
             <form action="{{ route('representatives.store') }}" method="POST" class="form-container">
             @csrf
                 <div class="form-group">
-                    <label for="name">名前:</label>
+                    <label for="name" class="name">名前:</label>
                     <input type="text" id="name" name="name" required class="input-field">
                     @error('name')
                         <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="email">メールアドレス:</label>
+                    <label for="email" class="email">メールアドレス:</label>
                     <input type="email" id="email" name="email" required class="input-field">
                     @error('email')
                         <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="password">パスワード:</label>
+                    <label for="password" class="password">パスワード:</label>
                     <input type="password" id="password" name="password" required class="input-field">
                     @error('password')
                         <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="store_id">店舗ID:</label>
+                    <label for="store_id" class="store_id">店舗ID:</label>
                     <select name="store_id" id="store_id" required class="input-field">
                         @foreach($stores as $store)
                             <option value="{{ $store->id }}">{{ $store->name }}</option>
@@ -46,14 +45,13 @@
                 <button type="submit" class="submit-button">新規登録</button>
             </form>
         </div>
-
         <!-- 店舗代表者に店舗を関連付けるフォーム -->
         <div class="form-section">
             <h3 class="form-title">店舗代表者に店舗を関連付ける</h3>
             <form action="{{ route('stores.attachRepresentative') }}" method="POST" class="form-container">
             @csrf
                 <div class="form-group">
-                    <label for="representative_id">店舗代表者:</label>
+                    <label for="representative_id" class="representative_id">店舗代表者:</label>
                     <select name="representative_id" id="representative_id" class="input-field">
                         @foreach($representatives as $representative)
                             <option value="{{ $representative->id }}">{{ $representative->name }}</option>
@@ -61,7 +59,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="store_id">関連付ける店舗ID:</label>
+                    <label for="store_id" class="store_id">関連付ける店舗ID:</label>
                     <select name="store_id" id="store_id" class="input-field">
                         @foreach($stores as $store)
                             <option value="{{ $store->id }}">{{ $store->name }}</option>
@@ -71,7 +69,6 @@
                 <button type="submit" class="submit-button">関連付ける</button>
             </form>
         </div>
-
         <!-- CSVインポートフォーム -->
         <div class="form-section">
             <h3 class="form-title">CSVインポート</h3>
@@ -114,7 +111,6 @@
             @endif
         </div>
     </div>
-
     <script>
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('fileInput');

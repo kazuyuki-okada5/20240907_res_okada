@@ -10,35 +10,32 @@ class ReviewController extends Controller
 {
     // 口コミ投稿
     public function store(Request $request, $storeId)
-{
-    $request->validate([
-        'comment' => 'required|string|max:400',
-        'rating' => 'required|integer|min:1|max:5',
-        'image' => 'required|image|mimes:jpeg,png|max:2048',
-    ]);
+    {
+        $request->validate([
+            'comment' => 'required|string|max:400',
+            'rating' => 'required|integer|min:1|max:5',
+            'image' => 'required|image|mimes:jpeg,png|max:2048',
+        ]);
 
-    // 口コミ有無確認
-    $existingReview = Review::where('user_id', auth()->id())->where('store_id', $storeId)->first();
-    if ($existingReview) {
-        return redirect()->back()->withErrors(['review' => 'この店舗には既に口コミを投稿済みです。']);
+        // 口コミ有無確認
+        $existingReview = Review::where('user_id', auth()->id())->where('store_id', $storeId)->first();
+        if ($existingReview) {
+            return redirect()->back()->withErrors(['review' => 'この店舗には既に口コミを投稿済みです。']);
+        }
+
+            $image = $request->file('image');
+            $imagePath = $image->store('images/reviews', 'public');
+
+        Review::create([
+            'user_id' => auth()->id(),
+            'store_id' => $storeId,
+            'comment' => $request->comment,
+            'rating' => $request->rating,
+            'image_path' => $imagePath,
+        ]);
+
+        return redirect()->back()->with('success', '口コミを投稿しました。');
     }
-
-    // 画像の処理
-
-        $image = $request->file('image');
-        $imagePath = $image->store('images/reviews', 'public');
-
-
-    Review::create([
-        'user_id' => auth()->id(),
-        'store_id' => $storeId,
-        'comment' => $request->comment,
-        'rating' => $request->rating,
-        'image_path' => $imagePath,
-    ]);
-
-    return redirect()->back()->with('success', '口コミを投稿しました。');
-}
 
     // 口コミ編集
     public function edit($id)
@@ -51,37 +48,34 @@ class ReviewController extends Controller
         return view('store_reviews.store_edit', compact('review'));
     }
     
+    // 口コミ更新
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'comment' => 'required|string|max:400',
+            'rating' => 'required|integer|min:1|max:5',
+            'image' => 'nullable|image|mimes:jpeg,png|max:2048',
+        ]);
 
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'comment' => 'required|string|max:400',
-        'rating' => 'required|integer|min:1|max:5',
-        'image' => 'nullable|image|mimes:jpeg,png|max:2048',
-    ]);
+        $review = Review::findOrFail($id);
 
-    $review = Review::findOrFail($id);
+        if ($review->user_id !== auth()->id()) {
+            abort(403, 'この口コミを編集する権限がありません。');
+        }
 
-    if ($review->user_id !== auth()->id()) {
-        abort(403, 'この口コミを編集する権限がありません。');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('images/reviews', 'public');
+            $review->image_path = $imagePath;
+        }
+
+        $review->update([
+            'comment' => $request->comment,
+            'rating' => $request->rating,
+        ]);
+
+        return redirect()->route('review_list', $review->store_id)->with('success', '口コミを更新しました。');
     }
-
-    // 画像の処理
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imagePath = $image->store('images/reviews', 'public');
-        $review->image_path = $imagePath;
-    }
-
-    // 口コミの更新処理
-    $review->update([
-        'comment' => $request->comment,
-        'rating' => $request->rating,
-    ]);
-
-    // 口コミ一覧ページへリダイレクト
-    return redirect()->route('review_list', $review->store_id)->with('success', '口コミを更新しました。');
-}
 
     
     // 口コミ削除
@@ -104,31 +98,13 @@ public function update(Request $request, $id)
         return view('store_reviews.review_list', compact('store', 'reviews'));
     }
 
-public function show($id)
-{
-    $store = Store::findOrFail($id);
-    $reviews = Review::where('store_id', $store->id)->latest()->get();
-    $hasReviews = $reviews->isNotEmpty();
-
-    dd($store, $reviews, $hasReviews); // デバッグ用
-    return view('store_detail', [
-        'store' => $store,
-        'reviews' => $reviews,
-        'hasReviews' => $hasReviews,
-    ]);
-}
-
-
     // 現在のユーザーが指定した店舗に対してレビューを投稿しているか確認
         public function hasReviewed($storeId)
     {
-        
         return Review::where('store_id', $storeId)
             ->where('user_id', auth()->id())
             ->exists();
     }
-
-    
 
     // 口コミ一覧ページを表示するメソッドを追加
     public function reviewPage($storeId)
@@ -171,7 +147,6 @@ public function show($id)
             }
         }
 
-        // 店舗データの取得
         $stores = $query->get();
 
         return view('store.index', compact('stores', 'selectedAreaId', 'selectedGenreId', 'keyword' ));

@@ -43,7 +43,7 @@ Route::post('/stores', [StoreController::class, 'store'])->name('stores.store');
 Route::delete('/stores/{store}', [StoreController::class, 'destroy'])->name('stores.destroy');
 Route::get('/stores', [StoreController::class, 'index'])->name('stores.index');
 Route::get('/areas/{area}', [StoreController::class, 'storesByArea'])->name('stores.by_area');
-Route::get('/store_detail/{id}', [StoreDetailController::class, 'show'])->name('store.detail');
+Route::get('/store_detail/{id}', [StoreController::class, 'show'])->name('store.detail');
 Route::get('/stores/search', [StoreController::class, 'search'])->name('store.search');
 Route::get('/store/{storeId}/image-url', [StoreController::class, 'getImageUrl']);
 Route::post('/stores', [StoreController::class, 'store'])->name('stores.store');
@@ -134,49 +134,19 @@ Route::get('/update_complete', function () {
     return view('store.update_complete');
 })->name('update.complete');
 
-// 口コミ関連のルート
-
-Route::post('stores/{store}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
-Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
-Route::get('/store_detail/{id}', [StoreController::class, 'show'])->name('store_detail');
-// Route::get('/store_reviews/{store_id}', [StoreReviewController::class, 'show'])->name('store_reviews.show');
-// ストア詳細ページ
-Route::get('/store/{id}', [ReviewController::class, 'show'])->name('store_detail');
-// 口コミ一覧ページ
-Route::get('/store_reviews/{storeId}', [ReviewController::class, 'reviewPage'])->name('store_reviews.show');
-
-// 口コミ編集フォーム表示
-Route::get('reviews/{id}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
-
-// 口コミ更新
-Route::put('reviews/{id}', [ReviewController::class, 'update'])->name('reviews.update');
+// Pro用追加実装分
+// 特定の店舗 ({id}) に関連するレビューの一覧を表示
 Route::get('/store/{id}/reviews', [ReviewController::class, 'review_index'])->name('review_list');
-
-
-// web.php
-Route::get('stores/{storeId}/reviews', [ReviewController::class, 'reviewPage'])->name('store_reviews.store_review');
-
 Route::get('/store_reviews_list/{id}', [ReviewController::class, 'review_index'])->name('store.reviews_list');
-
-// Csvインポート
+// 特定の店舗 ({store}) に新しいレビューを追加
+Route::post('stores/{store}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+//  特定の店舗 ({storeId}) に関連するレビューの一覧を表示
+Route::get('/store_reviews/{storeId}', [ReviewController::class, 'reviewPage'])->name('store_reviews.show');
+// 特定のレビュー ({id}) の編集フォームを表示
+Route::get('reviews/{id}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+// 特定のレビュー ({id}) を更新
+Route::put('reviews/{id}', [ReviewController::class, 'update'])->name('reviews.update');
+// 特定のレビュー ({review}) を削除
+Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+// CSVファイルから店舗データをインポート
 Route::post('/stores/import', [StoreCsvController::class, 'import'])->name('stores.import');
-Route::get('/stores/export', [StoreCsvController::class, 'export'])->name('stores.export');
-
-//Auth::routes();
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-//Route::get('/email/verify', function () {
-    //return view('auth.verify');
-//})->middleware('auth')->name('verification.notice');
-
-//Route::get('/email/verify/{id}/{hash}', function (\Illuminate\Foundation\Auth\EmailVerificationRequest $request) {
-    //$request->fulfill();
-    //return redirect('/home');
-//})->middleware(['auth', 'signed'])->name('verification.verify');
-
-//Route::post('/email/verification-notification', function (\Illuminate\Http\Request $request) {
-    //$request->user()->sendEmailVerificationNotification();
-    //return back()->with('message', 'Verification link sent!');
-//})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-

@@ -20,22 +20,19 @@ class StoresImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        // バリデーションルールの定義
         $validator = Validator::make($row, [
             'name' => 'required|string|max:50',
             'area' => ['required', Rule::in(['東京都', '大阪府', '福岡県'])],
             'genre' => ['required', Rule::in(['寿司', '焼肉', 'イタリアン', '居酒屋', 'ラーメン'])],
             'store_overview' => 'required|string|max:400',
-            'image_url' => ['required', 'url', 'regex:/\.(jpg|jpeg|png)$/i'] // 拡張子の正規表現
+            'image_url' => ['required', 'url', 'regex:/\.(jpg|jpeg|png)$/i']
         ]);
 
-                // バリデーションエラーがあればログに記録し、例外を投げる
         if ($validator->fails()) {
             Log::error('バリデーションエラー: ' . json_encode($validator->errors()));
             throw new \Illuminate\Validation\ValidationException($validator);
         }
 
-        // バリデーションをパスしたデータを使用してデータベースに保存する処理
         return new Store([
             'name' => $row['name'],
             'area_id' => $this->getAreaId($row['area']),
@@ -45,13 +42,11 @@ class StoresImport implements ToModel, WithHeadingRow
         ]);
     }
 
-    // 地域名からIDを取得するメソッド
     private function getAreaId($area)
     {
         return Area::where('area', $area)->firstOrFail()->id;
     }
 
-    // ジャンル名からIDを取得するメソッド
     private function getGenreId($genre)
     {
         return Genre::where('genre', $genre)->firstOrFail()->id;
