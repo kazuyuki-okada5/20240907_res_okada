@@ -271,14 +271,16 @@
     }
 
     .detail-container {
-        align-items: flex-start;
-        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 中央に配置 */
+        justify-content: center; /* 中央に配置 */
     }
 
     .detail-group {
-        width: 50%;
+        width: 100%;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center; /* flex-startからcenterに修正 */
     }
 
     .store-info {
@@ -310,7 +312,7 @@
     }
 
     .star-rating {
-    display: contents;
+        display: contents;
     }
 
     .review-comment {
@@ -333,8 +335,3 @@
         width: 360px;
     }
 }
-
-
-
-
-
